@@ -1,0 +1,1088 @@
+{
+ "site": "서부 및 남부 아시아 지리 뉴스(임송무)",
+ "updated": "2026-11-02T14:34:25+09:00",
+ "items": [
+  {
+   "id": "2026-11-02-cyclone-murasu",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "land",
+   "country": "IND",
+   "related": [
+    "LKA",
+    "NPL"
+   ],
+   "spot": null,
+   "title": "벵골만에 사이클론 '무라수' 발생…3일 인도 안드라프라데시 남부 상륙 예상, 스리랑카는 강풍 경보",
+   "titleOrig": "Another cyclone develops over Bay of Bengal",
+   "source": "Peoples' Review (네팔)",
+   "lang": "en",
+   "url": "https://peoplesreview.com.np/2026/11/01/another-cyclone-develops-over-bay-of-bengal/",
+   "video": null,
+   "why": "10월 말 사이클론 아르나브에 이어 벵골만에서 또 열대 저기압이 생겼습니다. 같은 바다에서 만들어진 폭풍이 진로에 따라 인도 동해안, 스리랑카 북동 해역, 히말라야 산간에 서로 다른 피해를 줍니다.",
+   "summary": "인도 기상청은 벵골만 남서부의 저기압이 11월 1일 깊은 저기압으로, 2일에는 강한 사이클론으로 발달해 3일 안드라프라데시 남부 해안을 지날 것으로 내다봤습니다. 스리랑카 기상 당국은 이 시스템이 '무라수'라는 이름의 사이클론이 됐다며 만나르~트링코말리 앞바다의 원양 어선에 강풍·높은 파도 경보를 냈습니다. 네팔 전문가는 이번에는 네팔 쪽으로 오지 않을 가능성이 크다고 봤습니다.",
+   "note": "10~11월은 남서 계절풍이 물러나는 몬순 후기로, 벵골만 사이클론이 가장 잦은 시기입니다. 지난번 아르나브는 북상해 네팔 무스탕에 폭설을 내렸지만 이번 진로는 서북서쪽이라 피해 지역이 인도 동해안으로 바뀝니다.",
+   "critique": "네팔 매체 기사라 네팔에 미칠 영향이 중심이고, 실제 상륙지인 안드라프라데시의 대피·해안 저지대 상황은 다루지 않았습니다. 이름(무라수)과 세기는 스리랑카 경보 기준이라 인도 기상청 최신 발표와 맞춰 볼 필요가 있습니다.",
+   "tags": [
+    "열대 저기압",
+    "벵골만",
+    "몬순 후기"
+   ]
+  },
+  {
+   "id": "2026-11-02-qatar-lng-tanker",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "res",
+   "country": "QAT",
+   "related": [
+    "IRN",
+    "SAU",
+    "KWT"
+   ],
+   "spot": null,
+   "title": "걸프 해역서 카타르 LNG 운반선 피격…카타르·쿠웨이트·사우디 일제히 규탄",
+   "titleOrig": "Qatari gas tanker struck in Arabian Gulf, state media says",
+   "source": "Khaleej Times",
+   "lang": "en",
+   "url": "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-1-2026",
+   "video": null,
+   "why": "카타르 LNG는 라스라판에서 출발해 걸프 안쪽 바다를 지나 호르무즈를 빠져나가야만 세계 시장에 닿습니다. 해협 밖이 아니라 걸프 안쪽에서 공격이 일어났다는 점은 위험 구역이 넓어졌다는 뜻입니다.",
+   "summary": "카타르 국영 매체는 11월 1일 자국 가스 운반선이 걸프 해역에서 공격받았다고 밝혔고, 선원은 무사한 것으로 전해졌습니다. 카타르·쿠웨이트·사우디가 잇따라 규탄 성명을 냈지만, 공격 주체와 정확한 위치·피해 규모는 공개되지 않았습니다. 같은 날 이란 협상단은 카타르 중재 회담을 위해 도하에 있었습니다.",
+   "note": "카타르는 전쟁 중재국이면서 동시에 걸프 해상로에 수출을 전적으로 의존하는 나라입니다. 중재국 선박이 공격받은 것이라 협상 판에도 압박이 될 수 있습니다.",
+   "critique": "라이브 블로그는 공격 주체·위치·선박명을 전하지 않아, '걸프 해역'이 카타르 근해인지 호르무즈 근처인지 구분할 수 없습니다. 이 수준의 정보만으로 특정 세력의 소행으로 단정해선 안 됩니다.",
+   "tags": [
+    "걸프 지정학",
+    "초크포인트",
+    "해상 수출로"
+   ]
+  },
+  {
+   "id": "2026-11-02-iran-hormuz-two-days",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT",
+    "OMN"
+   ],
+   "spot": "hormuz",
+   "title": "아락치 \"미국이 요구 수용하면 호르무즈 이틀 안에 재개방\"…\"미국과 회담 계획은 없다\"",
+   "titleOrig": "Trump says war in Iran will be put away very soon \"one way or the other\"",
+   "source": "CBS News · Khaleej Times",
+   "lang": "en",
+   "url": "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/",
+   "video": null,
+   "why": "좁은 해협 하나를 열고 닫는 일이 협상 카드가 되고 있습니다. 호르무즈는 이란과 오만(무산담반도) 사이 가장 좁은 곳이 약 39km라 연안국이 통항을 좌우하기 쉬운 지형입니다.",
+   "summary": "Khaleej Times에 따르면 아락치 이란 외무장관은 1일 미국이 이란의 요구를 받아들이면 호르무즈 해협이 이틀 안에 다시 열릴 수 있다고 말했습니다. CBS는 그가 알자지라 인터뷰에서 현재 미국 관리와 만날 계획은 없다고 했다고 전했고, 카타르 중재자가 이란에 새 종전 합의안을 건넸다고 보도했습니다. 트럼프 대통령은 전쟁이 \"어떻게든\" 곧 끝날 것이라고 말했습니다.",
+   "note": "'이틀 안 재개방'은 기뢰 제거·통항 체계 정비가 그만큼 빨리 가능하다는 주장인데, 이란이 주장해 온 기뢰 피격이 사실이라면 실제 소해 작업에는 더 오래 걸릴 수 있습니다.",
+   "critique": "이란이 내건 '요구'의 내용은 두 매체 모두 구체적으로 전하지 않았습니다. 미국 측은 공습 재개 여부를 정하지 않았다는 입장이라, 양측 발언 모두 협상용 신호로 봐야 합니다.",
+   "tags": [
+    "초크포인트",
+    "중재 외교",
+    "해상 봉쇄"
+   ]
+  },
+  {
+   "id": "2026-11-02-yemen-west-displaced",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "pop",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": null,
+   "title": "유엔 \"예멘 서부 전투로 30만 명 넘게 피란\"…호데이다 항구 공습 주장도",
+   "titleOrig": "UN says more than 300,000 have fled fighting in western Yemen",
+   "source": "The Times of Israel (AFP 인용)",
+   "lang": "en",
+   "url": "https://www.timesofisrael.com/liveblog-november-1-2026",
+   "video": null,
+   "why": "피란이 집중된 예멘 서부는 홍해 연안의 좁은 티하마 평야와 그 뒤의 고원 사이 지역입니다. 항구 도시 호데이다가 전장이 되면 식량·연료 수입 통로가 막혀 내륙 인구 전체가 영향을 받습니다.",
+   "summary": "유엔은 후티 반군과 사우디가 지원하는 정부군의 전투가 격해지면서 예멘 서부에서 30만 명 이상이 집을 떠났다고 밝혔습니다. 후티 측 매체는 1일 호데이다 대학과 항구가 공습받았다고 주장했고, 정부 측 합동군은 후티가 예멘과 사우디의 민간 시설을 계속 공격한다고 비난했습니다. 같은 날 사우디는 자국 내 예멘인 체류 위반자에 대한 비자 사면을 발표했습니다.",
+   "note": "호데이다는 예멘 수입 물자의 핵심 관문이라 전투가 길어질수록 피란민은 내륙 고원(사나 방면)이나 남쪽으로 흩어지게 됩니다. 사우디의 비자 사면은 국경 너머 이주 압력을 관리하려는 조치로도 읽힙니다.",
+   "critique": "공습 주장은 후티 매체, 민간인 공격 비난은 정부 측 발표라 양쪽 모두 독립적으로 확인되지 않았습니다. 30만 명이 어느 주에서 어디로 이동했는지가 빠져 있어 피란 경로를 지도에서 읽기 어렵습니다.",
+   "tags": [
+    "강제 이주",
+    "대리전",
+    "항구 도시"
+   ]
+  },
+  {
+   "id": "2026-11-02-rubio-pak-afg",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "geo",
+   "country": "PAK",
+   "related": [
+    "AFG",
+    "IND"
+   ],
+   "spot": null,
+   "title": "루비오 \"아프간발 테러에 대한 파키스탄 우려 듣고 있다…필요하면 건설적 역할\"",
+   "titleOrig": "US hears Pakistan's concerns over terrorism from Afghanistan, would play 'productive role' if there is one: Rubio",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041358/us-hears-pakistans-concerns-over-terrorism-from-afghanistan-would-play-productive-role-if-there-is-one-rubio",
+   "video": null,
+   "why": "파키스탄-아프간 갈등의 무대는 듀랜드 라인을 따라 이어진 험한 산악 국경입니다. 같은 파슈툰족이 양쪽에 걸쳐 살고 통로가 많아 무장 세력의 이동을 막기 어렵다는 지형·민족 조건이 갈등의 바탕입니다.",
+   "summary": "루비오 미 국무장관은 미국이 아프가니스탄에서 비롯되는 테러에 대한 파키스탄의 우려를 듣고 있으며, 할 수 있는 역할이 있다면 건설적으로 나서겠다고 말했습니다. 다음 날 파키스탄군 대변인은 인도가 파키스탄 내 테러의 최대 배후이고 탈레반 정권은 그 대리인이라고 주장하며, 아프간을 고립시키지는 않겠지만 국제사회가 탈레반을 압박해야 한다고 말했습니다.",
+   "note": "미국이 중재 가능성을 언급한 것은 10월 내내 이어진 국경 충돌 이후 처음 나온 외교적 출구 신호입니다. 파키스탄은 서쪽(아프간)과 동쪽(인도)을 한 묶음으로 보는 '양면 전선' 프레임을 강화하고 있습니다.",
+   "critique": "파키스탄 매체 보도라 파키스탄 측 우려가 중심이고, 탈레반 정부는 파키스탄의 공습과 민간인 피해를 문제 삼아 왔다는 반대 시각은 빠져 있습니다. 인도 배후설은 파키스탄군의 주장이며 인도는 부인해 왔습니다.",
+   "tags": [
+    "듀랜드 라인",
+    "대리전",
+    "양면 전선"
+   ]
+  },
+  {
+   "id": "2026-11-02-pak-groundwater-isotope",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "env",
+   "country": "PAK",
+   "related": [],
+   "spot": "indus",
+   "title": "IAEA \"동위원소 기술로 파키스탄 지하수 추적 능력 향상\"…물의 기원·연대·오염 경로 파악",
+   "titleOrig": "Nuclear science boosts Pakistan's ability to track groundwater",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041294/nuclear-science-boosts-pakistans-ability-to-track-groundwater",
+   "video": null,
+   "why": "인더스 평원의 농업과 도시는 강물만큼이나 지하수에 기대고 있습니다. 지하수가 어디서 와서 얼마나 오래 머물렀는지 알아야 상류 하천 유량이 줄 때 버틸 수 있는 양을 계산할 수 있습니다.",
+   "summary": "국제원자력기구(IAEA) 보고서에 따르면 파키스탄은 동위원소 분석 기법으로 지하수가 어디서 왔는지, 얼마나 오래된 물인지, 오염 물질이 어떻게 퍼지는지를 추적할 수 있게 됐습니다. 같은 날 Dawn에는 인도가 물을 지렛대로 파키스탄 경제를 압박한다는 칼럼도 실렸습니다.",
+   "note": "인더스강 조약을 둘러싼 긴장 속에서 지하수는 상류국 인도가 직접 통제할 수 없는 '숨은 수자원'입니다. 다만 과잉 양수로 지하수위가 떨어지고 있어 측정 기술이 곧 해결책은 아닙니다.",
+   "critique": "기사에 제시된 정보는 보고서 요약 수준이라 어느 대수층·지역이 대상인지, 지하수위 하락 수치가 얼마인지는 확인할 수 없습니다. 함께 실린 칼럼은 파키스탄 측 시각의 의견 기사라 사실 보도와 구분해 읽어야 합니다.",
+   "tags": [
+    "상류국-하류국",
+    "지하수",
+    "국제 하천"
+   ]
+  },
+  {
+   "id": "2026-11-01-iran-no-geo-limit",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT"
+   ],
+   "spot": "hormuz",
+   "title": "이란 외무장관 \"밴스 서한은 긍정적 조치\"…최고지도자는 군에 '지리적 제한 없는 대응' 지시",
+   "titleOrig": "Iran war live: Iran security chief says US ‘shifted tone’ in Vance letter",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/liveblog/2026/10/31/iran-war-live-oil-tankers-hit-in-hormuz-trump-says-conflict-will-end-soon",
+   "video": null,
+   "why": "'지리적 제한 없는' 대응 지시는 전장을 이란 영토와 호르무즈 해협에 묶어 두지 않고 걸프 연안 전체로 넓힐 수 있다는 신호입니다. 같은 걸프 안의 카타르 도하가 중재 무대가 되고 있다는 점과 대비됩니다.",
+   "summary": "아락치 이란 외무장관은 알자지라에 밴스 미 부통령의 서한을 검토했다며 미국의 대화 시도를 \"긍정적 조치\"라고 평가했고, 자신의 보좌관이 카타르에서 중재자들과 협의를 이어가고 있다고 밝혔습니다. 같은 날 이란 최고지도자는 군에 어떤 위협에도 지리적 제한 없이 즉각 대응하라고 지시했습니다. 이란은 호르무즈에서 유조선 4척이 기뢰에 맞아 불탔다고 주장하지만 독립적으로 확인되지는 않았습니다.",
+   "note": "협상 신호와 무력 경고가 같은 날 나온 것은 해협 통제력을 협상 지렛대로 쓰려는 의도로 읽힙니다. 지리적으로는 '대응 범위'가 호르무즈 바깥 걸프 연안국 기반 시설까지 넓어질지가 관건입니다.",
+   "critique": "라이브 블로그 특성상 이란 관리 발언이 중심이고 미국 측 직접 발언은 거의 없습니다. The National은 10월 호르무즈·오만만·걸프에서 공격받은 선박 수가 9월의 두 배를 넘었다고 전했지만 수치의 출처는 밝히지 않았습니다.",
+   "tags": [
+    "초크포인트",
+    "중재 외교",
+    "걸프 지정학"
+   ]
+  },
+  {
+   "id": "2026-11-01-mustang-korala-snow",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "land",
+   "country": "NPL",
+   "related": [
+    "XZ"
+   ],
+   "spot": null,
+   "title": "사이클론 아르나브 영향으로 네팔 무스탕에 폭설…코랄라 국경 검문소 닫혀 네팔-중국 교역 중단",
+   "titleOrig": "Heavy snowfall and rain disrupt life in Mustang; Korala road blocked",
+   "source": "Khabarhub",
+   "lang": "en",
+   "url": "https://english.khabarhub.com/2026/31/573819/",
+   "video": null,
+   "why": "벵골만에서 생긴 열대 저기압의 습기가 히말라야까지 올라와 고지대에서는 눈이 되면서, 해발 4천 m가 넘는 티베트 접경 고개의 교역로를 막았습니다. 같은 비구름이 고도에 따라 비와 눈으로 갈리는 산악 기후의 수직 차이가 잘 드러난 사례입니다.",
+   "summary": "31일 네팔 무스탕 북부 로만탕·로게카르 다모다르쿤다 일대에 전날 밤부터 눈이 내려, 코랄라 검문소 주변에 60~90cm(2~3피트) 정도 쌓였습니다. 검문소가 닫히면서 네팔-중국 국경 교역과 수출입이 멈췄고, 좀솜-코랄라 도로도 산사태로 두 곳이 끊겼습니다. 아래쪽 무스탕(추상 이남)에는 비가 내렸습니다.",
+   "note": "같은 날 네팔 전역에서는 산사태로 12곳 넘는 주요 도로 구간이 막혔습니다(Nepal News 브리핑). Khabarhub는 원인을 사이클론 아르나브의 영향으로, Nepal News는 서부 네팔 부근에 남은 저기압으로 설명해 표현에 차이가 있습니다.",
+   "critique": "기사는 국경 폐쇄를 날씨 문제로만 다룹니다. 같은 날 중국이 국경 교역 지점을 '항구'급으로 올리기 위한 공동 관리위원회를 제안했다는 보도도 있었는데, 고지대 교역로가 기후에 얼마나 취약한지가 그런 인프라 논의의 핵심 변수라는 점은 다루지 않습니다.",
+   "tags": [
+    "히말라야",
+    "열대 저기압",
+    "산악 교통"
+   ]
+  },
+  {
+   "id": "2026-11-01-israel-jewish-arab-rally",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "ISR",
+   "related": [
+    "PSX"
+   ],
+   "spot": null,
+   "title": "이스라엘 총선 뒤 '유대-아랍 연립정부' 요구 집회…맞불 집회는 '도둑맞은 선거' 주장",
+   "titleOrig": "Thousands rally in Tel Aviv to demand Jewish-Arab government; counterprotest held against 'stolen' election",
+   "source": "The Times of Israel",
+   "lang": "en",
+   "url": "https://www.timesofisrael.com/liveblog-october-31-2026/",
+   "video": null,
+   "why": "야권 67석 가운데 19석이 아랍계 비시온주의 정당 몫이어서, 아랍계 시민이 몰려 사는 갈릴리·'트라이앵글' 지역의 표가 정부 구성의 열쇠가 됐습니다. 집회 장소에 트라이앵글의 도시 타이베가 들어간 것도 이 지리를 보여 줍니다.",
+   "summary": "시민단체 '스탠딩 투게더'는 31일 저녁 텔아비브 하비마 광장, 예루살렘 파리 광장, 베에르셰바·하이파·타이베에서 집회를 열고 야권 '변화 진영'에 아랍 정당과 함께 정부를 꾸리라고 촉구했습니다. 개표 결과 야권은 67석(시온주의 정당 48석, 아랍 정당 19석), 현 연정 측은 53석입니다. 유대계 야권 지도자들은 그동안 아랍 정당과 협력하지 않겠다는 입장이었습니다.",
+   "note": "10월 29일의 '과반 진영 없음' 보도와 이번 '야권 67석' 집계는 서로 어긋나는 것이 아니라, 아랍 정당을 연정 셈에 넣느냐의 차이입니다. 민족 구성에 따른 거주지 분리가 곧 의석 계산의 분리로 이어지는 구조입니다.",
+   "critique": "라이브 블로그 항목이라 집회 참가 인원과 맞불 집회의 규모는 확인되지 않습니다. 네타냐후 측이 아랍 정당 표에 부정이 있었다고 주장한다는 보도(알자지라)도 있으나, 아직 근거는 제시되지 않았습니다.",
+   "tags": [
+    "선거 지리",
+    "민족 구성"
+   ]
+  },
+  {
+   "id": "2026-11-01-gaza-yellow-line",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "PSX",
+   "related": [
+    "ISR"
+   ],
+   "spot": null,
+   "title": "유엔 인권사무소 \"이스라엘군, 가자 '옐로라인' 넘어 이동\"…주민 공간 축소에 강제 이주 우려",
+   "titleOrig": "Ethnic cleansing fears rise as Israel squeezes space in Gaza: UN",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/30/ethnic-cleansing-fears-rise-as-israel-squeezes-space-in-gaza-un",
+   "video": null,
+   "why": "가자지구는 약 365㎢의 좁은 해안 띠에 200만 명이 넘게 사는 곳이라, 군 배치선이 조금만 움직여도 사람이 살 수 있는 땅이 크게 줄어듭니다. 임시 휴전선이 어디에 그어지느냐가 곧 인구 분포를 결정합니다.",
+   "summary": "유엔 인권최고대표사무소(OHCHR) 점령 팔레스타인 사무소는 이스라엘군이 2025년 10월 휴전 때 정한 배치선 '옐로라인'을 넘어 움직이고 있으며, 이 선 주변을 사실상 사격 구역처럼 다뤄 피란민이 집으로 돌아가지 못한다고 밝혔습니다. 알자지라는 이스라엘이 배치 지역을 가자 면적의 70%까지 넓히려 한다고 전했습니다. 가자 보건부는 휴전 이후 1,574명이 숨졌다고 집계했습니다.",
+   "note": "핵심은 사망자 수보다 '선의 이동'입니다. 임시 배치선이 사실상 영구 경계로 굳어지면 가자 내부가 군사 통제 구역과 과밀한 거주 구역으로 나뉘게 됩니다.",
+   "critique": "기사에는 이스라엘 정부·군의 입장이 실려 있지 않고, '70%' 목표의 근거와 현재 실제 통제 비율도 나오지 않아 검증이 필요합니다. 사상자 수는 하마스가 운영하는 가자 보건부 집계이며, '인종청소'는 유엔 쪽 우려를 옮긴 표현입니다.",
+   "tags": [
+    "완충지대",
+    "강제 이주",
+    "점령지"
+   ]
+  },
+  {
+   "id": "2026-11-01-aden-houthi-missiles",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": "babelmandeb",
+   "title": "후티, 한 달째 아덴 공항·항구에 미사일 공격…임시수도 주민들 \"플랜 B 필요\"",
+   "titleOrig": "'Need a Plan B': Yemenis in Aden prepare for another war as missiles fall",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/30/need-a-plan-b-yemenis-in-aden-prepare-for-another-war-as-missiles-fall",
+   "video": null,
+   "why": "아덴은 바브엘만데브 해협 동쪽 입구의 천연 항구이자 예멘 정부의 임시 수도입니다. 후티가 9월 모카와 해협 연안을 장악한 데 이어 아덴까지 압박하면서, 홍해 출입구 양쪽 해안의 통제 구도가 흔들리고 있습니다.",
+   "summary": "지난 한 달 동안 후티의 미사일·드론이 아덴 국제공항, 군 기지, 항구, 대통령궁을 노리면서 항공편 취소·지연·회항이 잇따랐습니다. 후티는 9월 서부에서 사우디가 지원하는 국민저항군(NRF)을 상대로 공세를 펴 호데이다·타이즈주 일부와 모카를 차지했고, 10월 정부군 반격은 홍해 연안에서 제한적 성과에 그쳤습니다. 타이즈와 아덴을 잇는 도로도 후티가 장악해 타이즈 포위가 더 조여졌습니다.",
+   "note": "공항이 집중 표적이 된 것은 아덴이 정부 쪽 지역의 핵심 대외 관문이기 때문입니다. 산악 내륙(후티)과 해안 평야·항구(정부)라는 오랜 지형적 구도가 다시 전선이 되고 있습니다.",
+   "critique": "기사에는 사상자 수와 후티 측이 밝힌 공격 이유가 없고, 아덴 내부 남부 세력 간 권력 구도도 빠져 있습니다. 아덴 함락을 노린다는 관측은 우려 단계로, 확인된 사실은 아닙니다.",
+   "tags": [
+    "초크포인트",
+    "대리전"
+   ]
+  },
+  {
+   "id": "2026-11-01-kgz-tjk-border-fence",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "KGZ",
+   "related": [
+    "TJK"
+   ],
+   "spot": "fergana",
+   "title": "키르기스스탄, 타지크 접경 바트켄주 국경 철책 328km 완공…경계 표지 설치는 계속",
+   "titleOrig": "Kyrgyzstan-Tajikistan Border Fencing Complete in Batken, Demarcation Continues",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/kyrgyzstan-tajikistan-border-fencing-complete/",
+   "video": null,
+   "why": "페르가나 분지 남쪽 가장자리는 소련 시기 행정 경계가 마을·농지·용수로를 가로질러 그어져 2021년과 2022년 유혈 충돌까지 낳은 곳입니다. 철책은 그 모호했던 경계를 땅 위의 물리적 선으로 고정하는 작업입니다.",
+   "summary": "키르기스스탄 바트켄주 당국은 10월 29일 타지키스탄과 맞닿은 약 328km 구간의 철책 공사를 마쳤다고 확인했습니다. 2025~2026년 바트켄·레일레크 지구에는 순찰로 338.5km도 놓였고, 2026년 7월 시작한 경계 표지 설치와 공식 경계 문서 작업은 이어지고 있습니다. 잔이-도스투크 주민 73가구는 집과 농지를 내준 데 대한 보상 액수와 주택 배정에 여전히 이의를 제기하고 있습니다.",
+   "note": "2025년 3월 국경 조약 이후 닫혔던 검문소가 다시 열리고 양국 교역도 늘었습니다. 다만 철책은 국경 양쪽 마을이 함께 쓰던 물·목초지 같은 생활 공간을 나누는 효과도 낼 수 있습니다.",
+   "critique": "약 1,008km 국경 가운데 일부만 다룬 키르기스 측 발표 위주의 기사로, 타지크 쪽 주민 시각이나 보루흐 같은 월경지가 어떻게 처리되는지는 나오지 않습니다.",
+   "tags": [
+    "국경 획정",
+    "구소련 행정 경계"
+   ]
+  },
+  {
+   "id": "2026-11-01-geo-aze-border",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "GEO",
+   "related": [
+    "AZE"
+   ],
+   "spot": null,
+   "title": "조지아·아제르바이잔, 미확정 국경 획정 작업 서두르기로 합의",
+   "titleOrig": "Georgia agrees to accelerate border delimitation and demarcation process with Azerbaijan",
+   "source": "APA",
+   "lang": "en",
+   "url": "https://en.apa.az/foreign-policy/georgia-agrees-to-accelerate-border-delimitation-and-demarcation-process-with-azerbaijan-533142",
+   "video": null,
+   "why": "두 나라 국경은 소련 해체 뒤 30년 넘게 상당 구간이 확정되지 않은 채 남아 있습니다. 국경 산등성이에 걸친 다비트 가레자 수도원 단지처럼 종교 유산과 영토가 겹친 곳이 대표적 쟁점입니다.",
+   "summary": "아제르바이잔 총리 알리 아사도프의 조지아 방문 중 열린 정부 간 경제위원회와 양자 회담에서, 조지아 총리 이라클리 코바히제는 국경 획정과 경계 표지 설치를 서두르기로 합의했다고 밝혔습니다. 그는 조지아의 입장은 그대로이며 \"진전을 봐야 한다\"고 말했고, 아제르바이잔의 반응이 진정성 있었다고 평가했습니다. 구체적 대상 지역은 공개되지 않았습니다.",
+   "note": "같은 위원회에서 에너지·교통과 중앙회랑이 함께 논의됐다는 점에서, 카스피해와 흑해를 잇는 통과 회랑의 안정성이 국경 확정과 맞물려 있습니다.",
+   "critique": "아제르바이잔 매체의 짧은 보도로 쟁점 지역이 어디인지 나오지 않으며, 다비트 가레자도 기사에는 언급되지 않습니다. 조지아 남동부 크베모 카르틀리의 아제르바이잔계 주민 같은 접경 인구 문제도 다루지 않습니다.",
+   "tags": [
+    "국경 획정",
+    "중앙회랑"
+   ]
+  },
+  {
+   "id": "2026-11-01-ca-power-demand",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "res",
+   "country": "KAZ",
+   "related": [
+    "UZB",
+    "KGZ",
+    "TJK"
+   ],
+   "spot": null,
+   "title": "유라시아개발은행 \"중앙아시아 전력 수요 2030년까지 27% 증가\"…송전망·저장 설비 투자 시급",
+   "titleOrig": "Central Asia Electricity Demand Expected to Rise 27% by 2030, EDB Says",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/central-asia-electricity-demand-expected-to-rise-27-by-2030-edb-says/",
+   "video": null,
+   "why": "중앙아시아는 상류국(키르기스스탄·타지키스탄)의 수력과 하류국의 화석연료가 소련 시기 통합 전력망으로 묶여 있던 지역이라, 전력 수요 급증은 물·에너지 교환 문제와 바로 이어집니다.",
+   "summary": "유라시아개발은행(EDB)은 29일 '국경 없는 에너지' 보고서에서 공장 신설과 도시 팽창으로 2030년까지 지역 전력 수요가 27% 늘 것으로 내다봤습니다. 각국은 2035년까지 태양광·풍력을 35GW 넘게 늘릴 계획이지만, 은행은 발전소뿐 아니라 송전망 개선, 저장 설비, 예비 발전 능력이 함께 필요하다고 강조했습니다. 2024년 12월 10일 최대 수요 때는 통합 계통에서 약 6.6GW가 가동 불능이거나 제한 상태였습니다.",
+   "note": "EDB는 3월 보고서에서 2024년 약 2,700억kWh에서 2030년 약 3,700억kWh로 40% 가까이 늘 것이라고 했습니다. 이번 27%와 수치가 다른데, 기사에 기준 연도가 없어 직접 비교하기 어렵습니다.",
+   "critique": "EDB는 러시아와 카자흐스탄이 주도해 세운 다자 개발은행이라 역내 전력망 통합을 강조하는 시각이 깔려 있을 수 있습니다. 기사에는 나라별 수치와, 수력 의존국이 겨울 갈수기에 겪는 전력난 위험이 빠져 있습니다.",
+   "tags": [
+    "상류국-하류국",
+    "수력 발전",
+    "전력망 통합"
+   ]
+  },
+  {
+   "id": "2026-10-31-oman-rescue-qatar-tehran",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "OMN",
+   "related": [
+    "IRN",
+    "QAT"
+   ],
+   "spot": "hormuz",
+   "title": "오만 해군, 무산담 앞바다 피격 상선 선원 25명 구조…카타르 대표단은 테헤란 도착",
+   "titleOrig": "Qatari delegation arrives in Tehran for peace talks",
+   "source": "Dawn (AFP 인용)",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041098/qatari-delegation-arrives-in-tehran-for-peace-talks",
+   "video": null,
+   "why": "오만의 무산담반도는 호르무즈 해협 남쪽 기슭에 붙은 월경지로, 해협 표준 항로가 이 앞바다를 지납니다. 해협 양쪽 연안국인 이란과 오만이 사고 현장과 가장 가깝습니다.",
+   "summary": "카타르 대표단이 종전 협상을 위해 테헤란에 도착했습니다. 같은 무렵 오만은 공격받은 상선에서 선원 25명을 구조했고, 이란은 호르무즈 해협에서 유조선 3척을 멈춰 세웠습니다.",
+   "note": "걸프 남쪽의 두 중재국(카타르·오만)이 한쪽은 외교, 한쪽은 해상 구조로 동시에 움직이는 모습입니다. 무산담 앞바다가 반복해서 사고 무대가 된다는 점이 표준 항로의 취약성을 보여 줍니다.",
+   "critique": "기사는 선박이 누구에게 왜 공격받았는지, 이란이 유조선을 멈춘 정확한 위치(영해·국제수역)를 밝히지 않았습니다. 해협 안 위치에 따라 통과통항권 적용 여부가 달라지는 만큼 중요한 빈칸입니다.",
+   "tags": [
+    "초크포인트",
+    "월경지(엑스클레이브)",
+    "중재 외교"
+   ]
+  },
+  {
+   "id": "2026-10-31-punjab-crop-fires",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "env",
+   "country": "PAK",
+   "related": [
+    "IND"
+   ],
+   "spot": null,
+   "title": "파키스탄 펀자브 볏짚 소각 탐지, 인도 펀자브의 4.2배…오카라·구즈란왈라 최다",
+   "titleOrig": "Pakistan's Punjab records 4.2 times more crop-fire detections than Indian Punjab: report",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041172/pakistans-punjab-records-42-times-more-crop-fire-detections-than-indian-punjab-report",
+   "video": null,
+   "why": "펀자브 평원은 1947년 분할로 인도와 파키스탄에 나뉘었지만 같은 쌀-밀 이모작 지대입니다. 늦가을 볏짚 연기는 국경과 상관없이 서풍과 기온 역전을 타고 라호르와 델리를 함께 덮습니다.",
+   "summary": "보고서에 따르면 10월 1~29일 위성으로 탐지된 농작물 소각 지점이 파키스탄 펀자브에서 인도 펀자브보다 4.2배 많았습니다. 지역별로는 오카라가 가장 많았고 구즈란왈라, 난카나사히브가 뒤를 이었습니다.",
+   "note": "10월 29일 실린 '델리 대기질에 볏짚 소각 영향 미미' 분석과 함께 보면, 오염원의 국경 너머 이동과 도시 자체 배출원 중 무엇을 더 중시하느냐는 논쟁이 양국에서 동시에 벌어지고 있습니다.",
+   "critique": "위성 탐지 '지점 수'는 태운 면적이나 배출량과 같지 않고, 구름·관측 시각에 따라 빠지는 불도 있습니다. 보고서 작성 주체가 기사 요약에 드러나지 않아 비교 방법을 확인하기 어렵습니다.",
+   "tags": [
+    "농업 부산물 소각",
+    "대기 오염",
+    "이모작"
+   ]
+  },
+  {
+   "id": "2026-10-31-sost-khunjerab-green-channel",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "econ",
+   "country": "PAK",
+   "related": [
+    "XJ"
+   ],
+   "spot": null,
+   "title": "파키스탄·중국, 소스트-쿤제랍 국경에 농산물 '그린 채널' 합의…Dawn 사설 \"품질 기준·공급망부터\"",
+   "titleOrig": "Will the Sost-Khunjerab border agreement help Pakistan's agricultural exports?",
+   "source": "Dawn (사설)",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041143/china-green-channel",
+   "video": null,
+   "why": "쿤제랍 고개는 해발 약 4,700m로 카라코람 하이웨이가 파키스탄 길기트발티스탄과 신장을 잇는 유일한 육로 관문입니다. 겨울에는 눈 때문에 닫히는 계절 국경이라 상하기 쉬운 농산물에는 통관 속도가 특히 중요합니다.",
+   "summary": "파키스탄과 중국이 소스트-쿤제랍 국경에서 농산물 신속 통관 '그린 채널'을 운영하기로 합의했습니다. Dawn 사설은 파키스탄이 어떤 농산물을 수출할 수 있는지 정하고, 중국 품질 기준을 맞추고, 믿을 만한 공급망을 갖춰야 효과가 있다고 지적했습니다.",
+   "note": "동쪽(인도)과 서쪽(아프간) 국경 교역이 막힌 상황에서 북쪽 산악 관문의 비중이 커지고 있습니다. 다만 겨울 폐쇄와 좁은 도로 용량이 근본적인 한계입니다.",
+   "critique": "사설은 경제 정책만 다루고 고개의 겨울 폐쇄 기간, 도로 용량, 신장 쪽 카스(카슈가르) 시장까지의 거리 같은 지리적 제약은 언급하지 않았습니다. 의견 기사라 합의 내용 자체는 별도로 확인할 필요가 있습니다.",
+   "tags": [
+    "산악 교통",
+    "관문 통로",
+    "계절 국경"
+   ]
+  },
+  {
+   "id": "2026-10-31-ots-azimov",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "UZB",
+   "related": [
+    "TUR",
+    "KAZ",
+    "AZE"
+   ],
+   "spot": null,
+   "title": "튀르크국가기구 새 사무총장에 우즈베키스탄 아지모프…창설 이후 첫 우즈베크 출신",
+   "titleOrig": "Uzbek Diplomat Mirvokhid Azimov Appointed Secretary General of Organization of Turkic States",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/uzbek-diplomat-mirvokhid-azimov-appointed-secretary-general-of-organization-of-turkic-states/",
+   "video": null,
+   "why": "튀르크국가기구는 아나톨리아에서 카스피해를 건너 중앙아시아까지 이어지는 튀르크어권을 묶는 조직입니다. 중앙아시아 인구가 가장 많은 우즈베키스탄이 사무국을 맡으면서 무게중심이 동쪽으로 옮겨 가는 모양새입니다.",
+   "summary": "10월 30일 앙카라 정상회의에서 우즈베크 외교관 미르보히드 아지모프가 사무총장으로 임명돼 키르기스 출신 전임자의 뒤를 잇습니다. 2009년 튀르크 평의회로 출범한 이 기구는 아제르바이잔·카자흐스탄·키르기스스탄·튀르키예가 창설했고 우즈베키스탄은 2019년 가입했으며, 역대 사무총장은 다른 네 회원국에서 한 번씩 나왔습니다.",
+   "note": "사무총장 자리가 회원국을 돌아가며 맡는 구조라, 이번 임명으로 모든 정회원국이 한 번씩 수장을 배출했습니다. 중앙회랑 교통 협력처럼 우즈베키스탄이 내륙국으로서 얻을 것이 많은 의제에 힘이 실릴 수 있습니다.",
+   "critique": "중앙아시아 매체 보도로 인사 자체에 집중했고, 같은 회의에서 아제르바이잔 대통령이 불참하는 등 회원국 사이의 온도 차는 다루지 않았습니다. 투르크메니스탄은 아직 옵서버라는 점도 지역 범위를 읽을 때 함께 봐야 합니다.",
+   "tags": [
+    "지역 협력 기구",
+    "문화권",
+    "내륙국"
+   ]
+  },
+  {
+   "id": "2026-10-30-hormuz-mines",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "OMN",
+    "ARE"
+   ],
+   "spot": "hormuz",
+   "title": "이란 \"호르무즈서 유조선 4척 기뢰 피격\" 주장…미군의 '항로 정리' 발표와 정면 충돌",
+   "titleOrig": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
+   "source": "CNBC",
+   "lang": "en",
+   "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html",
+   "video": null,
+   "why": "세계 해상 원유 수송의 핵심 초크포인트에서 '어느 항로가 안전한가'를 두고 정보전이 벌어지고 있습니다. 해협 안 항로 배치 자체가 전략이 되는 사례입니다.",
+   "summary": "이란은 해협 남쪽(오만 연안) 항로를 '무허가 항로'로 규정하고, 이곳을 지나던 유조선 4척이 기뢰에 맞아 불탔다고 발표했습니다. 하루 전 미 중부사령부는 주요 항로의 기뢰를 제거했다고 밝힌 상태였고, 혁명수비대는 독립적인 증거를 내놓으라며 반박했습니다. 미국 중간선거 뒤 추가 공습 가능성이 거론되는 가운데 나온 발표입니다.",
+   "note": "피격 주장은 이란 측 발표라 독립 검증이 필요합니다. 지리적으로 더 중요한 지점은 해협 안에서 이란 연안 항로와 오만 연안 항로가 갈리며 '통항 경로의 정치화'가 진행되고 있다는 점입니다.",
+   "critique": "양측 발표를 나란히 전한 점은 균형적이지만, 시장·군사 긴장 위주라 해협을 오가는 선원과 오만·UAE 연안의 현장 시각은 상대적으로 적습니다.",
+   "tags": [
+    "초크포인트",
+    "해상 봉쇄",
+    "통과통항권"
+   ]
+  },
+  {
+   "id": "2026-10-30-nepal-8000ers",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "land",
+   "country": "NPL",
+   "related": [
+    "XZ",
+    "IND"
+   ],
+   "spot": null,
+   "title": "네팔 \"8천 미터 봉우리 6개 더 인정해 달라\"…국제산악연맹 총회서 공식 제안",
+   "titleOrig": "Nepal officially bids to expand global eight-thousander roster with 6 new distinct peaks",
+   "source": "Clickmandu",
+   "lang": "en",
+   "url": "https://english.clickmandu.com/2026/10/12173/",
+   "video": null,
+   "why": "'어디까지가 독립된 산인가'는 높이만이 아니라 봉우리 사이의 고도 차(돌출도)와 지형적 분리로 정합니다. 산의 정의가 관광·경제·국가 정체성과 맞물리는 사례입니다.",
+   "summary": "카트만두에서 열린 국제산악연맹(UIAA) 총회에서 네팔 정부와 네팔산악협회가 칸첸중가 산괴의 봉우리 4개와 로체 산괴의 봉우리 2개를 독립된 8천 미터급 봉우리로 인정해 달라고 제안했습니다. 받아들여지면 세계 8천 미터 봉우리는 14개에서 20개로, 네팔에 있는 것은 8개에서 14개로 늘어납니다. 네팔은 이미 이 봉우리들에 별도 등반 허가를 내주고 있습니다.",
+   "note": "UIAA는 과거 칸첸중가를 '다섯 봉우리를 한 산으로 보는 현지 이름의 뜻'을 들어 하나의 산으로 본 적이 있어 통과는 불투명합니다. 숫자보다 봉우리 간 고도 차 같은 측량 근거가 얼마나 설득력 있는지가 관건입니다.",
+   "critique": "네팔 정부와 산악협회의 논리가 중심이고, UIAA 기준이나 산악계의 회의적 시각은 거의 다루지 않습니다. 관광 수익 기대도 구체적 근거 없이 제시됩니다.",
+   "tags": [
+    "히말라야",
+    "산의 독립성(돌출도)",
+    "산악 관광"
+   ]
+  },
+  {
+   "id": "2026-10-30-bhutan-glof-gasa",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "land",
+   "country": "BTN",
+   "related": [
+    "IND",
+    "NPL"
+   ],
+   "spot": "ganges",
+   "title": "부탄 가사 빙하호 붕괴 홍수로 가사 온천 단지 유실…인도, 하류 서벵골·아삼에 홍수 경보",
+   "titleOrig": "Glacial Lake Outburst Flood Destroys Gasa Tsachu Hot Springs in Bhutan as India Issues Transboundary Alerts",
+   "source": "Nepal News",
+   "lang": "en",
+   "url": "https://english.nepalnews.com/s/main-left/nepal-news-evening-briefing-friday-october-30-2026/",
+   "video": null,
+   "why": "히말라야 빙하호에서 터진 물이 모추강·푸나창추강을 따라 내려가 국경을 넘어 인도 평야(산코시강 유역)까지 위험을 옮깁니다. 상류의 산악 재해가 하류국의 홍수 문제가 되는 전형적인 사례입니다.",
+   "summary": "부탄 북부 가사주의 신타푸 빙하호가 자연 둑을 넘어 터지면서 가사 온천 단지가 완전히 파괴되고 푸나카-가사 도로 일부가 크게 부서졌습니다. 인도 중앙수자원위원회는 서벵골 알리푸르두아르와 아삼 두브리 지역에 높은 단계의 홍수 경보를 내리고 산코시강을 24시간 감시하라고 권고했습니다. 같은 날 네팔군은 고르카 지역 빙하 토석류가 부디간다키강을 막아 1,025명을 대피시켰다고 의회에 보고했습니다.",
+   "note": "10월 말 사이클론 아르나브가 히말라야에 비와 눈을 쏟은 직후라, 계절풍이 끝난 뒤에도 빙하호 홍수가 일어날 수 있음을 보여 줍니다. 네팔군이 고위험 빙하호 45곳에 조기경보 확대를 요구한 것도 같은 맥락입니다.",
+   "critique": "네팔 매체의 종합 브리핑이라 부탄 피해의 사상자·이재민 수가 없고, 부탄 정부 발표를 직접 인용하지 않았습니다. 하류 브라마푸트라 유역(방글라데시)까지 영향이 갈지에 대한 언급도 빠져 있습니다.",
+   "tags": [
+    "빙하호 홍수(GLOF)",
+    "상류국-하류국",
+    "히말라야"
+   ]
+  },
+  {
+   "id": "2026-10-29-vance-letter",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT",
+    "ISR"
+   ],
+   "spot": null,
+   "title": "밴스 미 부통령, 이란 안보수장에 서한…카타르 중재로 협상 재개 타진",
+   "titleOrig": "What we know of Vance's letter to Rezaei, as Trump warns Gulf to 'prepare'",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://aljazeera.com/news/2026/10/29/what-we-know-of-vances-letter-to-rezaei-as-trump-warns-gulf-to-prepare",
+   "video": null,
+   "why": "8개월째인 미국·이란 전쟁에서 카타르가 다시 협상 통로가 되고 있습니다. 걸프의 소국이 위치와 관계망으로 외교적 무게를 갖는 구조를 볼 수 있습니다.",
+   "summary": "미국 언론 보도에 따르면 JD 밴스 부통령이 카타르 중재단을 통해 이란 최고국가안보회의 사무총장 모흐센 레자이에게 직접 협상을 제안하는 서한을 보냈습니다. 핵 프로그램을 처음부터 의제에 올려야 한다는 요구가 담긴 것으로 전해집니다. 이란은 해상 봉쇄 해제와 동결 자산 반환 등 선결 조건을 고수하고 있습니다.",
+   "note": "쟁점은 '순서'입니다. 봉쇄 해제가 먼저냐, 핵 논의가 먼저냐에 따라 협상 구도가 달라집니다. 걸프 동맹국에 대비를 당부했다는 보도가 함께 나온 만큼, 협상과 군사적 압박이 동시에 진행되는 국면으로 읽는 것이 균형 잡힌 해석입니다.",
+   "critique": "서한이 공개되지 않아 미국 언론의 익명 소식통에 크게 기대고 있습니다. 이란 내부 여론과 강경파의 반응은 상대적으로 얕게 다뤘습니다.",
+   "tags": [
+    "중재 외교",
+    "해상 봉쇄",
+    "걸프 지정학"
+   ]
+  },
+  {
+   "id": "2026-10-29-israel-election",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "ISR",
+   "related": [
+    "PSX"
+   ],
+   "spot": null,
+   "title": "이스라엘 총선 개표 완료…어느 진영도 과반 61석 넘지 못해",
+   "titleOrig": "Israel election result shows no overall majority as vote count complete",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/29/israel-election-result-shows-no-overall-majority-as-vote-count-complete",
+   "video": null,
+   "why": "2023년 10월 7일 이후 첫 총선 결과는 가자·레바논·이란 전선 정책의 방향을 좌우합니다. 아랍계 정당의 의석이 변수로 떠오른 점은 국가 내부의 민족 구성이 정치 지형을 바꾸는 모습을 보여줍니다.",
+   "summary": "10월 27일 치러진 총선 개표 결과 네타냐후 총리 진영 53석, 가디 아이젠코트가 이끄는 야권 48석, 아랍계 정당 19석으로 집계됐습니다. 어느 진영도 전체 120석 가운데 과반인 61석을 확보하지 못해 연립정부 협상이 시작됐습니다. 선거관리위원회는 외국 개입 의혹에 대해 정보기관에 조사를 요청했습니다.",
+   "note": "의석수만큼 중요한 것은 아랍계 의석이 연정 계산에 들어가느냐입니다. 유대계 주요 진영이 아랍 정당의 지지에 선을 긋는 분위기라 숫자가 곧 정책 방향을 말해 주지는 않습니다. 공식 결과는 다음 주에 확정됩니다.",
+   "critique": "의석 수치는 충실하지만 지역·집단별 투표 양상 같은 '선거의 지리'는 다루지 않아, 결과가 공간적으로 무엇을 뜻하는지 읽기 어렵습니다.",
+   "tags": [
+    "선거 지리",
+    "민족 구성",
+    "분쟁과 국내 정치"
+   ]
+  },
+  {
+   "id": "2026-10-29-afpak-border",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "AFG",
+   "related": [
+    "PAK"
+   ],
+   "spot": null,
+   "title": "아프가니스탄·파키스탄 국경 충돌 계속…양국 교역 급감",
+   "titleOrig": "Afghanistan-Pakistan border clashes continue amid reported Pakistani outreach to anti-Taliban groups",
+   "source": "FDD's Long War Journal",
+   "lang": "en",
+   "url": "https://www.longwarjournal.org/archives/2026/10/afghanistan-pakistan-border-clashes-continue-amid-reported-pakistani-outreach-to-anti-taliban-groups.php",
+   "video": null,
+   "why": "식민지 시대에 그어진 듀랜드 라인을 사이에 둔 충돌이 내륙국 아프가니스탄의 생명선인 교역로를 막고 있습니다. 국경선의 역사와 내륙국의 취약성을 함께 볼 수 있습니다.",
+   "summary": "10월 19일 이후 탈레반군과 파키스탄군이 국경에서 최소 세 차례 교전했고, 파키스탄 측이 반탈레반 세력과 접촉했다는 보도도 나왔습니다. 파키스탄 무역개발청 자료를 인용해 양국 교역이 전년보다 95% 줄었다고 전했습니다. 아프간 상공인들은 파키스탄을 거쳐 중앙아시아로 이어지던 통과 교역까지 사실상 멈췄다고 말합니다.",
+   "note": "출처인 FDD는 미국의 안보 싱크탱크로 안보 관점이 강합니다. 교역 감소율도 매체마다 74~95%로 엇갈립니다. 지리적으로는 토르함·차만 같은 소수의 관문에 교역이 몰린 구조가 충돌의 경제적 파급을 키운다는 점이 핵심입니다.",
+   "critique": "군사적 경과는 자세하지만 국경 양쪽에 걸쳐 사는 파슈툰 공동체의 시각은 빠져 있고, 교역 통계도 한 출처에 기대고 있습니다.",
+   "tags": [
+    "듀랜드 라인",
+    "내륙국",
+    "관문 통로"
+   ]
+  },
+  {
+   "id": "2026-10-29-syria-floods",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "land",
+   "country": "SYR",
+   "related": [],
+   "spot": null,
+   "title": "시리아 북동부 돌발 홍수…라카·데이르에조르서 최소 5명 사망",
+   "titleOrig": "Men pulled from vehicle stranded by floods in Syria",
+   "source": "Al Jazeera (영상)",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/10/29/men-pulled-from-vehicle-stranded-by-floods-in-syria",
+   "video": {
+    "url": "https://www.aljazeera.com/video/newsfeed/2026/10/29/men-pulled-from-vehicle-stranded-by-floods-in-syria",
+    "source": "Al Jazeera NewsFeed",
+    "dur": "0:52"
+   },
+   "why": "건조 기후 지역은 비가 드문 대신 한 번 오면 땅이 물을 받아들이지 못해 돌발 홍수가 나기 쉽습니다. 유프라테스강 다리 붕괴는 교통망이 소수의 하천 횡단 지점에 기대고 있다는 사실도 드러냅니다.",
+   "summary": "시리아 여러 지역에 폭우가 내려 라카와 데이르에조르 일대에서 어린이 4명을 포함해 최소 5명이 숨졌습니다. 탑까 서쪽의 알살마니 다리가 무너지면서 라카와 알레포를 잇는 도로가 끊겼습니다. 영상에는 데이르에조르에서 물에 고립된 차량 속 남성들이 구조되는 장면이 담겼습니다.",
+   "note": "피해가 하사카의 실향민 캠프까지 미친 것을 보면, 재해의 크기는 강수량만이 아니라 오랜 내전으로 약해진 주거·기반시설에 좌우됩니다.",
+   "critique": "1분 남짓한 영상이라 구조 장면이 중심이고, 피해 규모나 배수·하천 관리 같은 원인 설명은 부족합니다.",
+   "tags": [
+    "돌발 홍수",
+    "건조 기후",
+    "하천 횡단 교통"
+   ]
+  },
+  {
+   "id": "2026-10-29-rogun-accident",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "env",
+   "country": "TJK",
+   "related": [
+    "UZB",
+    "TKM"
+   ],
+   "spot": null,
+   "title": "타지키스탄 로군 댐 공사 터널서 사고…부상자 수 두고 엇갈린 발표",
+   "titleOrig": "Industrial accident hits Rogun Dam in Tajikistan",
+   "source": "Eurasianet",
+   "lang": "en",
+   "url": "https://eurasianet.org/industrial-accident-hits-rogun-dam-in-tajikistan",
+   "video": null,
+   "why": "아무다리야강 상류에 짓는 초대형 댐은 상류국(전력)과 하류국(농업용수)의 이해가 부딪히는 중앙아시아 물 문제의 상징입니다.",
+   "summary": "10월 21~22일께 로군 수력발전소 건설 구간 터널로 물이 밀려드는 사고가 났습니다. 타지키스탄 당국은 다친 사람이 없다고 밝혔지만, 자유유럽방송(RFE/RL) 계열 라디오 오조디는 노동자 5명 이상이 다쳤다고 보도했습니다.",
+   "note": "사고 규모보다 정보 공개 방식이 더 중요한 쟁점입니다. 하류국 우즈베키스탄·투르크메니스탄에게 댐의 안전과 방류 계획은 직결된 문제여서, 대형 댐의 투명성은 국경을 넘는 문제입니다.",
+   "critique": "당국 발표와 현지 보도의 차이를 나란히 보여준 점은 좋지만, 하류국 정부의 반응은 확인하지 않았습니다.",
+   "tags": [
+    "상류국-하류국",
+    "수력 발전",
+    "국제 하천"
+   ]
+  },
+  {
+   "id": "2026-10-29-delhi-stubble",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "env",
+   "country": "IND",
+   "related": [
+    "PAK"
+   ],
+   "spot": null,
+   "title": "\"델리 대기질, 농촌 볏짚 소각 영향 미미\"…새 분석 보고서",
+   "titleOrig": "Stubble burning in Punjab, Haryana did not spike city's AQI",
+   "source": "The Hans India (PTI)",
+   "lang": "en",
+   "url": "https://www.thehansindia.com/news/cities/new-delhi/stubble-burning-in-punjab-haryana-did-not-spike-citys-aqi-1136797",
+   "video": null,
+   "why": "델리 스모그의 원인을 농촌 소각으로 볼지, 도시 자체 배출과 기상 조건으로 볼지에 따라 정책 대상이 달라집니다. 오염 원인을 어느 공간에 돌리느냐를 다투는 전형적인 환경지리 논쟁입니다.",
+   "summary": "델리의 한 기후연구기관이 2024~2026년 9~10월 자료를 분석한 결과, 펀자브·하리아나의 소각 건수는 2025년과 2026년이 거의 같았는데 델리의 대기질지수(AQI)는 15.8% 좋아졌습니다. 연구진은 이를 근거로 같은 기간 소각의 영향이 크지 않았다고 봤습니다. 다만 발표 당일 델리 대기질은 다시 '나쁨' 단계로 떨어졌습니다.",
+   "note": "소각이 본격화하는 시기는 보통 10월 말~11월 중순이라 9~10월 분석만으로 결론 내리기는 이릅니다. 겨울철 기온 역전과 약한 바람이 오염물질을 가두는 기상 조건도 함께 봐야 합니다.",
+   "critique": "한 연구기관의 비교 분석을 원인 판단처럼 읽히게 제목을 달았습니다. 해마다 다른 기상 조건을 어떻게 고려했는지는 기사만으로 알기 어렵습니다.",
+   "tags": [
+    "대기 오염",
+    "농업 부산물 소각",
+    "기온 역전"
+   ]
+  },
+  {
+   "id": "2026-10-29-kultepe",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "hist",
+   "country": "TUR",
+   "related": [],
+   "spot": null,
+   "title": "한·튀르키예 공동 발굴단, 퀼테페서 헬레니즘 시대 도시 유적과 모자이크 확인",
+   "titleOrig": "Korean tech helps uncover ancient Hellenistic city in Turkey",
+   "source": "The Korea Times",
+   "lang": "en",
+   "url": "https://www.koreatimes.co.kr/lifestyle/koreanheritage/20261029/korean-tech-helps-uncover-ancient-hellenistic-city-in-turkey",
+   "video": null,
+   "why": "아나톨리아 중부의 퀼테페(고대 카네시)는 청동기 시대 아시리아 상인들의 교역 거점이었습니다. 한 장소에 수천 년의 생활층이 쌓인 텔(유적 언덕)은 역사지리의 압축판입니다.",
+   "summary": "국가유산청은 한국과 튀르키예 공동 발굴단이 카이세리 인근 퀼테페에서 대규모 헬레니즘 시대 주거·신전 복합 유적과 모자이크 바닥을 확인했다고 밝혔습니다. 한국의 디지털 스캔·기록 기술이 유적 분석에 쓰였습니다. 튀르키예 문화관광부는 이 모자이크가 해당 유적에서 처음 나온 것이라고 설명했습니다.",
+   "note": "일부 보도에는 연대가 '기원전 2000년경'으로 적혀 있지만, 튀르키예 측 발표로는 모자이크가 헬레니즘 시대(기원전 323~30년) 층에서 나왔습니다. 카네시에는 기원전 3천년기부터 사람이 살았습니다.",
+   "critique": "한국 기술의 기여를 부각한 국내 시각의 기사이고, 연대 표기에 혼선이 있습니다. 튀르키예 측 발표와 대조해 읽는 것이 좋습니다.",
+   "tags": [
+    "텔(유적 언덕)",
+    "아나톨리아 교역로",
+    "헬레니즘"
+   ]
+  },
+  {
+   "id": "2026-10-29-eshnunna",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "hist",
+   "country": "IRQ",
+   "related": [],
+   "spot": null,
+   "title": "바그다드 텔 무함마드서 4천 년 전 에슈눈나 왕국 유물 공개",
+   "titleOrig": "Iraqi excavations to reveal secrets of life in Mesopotamia 4,000 years ago",
+   "source": "The National",
+   "lang": "en",
+   "url": "https://www.thenationalnews.com/news/mena/2026/10/29/iraqi-excavations-to-reveal-secrets-of-life-in-mesopotamia-4000-years-ago/",
+   "video": null,
+   "why": "에슈눈나는 티그리스강 지류인 디얄라강 유역을 기반으로 한 메소포타미아 도시국가였습니다. 전쟁과 제재로 멈췄던 이라크 발굴이 재개되는 흐름은 문화유산과 관광의 지리를 함께 보여줍니다.",
+   "summary": "이라크 고고유산청은 이탈리아 카타니아대학과의 공동 조사로 바그다드의 텔 무함마드 유적에서 고대 에슈눈나 왕국 시기의 유물을 확인했다고 밝혔습니다. 출토 유물은 이라크 박물관으로 옮겨지고 유적에는 보호 덮개가 설치됐습니다. 당국은 외국 발굴단을 늘려 유적을 관광 자원으로 키우겠다는 계획입니다.",
+   "note": "유적이 대도시 한가운데 있다는 점이 핵심입니다. 도시 확장과 보존이 같은 땅을 두고 경쟁하는 구조라, 발굴 성과만큼 보존 관리를 꾸준히 이어갈 수 있느냐가 관건입니다.",
+   "critique": "정부 발표를 바탕으로 관광 가치를 강조한 기사라, 출토 유물이 학술적으로 무엇을 새로 알려 주는지는 짧게 다뤘습니다.",
+   "tags": [
+    "메소포타미아",
+    "하천 문명",
+    "문화유산 관광"
+   ]
+  },
+  {
+   "id": "2026-10-29-ots-ankara",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "econ",
+   "country": "TUR",
+   "related": [
+    "AZE",
+    "KAZ",
+    "UZB"
+   ],
+   "spot": null,
+   "title": "튀르크국가기구 앙카라 정상회의…'중앙회랑' 교통 협력이 핵심 의제",
+   "titleOrig": "Türkiye hosts 13th OTS summit to further 'unity in language, thought, deed'",
+   "source": "Anadolu Agency",
+   "lang": "en",
+   "url": "https://www.aa.com.tr/en/turkiye/turkiye-hosts-13th-ots-summit-to-further-unity-in-language-thought-deed-/4104539",
+   "video": null,
+   "why": "튀르크어권이라는 문화권이 교통 회랑과 경제 협력으로 이어지는 사례입니다. 러시아를 우회해 카스피해를 건너는 '중앙회랑'이 왜 주목받는지 보여줍니다.",
+   "summary": "10월 29~30일 앙카라에서 튀르크국가기구(OTS) 13차 정상회의가 열려 튀르키예가 아제르바이잔으로부터 의장국을 넘겨받습니다. 정상들은 '앙카라 선언'을 채택하고 '튀르크 세계 비전 2040'에 따른 협력을 점검할 예정입니다. 무역·교통·농업·우주 분야 협력이 주요 의제로 꼽혔습니다.",
+   "note": "문화적 연대가 강조되지만 실제 성과는 물류에서 갈립니다. 카스피해 수위가 낮아져 항만 적재량이 제한되는 등 회랑의 물리적 병목이 남아 있다는 점도 함께 봐야 합니다.",
+   "critique": "관영 통신사 기사라 기구의 비전을 긍정적으로 소개하는 데 무게가 있고, 회원국 간 이견이나 러시아·중국과의 관계는 다루지 않았습니다.",
+   "tags": [
+    "중앙회랑",
+    "문화권",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-29-cyclone-arnab",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "land",
+   "country": "IND",
+   "related": [
+    "NPL"
+   ],
+   "spot": null,
+   "title": "'매우 강한' 사이클론 아르나브, 인도 동해안 상륙…18만 명 대피",
+   "titleOrig": "At least three killed, thousands evacuated as cyclone hits India's eastern coast",
+   "source": "ABC News (호주)",
+   "lang": "en",
+   "url": "https://www.abc.net.au/news/2026-10-29/cyclone-arnab-hits-india-east-coast/107321328",
+   "video": null,
+   "why": "벵골만은 수온이 높고 해안이 낮고 평평해 열대저기압과 폭풍 해일 피해가 큰 곳입니다. 몬순이 끝난 뒤인 10~12월이 사이클론이 잦은 시기라는 계절성도 확인할 수 있습니다.",
+   "summary": "인도 기상청 분류상 '매우 강한 사이클론 폭풍'인 아르나브가 10월 28일 새벽 안드라프라데시주 해안에 상륙했습니다. 안드라프라데시와 오디샤에서 18만 명 넘게 대피했고, 최소 3명이 숨졌으며 주택·농작물 피해와 정전이 이어졌습니다.",
+   "note": "사망자가 적었던 데는 사전 대피 효과가 컸지만, 피해는 농경지와 저지대 어촌에 집중됩니다. 남은 수증기는 네팔 등 내륙에도 비와 눈을 뿌릴 것으로 예보돼, 한 재해가 국경을 넘어 이어지는 경로도 보여줍니다.",
+   "critique": "대피 성과와 피해 집계 중심이라, 해마다 반복되는 동해안 사이클론에 대한 장기 적응(맹그로브 복원, 해안 제방 등) 논의는 빠져 있습니다.",
+   "tags": [
+    "열대 저기압",
+    "폭풍 해일",
+    "벵골만"
+   ]
+  },
+  {
+   "id": "2026-10-28-tripp",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "econ",
+   "country": "ARM",
+   "related": [
+    "AZE",
+    "TUR"
+   ],
+   "spot": null,
+   "title": "아르메니아 의회, '트럼프 루트(TRIPP)' 협정 비준…아제르바이잔 본토-나히치반 연결",
+   "titleOrig": "Armenian Parliament approves Trump Route agreement",
+   "source": "OC Media",
+   "lang": "en",
+   "url": "https://oc-media.org/armenia-parliament-approves-trump-route-agreement/",
+   "video": null,
+   "why": "아제르바이잔 본토와 떨어진 영토(월경지) 나히치반을 아르메니아 남부 시우니크를 거쳐 잇는 통로입니다. 월경지·회랑·주권이 얽힌 정치지리의 교과서적 사례입니다.",
+   "summary": "아르메니아 의회가 미국과 맺은 TRIPP 기본협정을 찬성 63, 반대 32로 비준했습니다. 이 노선은 아르메니아 영토를 지나 아제르바이잔 본토와 나히치반을 연결하며, 민간 운영사가 서류 확인과 요금 처리를 맡는 방식이 제안됐습니다. 정부는 아르메니아도 아제르바이잔을 거쳐 제3국과 연결될 수 있다고 설명합니다.",
+   "note": "야당은 평화조약 서명 전에 노선이 열리면 아제르바이잔이 조약을 맺을 동기가 약해진다고 우려하고, 정부는 상호 통행이 보장돼야 운송이 시작된다고 반박합니다. 약 42km의 짧은 구간이 이란·러시아·튀르키예 사이의 지역 균형까지 흔들 수 있다는 점이 핵심입니다.",
+   "critique": "찬반 주장을 고루 담았지만, 노선이 지나갈 시우니크 지역 주민의 목소리는 드러나지 않습니다.",
+   "tags": [
+    "월경지(엑스클레이브)",
+    "회랑",
+    "영토 주권"
+   ]
+  },
+  {
+   "id": "2026-10-28-caspian",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "env",
+   "country": "TKM",
+   "related": [
+    "KAZ",
+    "AZE",
+    "IRN"
+   ],
+   "spot": "caspian",
+   "title": "카스피해 연안 5개국, 아슈하바트서 해양 과학조사 협력 논의",
+   "titleOrig": "In Ashgabat, Caspian States Discuss Cooperation on Marine Research",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/in-ashgabat-caspian-states-discuss-cooperation-on-marine-research/",
+   "video": null,
+   "why": "카스피해는 '바다냐 호수냐'에 따라 자원을 나누는 원칙이 달라지는 독특한 수역입니다. 석유·가스 개발과 해양 환경 보호가 같은 수역 안에서 부딪히는 구조를 보여줍니다.",
+   "summary": "투르크메니스탄이 카스피해 연안국(아제르바이잔·이란·카자흐스탄·러시아·투르크메니스탄) 회의를 열어 해양 과학조사 협정 초안을 논의했습니다. 각국은 대규모 석유·가스 자원을 개발하려 하면서도 해양 환경에 미치는 영향을 줄여야 하는 과제를 안고 있습니다.",
+   "note": "합의문보다 실제 자료 공유 수준이 관건입니다. 카스피해 수위가 낮아지며 항만과 해운에도 제약이 생기고 있어, 과학조사 협력은 환경뿐 아니라 물류 문제와도 연결됩니다.",
+   "critique": "외교부 발표를 옮긴 짧은 기사라, 협정 초안의 쟁점이나 각국의 입장 차이는 알 수 없습니다.",
+   "tags": [
+    "내해(카스피해)",
+    "해양 환경",
+    "자원 분할"
+   ]
+  },
+  {
+   "id": "2026-10-28-afghan-returnees",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "pop",
+   "country": "AFG",
+   "related": [
+    "IRN",
+    "PAK"
+   ],
+   "spot": null,
+   "title": "이란·파키스탄서 3년간 600만 명 귀환…아프간, 일자리·주거 경쟁 심화",
+   "titleOrig": "Afghans compete for jobs, homes as millions return from Iran, Pakistan",
+   "source": "Arab News",
+   "lang": "en",
+   "url": "https://arabnews.pk/pakistan/afghans-compete-for-jobs-homes-as-millions-return-from-iran-pakistan-3005466",
+   "video": null,
+   "why": "수십 년 동안 난민을 받던 이웃 나라들이 대규모 송환으로 돌아선 것은 세계 최대 규모의 인구 이동 가운데 하나입니다. 귀환민이 고향보다 일자리가 있는 곳으로 몰리며 국내 인구 분포까지 바뀌고 있습니다.",
+   "summary": "이란과 파키스탄이 송환을 강화하면서 지난 3년여 동안 600만 명 넘는 아프간인이 귀국했습니다. 국경에서 수백 km 떨어진 북부 조즈잔주까지 귀환민이 몰려 일용직 일자리와 주거를 두고 경쟁이 벌어지고 있습니다. 유엔 자료로는 인구의 약 3분의 1인 1,590만 명이 위기 수준 이상의 식량 불안을 겪고 있습니다.",
+   "note": "2026년 이란에서 돌아온 아프간인의 85%가 강제 송환이라는 유엔난민기구(UNHCR) 집계도 있습니다. 송환국의 경제·안보 사정과 귀환국의 수용 능력을 함께 봐야 '자발적이고 안전한 귀환' 논의가 가능합니다.",
+   "critique": "개인 사례로 현실감을 살렸지만, 귀환민이 어느 지역에 얼마나 몰리는지 보여주는 공간 통계는 부족합니다.",
+   "tags": [
+    "귀환 이주",
+    "강제 송환",
+    "인구 압력"
+   ]
+  },
+  {
+   "id": "2026-10-28-syria-jordan-nassib",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "geo",
+   "country": "SYR",
+   "related": [
+    "JOR"
+   ],
+   "spot": null,
+   "title": "시리아-요르단 나시브 국경 재개방…요르단 공습으로 7명 숨진 데 대해 공동 조사",
+   "titleOrig": "Syria-Jordan border reopens amid probe into deadly air strikes",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://aljazeera.com/news/2026/10/28/syria-jordan-border-reopens-amid-probe-into-deadly-airstrikes",
+   "video": null,
+   "why": "나시브는 요르단과 시리아를 잇는 유일한 국경 통과소로, 걸프와 레바논·튀르키예를 잇는 육상 화물의 길목입니다. 공습이 일어난 다라·수와이다의 라자(용암 대지) 지대는 지형이 험해 무장 세력의 은신처가 되기 쉽습니다.",
+   "summary": "요르단이 시리아 남부의 IS 은신처라며 공습한 뒤 다라와 수와이다에서 한 가족 5명을 포함해 최소 7명이 숨졌습니다. 양국 외무장관은 정보를 공유하고 공습 영향을 조사할 안보위원회를 만들기로 했고, 닫혔던 나시브 통과소는 여객·화물 통행을 다시 시작했습니다.",
+   "note": "국경을 넘은 군사 행동과 국경 재개방이 동시에 결정됐다는 점이 핵심입니다. 요르단은 남부 시리아를 마약·무기 밀수의 통로로 보고 있어, 이 국경 지대가 앞으로도 마찰 지점이 될 가능성이 큽니다.",
+   "critique": "요르단은 공격 대상을 IS 근거지라고 설명했지만 숨진 사람 중 어린이가 포함돼 있어 양측 설명이 엇갈리고, 독립적인 확인은 없습니다. 31일 요르단군이 시리아에서 넘어오려던 무장 인원 14명을 막았다고 밝혀 긴장은 이어지고 있습니다.",
+   "tags": [
+    "국경 통과소",
+    "완충지대",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-28-iraq-pm-damascus-pipeline",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "res",
+   "country": "IRQ",
+   "related": [
+    "SYR"
+   ],
+   "spot": null,
+   "title": "이라크 총리, 아사드 정권 붕괴 후 첫 다마스쿠스 방문…하루 200만 배럴 송유관 복원 논의",
+   "titleOrig": "Syria hosts Iraqi PM for visit amid security challenges in north and south",
+   "source": "FDD's Long War Journal",
+   "lang": "en",
+   "url": "https://www.longwarjournal.org/archives/2026/10/syria-hosts-iraqi-pm-for-visit-amid-security-challenges-in-north-and-south.php",
+   "video": null,
+   "why": "이라크 석유는 대부분 남쪽 바스라에서 걸프와 호르무즈를 거쳐 나갑니다. 시리아를 가로질러 지중해로 가는 송유관은 해협이 막혔을 때 쓸 수 있는 서쪽 우회로입니다.",
+   "summary": "알자이디 이라크 총리가 10월 28일 다마스쿠스를 찾아 알샤라 시리아 대통령과 교역·에너지 협력을 논의했습니다. 이라크 총리실에 따르면 양국은 하루 최대 200만 배럴을 보낼 수 있는 이라크-시리아 송유관을 되살리려 하고 있습니다. 같은 시기 시리아는 남부의 요르단 공습, 북부 이들리브의 외국인 무장 세력 충돌 등 안보 문제를 겪고 있습니다.",
+   "note": "호르무즈 위기가 이라크로 하여금 오랫동안 쓰지 않던 사막 횡단 송유관 노선을 다시 보게 만든 셈입니다. 송유관이 IS 잔존 세력이 남아 있는 시리아 동부 사막을 지나야 한다는 점이 가장 큰 위험 요인입니다.",
+   "critique": "미국 싱크탱크(FDD) 계열 매체라 안보 위협 위주로 서술했고, 송유관의 구체적 경로와 종착 항구, 유프라테스강 물 문제는 다루지 않았습니다. 200만 배럴은 이라크 정부가 밝힌 목표 용량이지 실제 가동 규모가 아닙니다.",
+   "tags": [
+    "대체 수송로(송유관)",
+    "초크포인트",
+    "사막 횡단로"
+   ]
+  },
+  {
+   "id": "2026-10-27-houthi-saudi",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "geo",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": "babelmandeb",
+   "title": "사우디 \"후티 탄도미사일·드론 요격\"…바브엘만데브 해협 긴장 고조",
+   "titleOrig": "Saudi-led coalition says it intercepted Houthi missiles, drones attacking kingdom",
+   "source": "bdnews24 (Reuters)",
+   "lang": "en",
+   "url": "https://bdnews24.com/world/middle-east/ejb86qs7ir",
+   "video": null,
+   "why": "호르무즈가 막힌 상황에서 홍해 남쪽 관문인 바브엘만데브까지 불안해지면 아라비아반도를 둘러싼 두 초크포인트가 동시에 흔들립니다.",
+   "summary": "사우디 주도 연합군은 후티 반군이 동부 지역을 겨냥해 쏜 탄도미사일과 남부로 향한 드론을 요격했다고 밝혔습니다. 후티는 9월 공세로 예멘 홍해 연안의 상당 부분을 장악하며 해협 쪽으로 진출했고, 사우디는 이후 공습을 강화했습니다.",
+   "note": "사우디는 호르무즈를 피해 송유관으로 홍해 쪽 수출을 늘려 왔는데, 그 출구마저 위협받는 구조입니다. 다만 10월 27일 기준으로 상선 피격은 확인되지 않아, 위협과 실제 통항 차질은 구분해 볼 필요가 있습니다.",
+   "critique": "사우디 측 발표 위주의 짧은 통신 기사라, 후티 측 주장이나 예멘 민간인 피해는 다루지 않았습니다.",
+   "tags": [
+    "초크포인트",
+    "대체 수송로(송유관)",
+    "대리전"
+   ]
+  },
+  {
+   "id": "2026-10-27-tripp-framework",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "econ",
+   "country": "ARM",
+   "related": [
+    "AZE"
+   ],
+   "spot": null,
+   "title": "아르메니아 외무장관, 의회에 TRIPP 협정 설명…\"주권·관할권 유지\" 강조",
+   "titleOrig": "Armenia-US TRIPP Agreement sets out framework for regional transport links",
+   "source": "Public Radio of Armenia",
+   "lang": "en",
+   "url": "https://en.armradio.am/2026/10/27/armenia-us-tripp-agreement-sets-out-framework-for-regional-transport-links/",
+   "video": null,
+   "why": "같은 회랑을 두고 '연결'과 '주권'이라는 두 논리가 어떻게 조율되는지 정부의 설명을 볼 수 있습니다.",
+   "summary": "아라라트 미르조얀 외무장관은 TRIPP 협정이 아르메니아·아제르바이잔·미국 사이의 정치적 합의를 실행 틀로 옮긴 것이라고 설명했습니다. 그는 노선이 지나는 아르메니아 영토의 주권과 관할권은 그대로 유지된다고 강조했습니다.",
+   "note": "공영방송 보도라 정부 입장이 중심입니다. 다음 날 비준 표결 기사와 함께 읽으면 찬반 논리를 균형 있게 볼 수 있습니다.",
+   "critique": "정부 설명을 그대로 전한 기사로, 야당이 제기한 '통행 보장의 비대칭' 문제는 반영되지 않았습니다.",
+   "tags": [
+    "회랑",
+    "영토 주권",
+    "월경지(엑스클레이브)"
+   ]
+  },
+  {
+   "id": "2026-10-27-ots-preview",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "econ",
+   "country": "TUR",
+   "related": [
+    "KGZ",
+    "KAZ"
+   ],
+   "spot": null,
+   "title": "앙카라서 튀르크국가기구 정상회의 예고…주제는 '언어·사고·행동의 통합'",
+   "titleOrig": "Ankara to host 13th Summit of Organization of Turkic States",
+   "source": "AKIpress",
+   "lang": "en",
+   "url": "https://akipress.com/news:927554",
+   "video": null,
+   "why": "회원국(튀르키예·아제르바이잔·카자흐스탄·키르기스스탄·우즈베키스탄)이 지중해에서 톈산산맥까지 이어져, 문화권이 지역 협력체로 묶이는 공간 범위를 볼 수 있습니다.",
+   "summary": "10월 30일 앙카라에서 열리는 튀르크국가기구 13차 정상회의는 '튀르크의 세기: 언어·사고·행동의 통합'을 주제로 합니다. 튀르키예가 의장국을 맡고 '앙카라 선언'과 기구의 제도를 강화하는 문서들이 채택될 예정입니다.",
+   "note": "키르기스스탄 매체의 사전 보도라 의제 소개가 중심입니다. 실제 합의 내용은 회의 뒤 보도로 확인이 필요합니다.",
+   "critique": "의제 소개에 그친 사전 보도라, 회원국마다 무엇을 기대하는지에 대한 분석은 없습니다.",
+   "tags": [
+    "문화권",
+    "지역 협력 기구",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-27-sharaa-iraq-water-oil",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "env",
+   "country": "SYR",
+   "related": [
+    "IRQ",
+    "TUR"
+   ],
+   "spot": "tigris",
+   "title": "알샤라 시리아 대통령 \"이라크와 물 문제 전략적으로 다뤄야\"…이라크 원유 시리아 경유 수송도 진행",
+   "titleOrig": "Oil, Water and Security: Sharaa Outlines Ties With Iraq",
+   "source": "Enab Baladi",
+   "lang": "en",
+   "url": "https://english.enabbaladi.net/archives/2026/10/oil-water-and-security-sharaa-outlines-ties-with-iraq",
+   "video": null,
+   "why": "시리아와 이라크는 튀르키예에서 시작하는 유프라테스강을 차례로 나눠 쓰는 중류국과 하류국입니다. 상류 댐과 가뭄으로 유량이 줄면서 물은 두 나라 관계의 핵심 의제가 됐습니다.",
+   "summary": "알샤라 대통령은 10월 27일 이라크 디즐라 TV 인터뷰에서 두 나라 사이 교통과 교역이 빠르게 늘고 있다고 말했습니다. 그는 물이 양국의 가장 중요한 공동 현안이며, 두 나라 농지를 지역 전체의 곡창으로 보고 공유 수자원을 최대한 효율적으로 써야 한다고 했습니다. 최근 양국은 국경 통과소를 열고 호르무즈 위기 속에 이라크 원유를 시리아 땅으로 수송하기로 합의했습니다.",
+   "note": "시리아가 하류국 이라크와 '공동 이용'을 말하면서도 상류국 튀르키예와의 배분 문제는 언급하지 않은 점이 눈에 띕니다. 메소포타미아 하천 체계에서 실제 수량을 좌우하는 것은 튀르키예의 댐입니다.",
+   "critique": "시리아 반정부 성향에서 출발한 독립 매체로, 대통령 인터뷰 내용을 정리하는 데 그쳐 구체적 수치(유량, 경작 면적)가 없습니다. 이라크 측 반응은 실리지 않았습니다.",
+   "tags": [
+    "상류국-하류국",
+    "국제 하천",
+    "메소포타미아"
+   ]
+  },
+  {
+   "id": "2026-10-27-aze-iran-hijab-language",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "cult",
+   "country": "AZE",
+   "related": [
+    "IRN",
+    "TUR"
+   ],
+   "spot": null,
+   "title": "아제르바이잔 학교 히잡 제한 놓고 이란과 설전…바쿠 \"이란 내 아제르인 4천만 명은 모국어 교육도 못 받아\"",
+   "titleOrig": "Azerbaijan and Iran trade fresh accusations amid hijab ban in Azerbaijani schools",
+   "source": "JAMnews",
+   "lang": "en",
+   "url": "https://jam-news.net/news-in-azerbaijan-armenia-georgia-26-30-october-2026/",
+   "video": null,
+   "why": "아제르바이잔인은 아라스강을 경계로 북쪽의 아제르바이잔 공화국과 남쪽의 이란 북서부에 나뉘어 삽니다. 이란 쪽 아제르인이 공화국 인구보다 훨씬 많다는 민족 분포가 종교·교육 논쟁 밑에 깔려 있습니다.",
+   "summary": "아제르바이잔이 학교 교복 규정으로 사실상 히잡을 금지하자, 이란은 아제르바이잔 여학생을 자국 대학에 받겠다고 제안했습니다. 아제르바이잔 교육부는 내정 간섭이라 반발하며 이란에 사는 약 4천만 명의 아제르인은 모국어로 배울 학교조차 없다고 맞받았고, 시민단체 55곳은 이란 대통령에게 아제르어 교육을 요구하는 공개서한을 보냈습니다. 히잡 제한을 비판한 튀르키예 대통령 보좌관은 사임했고 비판적 튀르키예 언론인은 이스탄불에서 구금됐습니다.",
+   "note": "세속주의 시아파 국가(아제르바이잔)와 신정 시아파 국가(이란)가 종교 문제를 민족·언어 문제로 되받아치는 구도입니다. 튀르키예까지 얽히면서 '하나의 민족, 두 국가'로 불리던 아제르-튀르키예 관계에도 미묘한 균열이 보입니다.",
+   "critique": "'4천만 명'은 아제르바이잔 정부의 추정치로, 이란 인구조사는 민족 통계를 내지 않아 학계 추정은 대체로 이보다 적습니다. 지역 매체의 하루 요약이라 이란 측 공식 입장은 짧게만 소개됐습니다.",
+   "tags": [
+    "민족 구성",
+    "분단 민족",
+    "세속주의와 종교"
+   ]
+  }
+ ]
+}

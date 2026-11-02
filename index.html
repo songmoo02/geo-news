@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>서부 및 남부 아시아 지리 뉴스(임송무)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@700&display=swap" rel="stylesheet">
+<style>:root{
+  --bg:#f7f7f4; --panel:#ffffff; --ink:#15181d; --ink2:#4b5260; --muted:#7a8291; --line:#e4e6ea; --chip:#f0f1f3;
+  --sea:#d9e4ee; --land:#ffffff; --landB:#b9c3cf; --ctx:#e3e6ea; --ctxB:#d3d8de; --label:#5a6270; --shadow:0 10px 30px -18px rgba(20,30,50,.45);
+  --hl:rgba(21,24,29,.06); --accent:#15181d;
+  --t-geo:#e5484d; --t-res:#f76b15; --t-env:#0b84e8; --t-land:#a0714f; --t-pop:#8e4ec6; --t-econ:#2f9e62; --t-cult:#d99a00; --t-hist:#d6409f;
+}
+[data-theme=dark]{
+  --bg:#0d1015; --panel:#151a21; --ink:#e9edf2; --ink2:#b4bcc8; --muted:#8a94a3; --line:#252d37; --chip:#1d242d;
+  --sea:#0a1520; --land:#1d252f; --landB:#344150; --ctx:#121920; --ctxB:#1f2832; --label:#8e9aa9; --shadow:0 10px 30px -14px rgba(0,0,0,.7);
+  --hl:rgba(255,255,255,.06); --accent:#e9edf2;
+  --t-land:#c08a5e; --t-cult:#e8ad1a;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+
+/* 헤더 */
+header{display:flex;align-items:center;gap:14px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:1px solid var(--line);background:var(--panel);flex:none}
+.brand{min-width:0}
+.brand h1{margin:0;font-family:"Noto Serif KR",serif;font-weight:700;font-size:19px;letter-spacing:-.4px;white-space:nowrap}
+.brand p{margin:2px 0 0;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.tabs{display:flex;gap:2px;background:var(--chip);border-radius:10px;padding:3px;margin-left:auto}
+.tabs button{white-space:nowrap;border:0;background:transparent;padding:7px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:var(--ink2)}
+.tabs button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.iconbtn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;flex:none}
+.iconbtn svg{width:18px;height:18px}
+.upd{font-size:11.5px;color:var(--muted);white-space:nowrap}
+
+/* 본문 레이아웃 */
+main{flex:1;min-height:0;display:flex}
+.mapwrap{position:relative;flex:1;min-width:0;background:var(--sea);overflow:hidden;touch-action:none}
+#map{width:100%;height:100%;display:block;cursor:grab;user-select:none;-webkit-user-select:none}
+#map.drag{cursor:grabbing}
+#map .ctx{fill:var(--ctx);stroke:var(--ctxB);stroke-width:.8;vector-effect:non-scaling-stroke}
+#map .reg{fill:var(--land);stroke:var(--landB);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+#map .reg.has{fill:color-mix(in srgb,var(--land) 95%,var(--ink) 5%)}
+#map .reg.sel{fill:color-mix(in srgb,var(--land) 70%,var(--tc) 30%)}
+#map .reg.rel{stroke:var(--tc);stroke-width:2;fill:color-mix(in srgb,var(--land) 86%,var(--tc) 14%)}
+#map .lbl{font-size:10.5px;fill:var(--label);font-weight:500;paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+#map .lbl.ctxl{fill:var(--muted);opacity:.7;stroke:var(--ctx);font-size:10px}
+#map .spotl{font-size:10px;fill:var(--muted);font-style:italic;pointer-events:none;paint-order:stroke;stroke:var(--sea);stroke-width:3px}
+#map .arc{fill:none;stroke-width:1.4;stroke-dasharray:4 4;opacity:.35;pointer-events:none}
+#map .arc.on{opacity:.95;stroke-width:2.4;stroke-dasharray:none}
+#map .mk{cursor:pointer;outline:none}
+#map .mk .ring{fill:var(--panel)}
+#map .mk:hover .core,#map .mk:focus .core{filter:brightness(1.12)}
+#map .mk.dim{opacity:.18;pointer-events:none}
+#map .mk.sel .ring{animation:pulse 1.4s ease-out infinite}
+@keyframes pulse{0%{stroke-opacity:.9}100%{stroke-opacity:.15}}
+.mapctl{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.mapctl button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel);font-size:17px;line-height:1;box-shadow:var(--shadow)}
+.legend{position:absolute;left:12px;bottom:12px;z-index:3;background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:11.5px;color:var(--ink2);box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;flex-wrap:wrap;max-width:calc(100% - 70px)}
+.legend i{display:inline-block;vertical-align:-2px;margin-right:5px}
+.tip{position:absolute;z-index:4;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12.5px;max-width:260px;box-shadow:var(--shadow);opacity:0;transition:opacity .12s;line-height:1.45}
+.tip.on{opacity:1}
+.tip b{display:block;font-size:11px;font-weight:600;margin-bottom:2px}
+
+/* 사이드 패널 */
+.side{width:420px;flex:none;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-height:0}
+.topics{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.tchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 10px 5px 8px;font-size:12.5px;color:var(--ink2);transition:all .15s}
+.tchip i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.tchip em{font-style:normal;font-size:11px;color:var(--muted)}
+.tchip.on{background:color-mix(in srgb,var(--c) 14%,var(--panel));border-color:color-mix(in srgb,var(--c) 55%,var(--line));color:var(--ink)}
+.tchip.off{opacity:.45}
+.tchip.zero{opacity:.35}
+.scroll{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.dayh{position:sticky;top:0;z-index:1;background:var(--panel);padding:12px 16px 6px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.3px;display:flex;justify-content:space-between}
+.item{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer;align-items:flex-start;background:transparent;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}
+.item:hover{background:var(--hl)}
+.item.sel{background:color-mix(in srgb,var(--tc) 9%,var(--panel))}
+.dw{width:18px;height:20px;display:grid;place-items:center;flex:none}
+.dot{width:13px;height:13px;border-radius:50%;background:var(--tc);box-shadow:0 0 0 2px var(--panel),0 0 0 3.5px var(--tc)}
+.dot.old{width:7px;height:7px;box-shadow:0 0 0 1.5px var(--panel),0 0 0 2.8px var(--tc)}
+.item .m{font-size:11.5px;color:var(--muted);margin-bottom:3px}
+.item .m b{color:var(--tc);font-weight:600}
+.item h3{margin:0;font-size:14.5px;line-height:1.42;font-weight:600;letter-spacing:-.2px}
+.item .w{margin:5px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.badge{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:5px;background:var(--chip);color:var(--muted);margin-left:4px;font-weight:500}
+.empty{padding:40px 20px;text-align:center;color:var(--muted);font-size:13.5px}
+
+/* 상세 */
+.detail{padding:16px 18px 28px}
+.back{border:0;background:none;color:var(--muted);font-size:13px;padding:0;margin-bottom:12px;display:inline-flex;gap:4px;align-items:center}
+.tbadge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--tc);background:color-mix(in srgb,var(--tc) 12%,transparent);padding:4px 9px;border-radius:7px}
+.tbadge i{width:8px;height:8px;border-radius:50%;background:var(--tc)}
+.detail h2{font-family:"Noto Serif KR",serif;font-size:21px;line-height:1.4;margin:10px 0 6px;letter-spacing:-.4px}
+.detail .orig{font-size:12.5px;color:var(--muted);line-height:1.45;margin:0 0 10px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink2);padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta span b{color:var(--muted);font-weight:500;margin-right:5px}
+.why{margin:14px 0;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--tc) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--tc) 28%,var(--line))}
+.why h4{margin:0 0 5px;font-size:12px;color:var(--tc)}
+.why p{margin:0;font-size:14px;line-height:1.65}
+.sec h4{margin:16px 0 6px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.2px}
+.sec p{margin:0;font-size:14px;line-height:1.75;color:var(--ink)}
+.sec.crit{margin-top:4px;padding:2px 0 2px 12px;border-left:3px solid var(--line)}
+.sec.crit p{color:var(--ink2)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tags span{font-size:12.5px;padding:4px 9px;border-radius:7px;background:var(--chip);color:var(--ink2)}
+.btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.btns a{flex:1;min-width:140px;text-align:center;text-decoration:none;padding:11px 12px;border-radius:11px;font-size:13.5px;font-weight:600;border:1px solid var(--line)}
+.btns a.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.rel h4{margin:22px 0 4px;font-size:12px;color:var(--muted);font-weight:600}
+.rel .item{padding:10px 0;border-bottom:1px solid var(--line)}
+.rel .item:hover{background:transparent}
+.rel .item h3{font-size:13.5px}
+.note2{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.6}
+.offmap{font-size:12px;color:var(--muted);background:var(--chip);padding:7px 10px;border-radius:8px;margin-top:10px}
+
+/* 지난 뉴스 */
+.archive{flex:1;min-height:0;overflow:auto;background:var(--bg)}
+.arc-in{max-width:880px;margin:0 auto;padding:18px 16px 40px}
+.arc-in h2{font-family:"Noto Serif KR",serif;font-size:22px;margin:4px 0 4px}
+.arc-in .sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.filters{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:10px;margin-bottom:14px}
+.frow{display:flex;gap:10px;align-items:flex-start}
+.frow > b{font-size:12px;color:var(--muted);font-weight:600;min-width:34px;padding-top:6px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.dchip{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 10px;font-size:12.5px;color:var(--ink2)}
+.dchip.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.dchip em{font-style:normal;opacity:.65;margin-left:3px;font-size:11px}
+select{font:inherit;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.alist{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.alist .item:last-child{border-bottom:0}
+
+/* 데스크톱 서랍(지난 뉴스에서 상세 보기) */
+@media (min-width:861px){
+  .sheet.desk{display:block;position:fixed;inset:0;z-index:50;pointer-events:none}
+  .sheet.desk .bd{position:absolute;inset:0;background:rgba(0,0,0,.3);opacity:0;transition:opacity .2s}
+  .sheet.desk .pn{position:absolute;top:0;right:0;bottom:0;width:480px;max-width:92vw;overflow:auto;background:var(--panel);transform:translateX(100%);transition:transform .3s cubic-bezier(.2,1,.3,1);box-shadow:var(--shadow)}
+  .sheet.desk .grab{display:none}
+  .sheet.desk.on{pointer-events:auto}.sheet.desk.on .bd{opacity:1}.sheet.desk.on .pn{transform:none}
+}
+/* 모바일 */
+.sheet{display:none}
+@media (max-width:860px){
+  header{gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px}
+  .brand{flex:1;overflow:hidden}
+  .brand h1{font-size:14.5px;overflow:hidden;text-overflow:ellipsis}
+  .brand p,.upd{display:none}
+  .tabs{margin-left:0}
+  .tabs button{padding:6px 9px;font-size:12.5px}
+  .iconbtn{width:32px;height:32px}
+  main{flex-direction:column}
+  .mapwrap{flex:none;height:46vh}
+  .side{width:auto;border-left:0;border-top:1px solid var(--line);flex:1}
+  .topics{flex-wrap:nowrap;overflow-x:auto;padding:10px 12px;scrollbar-width:none}
+  .topics::-webkit-scrollbar{display:none}
+  .tchip{flex:none}
+  .legend{font-size:10.5px;padding:6px 8px;gap:8px}
+  .side .detail{display:none}
+  .sheet{display:block;position:fixed;inset:0;z-index:50;pointer-events:none}
+  .sheet .bd{position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s}
+  .sheet .pn{position:absolute;left:0;right:0;bottom:0;max-height:62vh;overflow:auto;background:var(--panel);border-radius:18px 18px 0 0;transform:translateY(100%);transition:transform .3s cubic-bezier(.2,1,.3,1);padding-bottom:env(safe-area-inset-bottom)}
+  .sheet .grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 0}
+  .sheet.on{pointer-events:auto}
+  .sheet.on .bd{opacity:1}
+  .sheet.on .pn{transform:none}
+}
+
+.foot{flex:none;border-top:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:11.5px;line-height:1.5;padding:7px 16px calc(7px + env(safe-area-inset-bottom))}
+.foot a{color:var(--ink2)}.foot b{color:var(--ink2);font-weight:600}.foot .sep{margin:0 6px;opacity:.5}
+.ai,.aitag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.2px;padding:1px 6px;border-radius:5px;background:var(--chip);color:var(--ink2);border:1px solid var(--line);vertical-align:1px}
+.note2 a{color:inherit}
+@media (max-width:860px){.foot{font-size:10.5px;padding:6px 12px calc(6px + env(safe-area-inset-bottom))}.foot .sep{display:block;height:0;overflow:hidden}}
+</style></head><body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>서부 및 남부 아시아 지리 뉴스(임송무)</h1>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="on" data-view="map" role="tab">지도</button>
+      <button data-view="archive" role="tab">지난 뉴스</button>
+    </div>
+    <span class="upd" id="upd"></span>
+    <button class="iconbtn" id="theme" title="다크/라이트 전환" aria-label="다크/라이트 전환">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </header>
+
+  <main id="vMap">
+    <div class="mapwrap" id="mapwrap">
+      <svg id="map" aria-label="지역 지도">
+        <g id="world"></g>
+        <g id="overlay"></g>
+      </svg>
+      <div class="mapctl">
+        <button id="zin" aria-label="확대">+</button>
+        <button id="zout" aria-label="축소">−</button>
+        <button id="zhome" aria-label="전체 보기" style="font-size:13px">⤢</button>
+      </div>
+      <div class="legend" id="legend">
+        <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="11" r="6.5" fill="currentColor"/></svg> 오늘</span>
+        <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="11" cy="11" r="3.5" fill="currentColor"/></svg> 1~2일 전</span>
+        <span><svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2.5 15.5 9 9 15.5 2.5 9z" fill="currentColor"/></svg> 접경 지점</span>
+        <span style="color:var(--muted)">마우스를 올리면 관련국이 표시돼요</span>
+      </div>
+      <div class="tip" id="tip"></div>
+    </div>
+    <aside class="side">
+      <div class="topics" id="topics"></div>
+      <div class="scroll" id="sideScroll">
+        <div id="list"></div>
+        <div class="detail" id="detail" hidden></div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="archive" id="vArchive" hidden>
+    <div class="arc-in">
+      <h2>지난 뉴스</h2>
+      <p class="sub">최근 1주일 동안 올라온 뉴스입니다. 3일이 지나면 지도에서는 내려가고 이곳에만 남습니다.</p>
+      <div class="filters">
+        <div class="frow"><b>날짜</b><div class="fchips" id="fDate"></div></div>
+        <div class="frow"><b>주제</b><div class="fchips" id="fTopic"></div></div>
+        <div class="frow"><b>국가</b><select id="fCountry"></select></div>
+      </div>
+      <div class="alist" id="alist"></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="ai">AI 작성</span> 뉴스의 요약·해설·비평은 생성형 AI가 원문 기사를 바탕으로 작성했습니다. 사실관계는 원문에서 확인해 주세요.
+    <span class="sep">|</span>
+    <b>삭제 요청</b> 저작권·초상권 등 게시물 삭제를 원하시면 연락 주세요:
+    <a href="mailto:a56500727@gmail.com?subject=%5B%EC%A7%80%EB%A6%AC%20%EB%89%B4%EC%8A%A4%5D%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD">a56500727@gmail.com</a> ·
+    <a href="tel:+821056500727">+82 10-5650-0727</a>
+  </footer>
+
+  <div class="sheet" id="sheet"><div class="bd"></div><div class="pn"><div class="grab"></div><div class="detail" id="sdetail"></div></div></div>
+</div>
+
+<script>window.GEO={"view":[-4818,-2699,3753,3758],"countries":[{"code":"YEM","name":"예멘","group":"서남아시아","d":"M-1598 1711L-1622 1639L-1629 1634L-1688 1436L-2000 1435L-2096 1466L-2168 1534L-2188 1568L-2221 1581L-2239 1577L-2260 1538L-2304 1533L-2383 1510L-2397 1505L-2422 1488L-2525 1470L-2551 1473L-2571 1464L-2587 1445L-2599 1441L-2607 1442L-2625 1453L-2622 1464L-2632 1469L-2640 1497L-2636 1513L-2640 1526L-2683 1553L-2685 1591L-2704 1630L-2701 1668L-2704 1675L-2712 1666L-2718 1675L-2699 1691L-2694 1714L-2697 1722L-2691 1758L-2694 1766L-2689 1799L-2693 1820L-2680 1840L-2677 1859L-2689 1905L-2670 1958L-2671 1974L-2655 1972L-2625 1992L-2589 1996L-2549 1985L-2535 1994L-2504 1994L-2488 1977L-2462 1974L-2430 1949L-2371 1951L-2322 1959L-2239 1948L-2212 1930L-2172 1916L-2142 1927L-2099 1928L-2069 1909L-2053 1890L-2019 1875L-1957 1863L-1929 1865L-1889 1850L-1835 1847L-1770 1834L-1754 1825L-1701 1808L-1703 1774L-1693 1751L-1683 1739L-1654 1723ZM-2727 1668L-2719 1660L-2720 1652L-2724 1654ZM-2728 1840L-2734 1840L-2740 1848L-2733 1846ZM-2723 1813L-2726 1806L-2734 1811L-2727 1820ZM-1557 2163L-1588 2149L-1599 2154L-1613 2166L-1584 2191L-1571 2195L-1526 2196L-1483 2179L-1517 2163L-1546 2160Z","ax":-2195,"ay":1697},{"code":"UZB","name":"우즈베키스탄","group":"중앙아시아","d":"M251 -1035L224 -1021L214 -1007L200 -1011L174 -982L139 -965L117 -950L114 -944L96 -937L89 -930L83 -912L62 -894L49 -875L48 -847L42 -846L25 -851L4 -868L10 -892L-5 -911L-16 -907L-22 -910L-100 -905L-108 -909L-124 -1000L-165 -1002L-155 -1111L-180 -1099L-203 -1148L-221 -1160L-250 -1194L-288 -1177L-387 -1190L-486 -1180L-547 -1259L-558 -1285L-738 -1429L-947 -1390L-1003 -985L-917 -969L-908 -977L-915 -989L-914 -1035L-883 -1061L-840 -1064L-818 -1095L-798 -1087L-791 -1071L-784 -1071L-787 -1083L-806 -1110L-797 -1115L-780 -1111L-769 -1123L-748 -1097L-726 -1089L-718 -1071L-712 -1067L-671 -1060L-661 -1050L-667 -1024L-654 -1016L-647 -1003L-658 -999L-655 -981L-661 -968L-660 -959L-632 -937L-597 -938L-566 -929L-544 -937L-532 -932L-512 -915L-499 -868L-477 -828L-471 -788L-387 -717L-366 -692L-332 -668L-319 -670L-293 -645L-209 -585L-199 -583L-187 -588L-177 -585L-122 -555L-120 -549L-130 -533L-131 -484L-104 -487L-82 -482L-71 -471L-60 -468L-43 -474L-35 -469L-27 -470L-21 -464L-12 -508L21 -551L31 -575L29 -582L13 -598L8 -608L4 -630L13 -655L9 -663L-26 -666L-30 -681L-55 -691L-49 -719L-39 -729L-24 -736L40 -727L50 -738L55 -760L63 -760L66 -768L74 -768L67 -780L69 -784L83 -788L79 -793L54 -792L54 -797L81 -803L108 -801L104 -810L111 -815L102 -841L111 -849L111 -859L115 -864L119 -867L145 -852L193 -879L202 -895L224 -874L223 -867L232 -863L229 -855L202 -831L201 -826L204 -820L215 -817L221 -805L226 -803L281 -814L299 -806L309 -808L314 -801L336 -813L350 -834L359 -836L370 -830L373 -837L370 -844L372 -850L390 -845L403 -860L433 -879L420 -884L392 -884L367 -902L352 -899L349 -915L325 -917L323 -930L317 -941L309 -945L306 -954L301 -950L300 -931L293 -928L286 -932L285 -907L261 -910L240 -917L233 -921L225 -942L207 -937L184 -948L182 -954L204 -972L218 -989L233 -994L237 -1007L267 -1022L265 -1027ZM221 -884L214 -893L216 -894L223 -887ZM275 -772L271 -780L275 -788L263 -791L256 -799L252 -791L260 -781L257 -770ZM323 -783L314 -780L313 -778L321 -774Z","ax":-391,"ay":-983},{"code":"ARE","name":"아랍에미리트","group":"서남아시아","d":"M-1172 754L-1183 754L-1187 748L-1181 709L-1189 706L-1206 735L-1251 763L-1298 809L-1336 830L-1377 885L-1430 901L-1554 875L-1596 887L-1631 883L-1641 872L-1641 852L-1651 851L-1656 840L-1661 845L-1662 863L-1580 1009L-1323 1077L-1315 1068L-1310 1032L-1272 959L-1268 949L-1273 935L-1265 930L-1220 927L-1224 910L-1241 905L-1235 893L-1237 877L-1232 862L-1230 836L-1217 826L-1209 829L-1208 834L-1213 839L-1205 853L-1170 830L-1166 764ZM-1178 800L-1185 802L-1184 796L-1182 792L-1178 793ZM-1479 871L-1472 862L-1474 857L-1483 864L-1498 868L-1492 873ZM-1551 856L-1553 850L-1558 853L-1557 861ZM-1426 894L-1434 880L-1455 887ZM-1370 869L-1374 859L-1381 863Z","ax":-1391,"ay":924},{"code":"TKM","name":"투르크메니스탄","group":"중앙아시아","d":"M-1285 -767L-1281 -772L-1288 -769L-1286 -735ZM-1006 -986L-1039 -983L-1048 -988L-1061 -1008L-1085 -1068L-1139 -1117L-1175 -1118L-1229 -1109L-1245 -1102L-1281 -1076L-1277 -1047L-1263 -1008L-1262 -1023L-1252 -1057L-1256 -1064L-1239 -1091L-1221 -1102L-1211 -1099L-1182 -1101L-1168 -1097L-1155 -1028L-1142 -1008L-1119 -986L-1112 -971L-1112 -958L-1117 -950L-1129 -947L-1143 -953L-1148 -949L-1145 -933L-1160 -938L-1188 -934L-1197 -937L-1207 -956L-1214 -959L-1231 -956L-1246 -963L-1258 -989L-1287 -921L-1288 -882L-1274 -848L-1278 -863L-1274 -872L-1239 -864L-1233 -857L-1239 -831L-1230 -823L-1230 -816L-1248 -817L-1260 -827L-1272 -809L-1272 -790L-1268 -796L-1256 -796L-1245 -791L-1234 -779L-1227 -777L-1227 -765L-1217 -747L-1238 -634L-1240 -569L-1216 -564L-1169 -573L-1147 -605L-1102 -630L-1084 -633L-1024 -624L-1018 -636L-1007 -641L-942 -630L-933 -619L-931 -602L-878 -580L-856 -560L-845 -555L-830 -560L-822 -555L-807 -557L-766 -534L-762 -514L-755 -504L-705 -468L-683 -430L-613 -426L-610 -417L-609 -375L-616 -351L-608 -339L-609 -311L-601 -312L-584 -292L-577 -288L-545 -288L-525 -269L-517 -256L-503 -264L-482 -263L-448 -283L-444 -296L-436 -308L-439 -327L-423 -327L-372 -342L-359 -342L-351 -353L-327 -364L-313 -377L-282 -464L-258 -475L-217 -475L-208 -499L-197 -510L-167 -492L-131 -484L-130 -533L-120 -549L-122 -555L-177 -585L-187 -588L-199 -583L-209 -585L-293 -645L-319 -670L-332 -668L-366 -692L-387 -717L-471 -788L-477 -828L-499 -868L-512 -915L-532 -932L-544 -937L-566 -929L-597 -938L-632 -937L-660 -959L-661 -968L-655 -981L-658 -999L-647 -1003L-654 -1016L-667 -1024L-661 -1050L-671 -1060L-712 -1067L-718 -1071L-726 -1089L-748 -1097L-769 -1123L-780 -1111L-797 -1115L-806 -1110L-787 -1083L-784 -1071L-791 -1071L-798 -1087L-818 -1095L-840 -1064L-883 -1061L-914 -1035L-915 -989L-908 -977L-917 -969Z","ax":-737,"ay":-712},{"code":"TUR","name":"튀르키예","group":"서남아시아","d":"M-3412 -1542L-3410 -1554L-3414 -1555L-3425 -1556L-3434 -1553L-3430 -1547ZM-2181 -1232L-2212 -1222L-2235 -1221L-2248 -1215L-2287 -1209L-2298 -1210L-2322 -1222L-2348 -1244L-2436 -1250L-2470 -1270L-2478 -1282L-2529 -1312L-2531 -1323L-2544 -1338L-2555 -1341L-2569 -1335L-2576 -1339L-2588 -1361L-2587 -1392L-2596 -1399L-2627 -1400L-2643 -1417L-2650 -1439L-2642 -1453L-2652 -1461L-2675 -1457L-2783 -1503L-2868 -1503L-2891 -1494L-2950 -1485L-2965 -1471L-2974 -1469L-3009 -1480L-3038 -1507L-3072 -1515L-3112 -1543L-3125 -1548L-3143 -1528L-3141 -1519L-3129 -1497L-3095 -1476L-3097 -1474L-3167 -1491L-3185 -1487L-3170 -1466L-3175 -1464L-3228 -1490L-3254 -1497L-3256 -1499L-3246 -1509L-3253 -1515L-3265 -1517L-3262 -1502L-3273 -1501L-3292 -1509L-3300 -1519L-3299 -1529L-3312 -1535L-3322 -1533L-3342 -1542L-3392 -1518L-3404 -1519L-3435 -1467L-3372 -1447L-3373 -1444L-3401 -1428L-3397 -1403L-3407 -1388L-3396 -1374L-3409 -1365L-3423 -1364L-3423 -1334L-3420 -1329L-3407 -1323L-3412 -1321L-3432 -1325L-3440 -1334L-3448 -1327L-3450 -1339L-3444 -1354L-3446 -1364L-3451 -1368L-3456 -1368L-3466 -1340L-3471 -1343L-3480 -1335L-3464 -1311L-3454 -1312L-3447 -1302L-3446 -1290L-3423 -1270L-3435 -1243L-3448 -1244L-3450 -1242L-3447 -1233L-3451 -1208L-3435 -1182L-3438 -1173L-3457 -1177L-3464 -1174L-3467 -1162L-3459 -1164L-3389 -1134L-3416 -1121L-3448 -1129L-3462 -1131L-3465 -1127L-3451 -1116L-3436 -1118L-3414 -1110L-3424 -1099L-3408 -1099L-3394 -1108L-3380 -1101L-3360 -1076L-3346 -1075L-3341 -1071L-3346 -1035L-3343 -1025L-3313 -991L-3264 -989L-3254 -977L-3248 -978L-3228 -1002L-3215 -1031L-3207 -1036L-3153 -1006L-3110 -956L-3096 -907L-3087 -894L-3068 -879L-3055 -881L-2989 -867L-2963 -872L-2923 -895L-2882 -906L-2835 -860L-2822 -858L-2807 -869L-2769 -878L-2762 -863L-2766 -847L-2810 -820L-2809 -782L-2817 -775L-2801 -759L-2791 -768L-2777 -771L-2768 -789L-2758 -791L-2744 -788L-2745 -815L-2722 -849L-2701 -837L-2694 -822L-2664 -811L-2592 -819L-2573 -809L-2551 -782L-2503 -766L-2443 -765L-2376 -779L-2355 -774L-2330 -762L-2309 -759L-2260 -759L-2245 -766L-2238 -756L-2237 -742L-2228 -742L-2195 -761L-2182 -753L-2168 -754L-2123 -726L-2109 -722L-2092 -729L-2083 -725L-2078 -718L-2083 -696L-2078 -686L-2045 -701L-2033 -694L-2026 -710L-2041 -730L-2037 -755L-2032 -760L-2049 -783L-2058 -786L-2059 -790L-2027 -831L-2038 -840L-2028 -890L-2033 -903L-2027 -925L-2033 -936L-2033 -954L-2002 -952L-1989 -977L-1976 -985L-1960 -968L-1985 -1014L-1992 -1021L-2021 -1026L-2041 -1043L-2036 -1047L-2038 -1084L-2021 -1099L-2020 -1131L-2030 -1150L-2029 -1160L-2046 -1169L-2049 -1178L-2046 -1180L-2067 -1209L-2068 -1218L-2081 -1223L-2097 -1211L-2138 -1229L-2148 -1224L-2170 -1240ZM-3181 -1670L-3209 -1674L-3221 -1702L-3239 -1707L-3252 -1704L-3272 -1710L-3287 -1700L-3303 -1700L-3306 -1695L-3293 -1674L-3300 -1651L-3304 -1647L-3330 -1645L-3344 -1615L-3377 -1601L-3378 -1587L-3327 -1564L-3336 -1558L-3361 -1557L-3382 -1550L-3398 -1527L-3386 -1528L-3335 -1552L-3290 -1555L-3270 -1565L-3258 -1576L-3238 -1572L-3226 -1564L-3204 -1565L-3164 -1534L-3150 -1531L-3132 -1551L-3172 -1600L-3179 -1614L-3179 -1652L-3172 -1663Z","ax":-2738,"ay":-1127},{"code":"TJK","name":"타지키스탄","group":"중앙아시아","d":"M-21 -460L-4 -442L6 -439L19 -447L23 -446L27 -455L34 -460L59 -474L73 -475L81 -482L112 -457L116 -458L125 -469L124 -490L125 -500L132 -507L161 -514L171 -513L180 -507L193 -511L198 -521L194 -550L212 -567L228 -596L239 -606L251 -610L266 -606L284 -594L292 -579L288 -551L314 -551L304 -464L314 -433L321 -421L327 -417L339 -417L387 -451L413 -457L422 -474L433 -485L475 -509L505 -505L505 -495L498 -487L509 -485L545 -498L553 -508L561 -509L576 -506L588 -508L610 -491L629 -509L626 -517L607 -532L610 -551L592 -597L596 -621L593 -627L566 -641L545 -646L533 -645L524 -631L504 -638L493 -665L502 -678L483 -706L484 -730L470 -731L440 -718L393 -718L375 -712L365 -698L348 -713L326 -704L321 -707L321 -720L301 -725L302 -734L298 -739L263 -726L258 -716L241 -714L235 -716L224 -732L215 -735L193 -729L186 -734L168 -730L137 -732L111 -726L105 -752L109 -769L112 -775L126 -770L125 -781L130 -790L167 -802L209 -786L215 -775L224 -781L225 -790L251 -802L252 -808L221 -805L215 -817L201 -823L202 -831L232 -861L223 -867L224 -874L202 -895L193 -879L145 -852L119 -867L115 -864L111 -859L111 -849L102 -841L111 -815L104 -810L108 -801L81 -803L54 -797L54 -792L79 -793L83 -788L69 -784L67 -780L74 -768L66 -768L63 -760L55 -760L50 -738L40 -727L-24 -736L-39 -729L-49 -719L-55 -691L-30 -681L-26 -666L4 -665L11 -659L4 -630L8 -608L31 -579L26 -559L-16 -499ZM221 -884L220 -892L214 -893ZM231 -764L228 -765L212 -767L219 -757Z","ax":254,"ay":-652},{"code":"SYR","name":"시리아","group":"서남아시아","d":"M-2817 -775L-2841 -741L-2834 -721L-2838 -698L-2852 -670L-2856 -633L-2832 -625L-2827 -629L-2821 -624L-2818 -618L-2831 -608L-2818 -596L-2819 -571L-2835 -557L-2855 -547L-2850 -536L-2874 -542L-2888 -535L-2892 -529L-2887 -517L-2917 -497L-2922 -452L-2938 -432L-2929 -426L-2921 -402L-2908 -393L-2899 -377L-2862 -357L-2462 -477L-2439 -477L-2433 -480L-2405 -513L-2388 -569L-2366 -604L-2361 -623L-2362 -654L-2349 -687L-2334 -698L-2301 -699L-2239 -737L-2237 -742L-2238 -756L-2245 -766L-2260 -759L-2309 -759L-2330 -762L-2355 -774L-2376 -779L-2443 -765L-2503 -766L-2551 -782L-2573 -809L-2592 -819L-2664 -811L-2694 -822L-2701 -837L-2722 -849L-2745 -815L-2744 -788L-2758 -791L-2768 -789L-2777 -771L-2791 -768L-2799 -758Z","ax":-2629,"ay":-606},{"code":"LKA","name":"스리랑카","group":"남부아시아","d":"M1337 2516L1327 2505L1324 2506L1330 2518ZM1328 2579L1315 2576L1333 2589ZM1335 2499L1334 2504L1345 2514L1369 2515L1383 2521L1388 2528L1376 2531L1350 2521L1355 2548L1354 2561L1351 2574L1337 2597L1339 2619L1331 2651L1326 2694L1322 2691L1320 2664L1317 2677L1341 2823L1371 2893L1391 2907L1418 2911L1443 2905L1507 2874L1543 2846L1557 2824L1565 2792L1564 2750L1559 2735L1540 2709L1538 2698L1508 2662L1501 2631L1484 2625L1480 2608L1457 2581L1448 2578L1421 2537L1382 2511L1367 2495Z","ax":1431,"ay":2729},{"code":"SAU","name":"사우디아라비아","group":"서남아시아","d":"M-3059 404L-3074 382L-3087 371L-3091 362L-3095 366L-3093 371L-3077 384L-3067 405ZM-2765 1491L-2761 1471L-2763 1464L-2769 1461L-2768 1468L-2771 1473L-2781 1476L-2779 1485L-2765 1502L-2753 1503L-2746 1516L-2742 1501L-2752 1488L-2756 1492L-2753 1498ZM-1688 1436L-1365 1366L-1276 1151L-1315 1068L-1324 1077L-1580 1009L-1661 868L-1661 845L-1686 835L-1672 811L-1679 811L-1686 805L-1704 807L-1720 801L-1749 741L-1754 702L-1772 676L-1785 619L-1773 622L-1763 600L-1765 589L-1778 573L-1777 556L-1775 554L-1764 560L-1777 539L-1801 520L-1815 496L-1827 490L-1845 458L-1838 453L-1868 432L-1876 420L-1872 412L-1872 401L-1885 372L-1895 323L-1969 310L-1975 298L-1982 255L-2065 226L-2082 227L-2235 178L-2374 -5L-2430 -87L-2560 -222L-2663 -274L-2683 -264L-2876 -263L-2816 -126L-2851 -117L-2877 -85L-2946 -91L-2982 -58L-3028 -37L-3124 -87L-3167 1L-3193 35L-3195 45L-3184 40L-3153 56L-3145 65L-3132 105L-3127 143L-3116 167L-3113 190L-3091 254L-3080 316L-3067 327L-3067 362L-3056 378L-3044 423L-3042 463L-3054 476L-3034 544L-3018 551L-3010 564L-3000 566L-2972 607L-2960 634L-2947 685L-2945 716L-2935 738L-2941 736L-2931 752L-2934 760L-2930 773L-2932 796L-2955 850L-2948 894L-2949 904L-2958 916L-2947 957L-2916 1034L-2902 1049L-2883 1057L-2849 1097L-2839 1119L-2826 1130L-2804 1213L-2801 1261L-2785 1291L-2781 1314L-2764 1361L-2737 1392L-2716 1424L-2713 1460L-2699 1482L-2700 1492L-2687 1510L-2683 1553L-2640 1526L-2636 1513L-2640 1497L-2632 1469L-2622 1464L-2625 1453L-2599 1441L-2581 1450L-2571 1464L-2551 1473L-2525 1470L-2422 1488L-2397 1505L-2383 1510L-2304 1533L-2260 1538L-2239 1577L-2221 1581L-2188 1568L-2168 1534L-2096 1466L-2000 1435ZM-3085 362L-3083 351L-3081 345L-3088 357Z","ax":-2342,"ay":739},{"code":"QAT","name":"카타르","group":"서남아시아","d":"M-1672 803L-1645 761L-1651 707L-1638 680L-1639 666L-1663 634L-1679 639L-1691 649L-1710 688L-1723 705L-1726 734L-1723 767L-1729 778L-1726 791L-1716 804L-1704 807Z","ax":-1684,"ay":726},{"code":"PAK","name":"파키스탄","group":"남부아시아","d":"M787 -331L771 -340L769 -353L743 -342L734 -344L725 -360L710 -366L714 -380L713 -404L703 -427L683 -442L661 -440L653 -458L634 -464L612 -460L594 -468L586 -468L537 -441L513 -447L455 -441L411 -435L379 -423L338 -388L324 -388L290 -352L286 -343L309 -320L323 -289L326 -273L322 -260L329 -248L315 -224L300 -212L272 -174L284 -156L285 -129L281 -121L245 -109L214 -109L184 -119L174 -114L172 -101L198 -71L212 -43L210 -34L179 -14L159 -12L140 -3L132 34L117 62L121 117L102 140L82 152L74 150L56 133L42 138L15 133L2 147L-40 166L-25 184L-52 196L-68 198L-102 188L-111 192L-134 219L-153 231L-158 243L-164 265L-163 297L-169 320L-163 336L-171 347L-281 379L-349 378L-371 387L-378 394L-429 381L-535 386L-690 326L-647 383L-646 395L-621 450L-597 478L-552 495L-533 516L-514 516L-517 543L-512 600L-518 627L-503 631L-478 628L-469 634L-465 643L-471 648L-472 670L-478 674L-482 695L-519 694L-554 702L-567 709L-575 723L-586 721L-590 727L-615 736L-626 778L-635 787L-643 839L-648 849L-614 857L-596 856L-584 849L-573 859L-537 847L-454 856L-454 847L-447 841L-431 838L-409 843L-397 837L-387 845L-337 863L-325 850L-296 850L-261 844L-234 847L-213 840L-178 836L-154 838L-165 831L-188 833L-179 822L-168 821L-158 824L-147 834L-144 846L-131 863L-131 903L-84 916L-70 980L-53 998L-51 1006L-45 1013L-36 1009L-34 1021L-18 1019L-14 1011L-5 1019L4 1017L12 1027L17 1016L29 1008L74 1003L74 970L79 965L84 970L92 967L158 968L175 979L184 980L206 977L213 966L253 951L259 950L262 966L276 970L309 951L302 942L301 932L309 919L291 878L267 839L266 812L258 808L246 811L227 808L210 786L208 768L213 752L214 720L205 712L173 707L150 694L146 688L152 652L187 613L211 570L236 550L244 550L258 560L265 578L276 585L313 570L349 565L380 553L387 529L404 510L423 464L477 431L506 371L518 328L559 308L570 293L564 279L565 270L604 216L631 199L629 190L622 189L619 183L625 151L615 124L619 112L635 97L682 72L689 56L679 47L655 38L636 40L626 36L622 24L622 7L594 8L589 3L587 -17L570 -25L558 -37L557 -43L568 -59L570 -73L555 -86L552 -96L554 -104L573 -116L575 -127L545 -131L543 -139L550 -148L549 -153L533 -162L533 -173L545 -199L575 -214L635 -204L657 -205L696 -193L719 -201L734 -214L746 -215L771 -227L784 -225L793 -232L800 -245L818 -257L822 -271Z","ax":112,"ay":345},{"code":"OMN","name":"오만","group":"서남아시아","d":"M-972 1379L-959 1357L-946 1348L-952 1329L-964 1349L-980 1365L-981 1379ZM-1575 1705L-1541 1705L-1503 1693L-1490 1684L-1437 1688L-1416 1698L-1384 1693L-1359 1664L-1356 1658L-1361 1644L-1359 1635L-1333 1609L-1236 1603L-1217 1585L-1202 1540L-1183 1523L-1145 1510L-1092 1509L-1077 1504L-1082 1430L-1062 1369L-1034 1335L-1027 1333L-1019 1333L-1024 1352L-1010 1357L-997 1356L-948 1282L-929 1264L-896 1243L-847 1166L-842 1134L-871 1125L-882 1115L-919 1059L-942 1014L-961 999L-987 999L-1007 987L-1058 972L-1106 948L-1125 927L-1150 889L-1162 860L-1170 830L-1205 853L-1213 839L-1208 834L-1209 829L-1217 826L-1230 836L-1232 862L-1237 877L-1235 893L-1241 905L-1224 910L-1220 927L-1265 930L-1273 935L-1268 949L-1272 959L-1310 1032L-1315 1068L-1276 1151L-1365 1366L-1688 1436L-1629 1634L-1622 1639L-1598 1711ZM-1174 757L-1163 738L-1155 705L-1152 681L-1156 677L-1165 690L-1179 691L-1189 706L-1181 709L-1187 748L-1183 754ZM-1177 796L-1182 792L-1185 802L-1178 800Z","ax":-1247,"ay":1316},{"code":"NPL","name":"네팔","group":"남부아시아","d":"M1961 387L1937 390L1915 402L1868 408L1855 400L1828 395L1821 387L1808 391L1806 405L1796 411L1777 403L1767 395L1762 399L1763 416L1757 419L1738 397L1720 384L1666 388L1662 383L1665 357L1656 357L1631 366L1571 336L1554 304L1537 299L1505 315L1458 273L1444 275L1428 270L1390 246L1363 236L1342 209L1303 207L1283 215L1270 244L1264 251L1257 252L1246 239L1236 240L1206 274L1188 313L1183 330L1184 356L1175 367L1170 394L1209 418L1215 418L1218 411L1225 412L1285 440L1301 456L1357 484L1370 477L1418 498L1440 495L1448 511L1504 520L1518 507L1556 512L1562 504L1580 495L1633 509L1644 536L1680 549L1690 549L1698 559L1708 560L1734 545L1742 545L1747 549L1753 564L1759 567L1779 559L1816 561L1851 571L1879 552L1889 565L1909 569L1920 560L1942 559L1962 551L1980 552L1987 513L1979 492L1963 471L1961 440L1966 395Z","ax":1554,"ay":412},{"code":"MDV","name":"몰디브","group":"남부아시아","d":"M624 3258L623 3254L618 3256L619 3261ZM632 3157L633 3151L631 3150L626 3159Z","ax":621,"ay":3257},{"code":"LBN","name":"레바논","group":"서남아시아","d":"M-2859 -624L-2877 -617L-2897 -600L-2908 -578L-2984 -489L-2958 -480L-2950 -482L-2942 -495L-2937 -496L-2936 -492L-2889 -515L-2892 -529L-2882 -539L-2874 -542L-2850 -536L-2855 -547L-2835 -557L-2819 -571L-2818 -596L-2831 -608L-2818 -618L-2827 -629L-2832 -625L-2856 -633Z","ax":-2888,"ay":-552},{"code":"KGZ","name":"키르기스스탄","group":"중앙아시아","d":"M254 -810L251 -802L225 -790L224 -781L215 -775L209 -786L167 -802L130 -790L125 -781L126 -770L112 -775L109 -769L105 -752L111 -726L137 -732L168 -730L186 -734L193 -729L215 -735L224 -732L235 -716L241 -714L258 -716L263 -726L298 -739L302 -734L301 -725L321 -720L321 -707L326 -704L348 -713L365 -698L375 -712L393 -718L440 -718L470 -731L484 -730L500 -736L507 -749L499 -770L511 -798L546 -811L567 -831L579 -834L576 -845L579 -851L602 -850L638 -871L651 -837L668 -838L699 -855L705 -846L718 -858L729 -896L741 -920L748 -925L804 -927L823 -936L848 -940L864 -965L865 -975L871 -981L936 -1029L973 -1046L978 -1058L1008 -1066L1008 -1077L1005 -1083L978 -1105L937 -1108L908 -1137L889 -1135L858 -1141L818 -1136L753 -1136L732 -1141L694 -1132L640 -1129L624 -1114L602 -1115L556 -1127L504 -1153L500 -1148L484 -1147L479 -1140L453 -1124L445 -1078L452 -1058L434 -1067L399 -1072L390 -1080L350 -1091L312 -1097L288 -1090L280 -1091L260 -1078L239 -1041L243 -1031L251 -1035L265 -1027L267 -1022L237 -1007L233 -994L218 -989L182 -951L207 -937L225 -942L233 -921L240 -917L261 -910L285 -907L286 -932L293 -928L300 -931L301 -950L306 -954L309 -945L317 -941L323 -930L325 -917L349 -915L352 -899L367 -902L392 -884L420 -884L433 -879L403 -860L390 -845L372 -850L370 -844L373 -837L370 -830L359 -836L350 -834L336 -813L314 -801L309 -808L299 -806L281 -814ZM275 -772L257 -770L260 -781L252 -791L256 -799L263 -791L275 -788L271 -780ZM321 -774L313 -778L323 -783L323 -778ZM231 -764L219 -757L212 -767Z","ax":543,"ay":-959},{"code":"KWT","name":"쿠웨이트","group":"서남아시아","d":"M-1883 194L-1880 184L-1892 160L-1905 178L-1902 194L-1896 202ZM-1895 323L-1911 270L-1917 226L-1921 222L-1936 221L-1947 216L-1919 196L-1904 204L-1911 172L-1911 155L-1940 137L-1970 133L-1988 138L-2021 185L-2065 226L-1982 255L-1975 298L-1969 310Z","ax":-1969,"ay":241},{"code":"KAZ","name":"카자흐스탄","group":"중앙아시아","d":"M-1399 -1445L-1408 -1457L-1400 -1471L-1407 -1468L-1412 -1457L-1407 -1444ZM-1390 -1455L-1381 -1467L-1390 -1462ZM-1193 -1478L-1198 -1486L-1203 -1481L-1196 -1471ZM239 -1036L248 -1063L267 -1085L308 -1097L350 -1091L390 -1080L399 -1072L434 -1067L452 -1058L445 -1078L453 -1124L479 -1140L484 -1147L500 -1148L504 -1153L556 -1127L602 -1115L624 -1114L640 -1129L694 -1132L732 -1141L753 -1136L818 -1136L858 -1141L889 -1135L908 -1137L937 -1108L978 -1105L1005 -1083L1008 -1088L995 -1131L996 -1143L999 -1150L1021 -1162L1021 -1166L1007 -1171L1007 -1179L1023 -1191L1035 -1189L1036 -1196L1025 -1211L1026 -1224L1019 -1239L987 -1295L980 -1345L980 -1356L987 -1364L968 -1372L948 -1368L937 -1376L949 -1392L992 -1411L1009 -1413L1071 -1446L1080 -1434L1094 -1429L1117 -1439L1139 -1431L1143 -1451L1140 -1465L1116 -1472L1114 -1480L1137 -1638L1137 -1663L1141 -1666L1192 -1653L1215 -1652L1239 -1658L1264 -1660L1276 -1646L1305 -1675L1323 -1681L1331 -1704L1306 -1775L1306 -1807L1310 -1829L1346 -1843L1365 -1856L1372 -1876L1367 -1911L1374 -1921L1406 -1927L1402 -1934L1396 -1940L1377 -1944L1350 -1970L1344 -1969L1341 -1974L1347 -1985L1341 -1993L1314 -1956L1299 -1953L1295 -1958L1244 -1955L1221 -1982L1216 -2000L1186 -2011L1165 -2011L1159 -2016L1148 -2040L1126 -2065L1108 -2074L1080 -2082L1067 -2079L1059 -2067L1041 -2064L1026 -2043L999 -2037L986 -2041L954 -2033L944 -2056L922 -2054L922 -2079L910 -2077L903 -2087L893 -2086L875 -2072L877 -2046L863 -2040L855 -2031L855 -2022L849 -2023L801 -2097L664 -2278L569 -2342L562 -2350L557 -2364L572 -2365L580 -2398L559 -2385L544 -2381L509 -2356L493 -2352L490 -2338L480 -2329L470 -2321L455 -2320L432 -2299L430 -2283L426 -2281L416 -2290L392 -2293L378 -2287L364 -2272L354 -2288L355 -2300L360 -2312L378 -2326L379 -2338L373 -2341L358 -2328L348 -2327L340 -2329L326 -2342L306 -2344L303 -2339L305 -2329L296 -2323L291 -2342L276 -2364L271 -2362L265 -2350L257 -2352L221 -2343L205 -2349L202 -2354L208 -2365L209 -2391L188 -2448L177 -2467L160 -2464L141 -2451L96 -2471L63 -2474L34 -2454L13 -2449L16 -2437L10 -2429L-11 -2425L-20 -2417L-81 -2403L-116 -2396L-134 -2396L-136 -2399L-150 -2392L-165 -2392L-181 -2381L-187 -2365L-192 -2362L-202 -2369L-221 -2365L-233 -2369L-251 -2365L-274 -2354L-318 -2349L-326 -2342L-356 -2340L-365 -2334L-396 -2335L-404 -2330L-442 -2343L-449 -2341L-455 -2335L-460 -2312L-470 -2299L-453 -2290L-437 -2292L-434 -2285L-443 -2278L-455 -2278L-461 -2267L-459 -2261L-428 -2252L-405 -2238L-402 -2226L-409 -2220L-448 -2228L-472 -2227L-494 -2196L-482 -2158L-506 -2140L-523 -2138L-553 -2119L-530 -2100L-526 -2086L-492 -2071L-489 -2066L-465 -2058L-453 -2045L-452 -2034L-469 -1995L-502 -1979L-539 -1980L-549 -1983L-563 -2001L-571 -1996L-584 -1973L-605 -1965L-604 -1975L-609 -1979L-648 -1991L-668 -2024L-680 -2035L-716 -2042L-732 -2026L-747 -2023L-763 -2041L-775 -2046L-803 -2040L-812 -2045L-839 -2029L-848 -2016L-876 -2005L-897 -2017L-927 -2052L-941 -2062L-949 -2056L-947 -2024L-956 -2011L-961 -2017L-961 -2039L-975 -2070L-986 -2085L-1003 -2098L-1010 -2116L-1022 -2127L-1075 -2135L-1087 -2160L-1094 -2164L-1109 -2163L-1141 -2147L-1159 -2149L-1161 -2163L-1167 -2170L-1190 -2184L-1238 -2144L-1272 -2132L-1295 -2131L-1313 -2109L-1355 -2089L-1368 -2093L-1369 -2025L-1377 -2017L-1403 -2011L-1409 -2016L-1438 -2082L-1451 -2087L-1467 -2076L-1480 -2048L-1503 -2036L-1514 -2021L-1530 -1987L-1520 -1960L-1554 -1928L-1567 -1905L-1568 -1886L-1544 -1860L-1544 -1848L-1550 -1829L-1547 -1810L-1542 -1803L-1526 -1807L-1482 -1791L-1479 -1786L-1461 -1738L-1445 -1672L-1447 -1667L-1453 -1666L-1476 -1677L-1482 -1666L-1478 -1657L-1436 -1621L-1437 -1626L-1430 -1631L-1425 -1627L-1423 -1639L-1381 -1639L-1334 -1662L-1322 -1661L-1293 -1673L-1272 -1677L-1242 -1663L-1234 -1651L-1215 -1644L-1207 -1634L-1190 -1639L-1178 -1647L-1146 -1638L-1136 -1626L-1132 -1604L-1144 -1584L-1145 -1552L-1156 -1529L-1185 -1489L-1181 -1480L-1156 -1457L-1179 -1459L-1215 -1475L-1268 -1483L-1284 -1479L-1293 -1483L-1311 -1459L-1334 -1441L-1333 -1428L-1317 -1403L-1308 -1400L-1301 -1390L-1314 -1394L-1330 -1392L-1352 -1411L-1387 -1416L-1397 -1413L-1403 -1401L-1404 -1389L-1400 -1385L-1374 -1373L-1364 -1363L-1355 -1312L-1343 -1279L-1350 -1245L-1324 -1239L-1308 -1204L-1285 -1200L-1279 -1191L-1261 -1190L-1254 -1182L-1259 -1146L-1278 -1112L-1281 -1076L-1245 -1102L-1229 -1109L-1175 -1118L-1139 -1117L-1085 -1068L-1061 -1008L-1048 -988L-1039 -983L-1003 -985L-947 -1390L-738 -1429L-558 -1285L-547 -1259L-486 -1180L-387 -1190L-288 -1177L-250 -1194L-221 -1160L-203 -1148L-180 -1099L-155 -1111L-165 -1002L-124 -1000L-108 -909L-100 -905L-22 -910L-16 -907L-5 -911L10 -892L4 -868L25 -851L42 -846L48 -847L49 -875L62 -894L83 -912L89 -930L114 -944L130 -960L174 -982L200 -1011L214 -1007L224 -1021L243 -1031Z","ax":-56,"ay":-1695},{"code":"JOR","name":"요르단","group":"서남아시아","d":"M-2942 -433L-2959 -428L-2985 -357L-2990 -333L-3005 -313L-3022 -279L-3022 -267L-3072 -198L-3081 -167L-3093 -152L-3124 -87L-3033 -38L-2982 -58L-2951 -88L-2946 -91L-2877 -85L-2851 -117L-2816 -126L-2876 -263L-2683 -264L-2647 -283L-2647 -296L-2667 -296L-2667 -316L-2660 -316L-2658 -420L-2862 -357L-2899 -377L-2908 -393L-2921 -402L-2929 -426Z","ax":-2902,"ay":-241},{"code":"ISR","name":"이스라엘","group":"서남아시아","d":"M-2910 -504L-2936 -492L-2937 -496L-2942 -495L-2950 -482L-2958 -480L-2984 -489L-3063 -373L-3091 -345L-3089 -337L-3124 -311L-3124 -102L-3115 -108L-3081 -167L-3072 -198L-3022 -267L-3022 -279L-3009 -304L-3044 -302L-3063 -309L-3049 -333L-3022 -341L-3026 -351L-3040 -356L-3035 -365L-3029 -393L-3009 -423L-2996 -427L-2982 -419L-2975 -404L-2970 -401L-2959 -428L-2938 -432L-2922 -452L-2919 -492Z","ax":-3085,"ay":-303},{"code":"PSX","name":"팔레스타인","group":"서남아시아","d":"M-3091 -345L-3124 -325L-3124 -311L-3112 -317L-3110 -324L-3088 -339ZM-2975 -404L-2982 -419L-2996 -427L-3009 -423L-3029 -393L-3035 -365L-3040 -359L-3026 -351L-3022 -341L-3049 -333L-3063 -312L-3061 -306L-3044 -302L-3009 -304L-2990 -333L-2985 -357L-2973 -384L-2970 -401Z","ax":-3010,"ay":-362},{"code":"IRQ","name":"이라크","group":"서남아시아","d":"M-2238 -740L-2301 -699L-2334 -698L-2349 -687L-2362 -654L-2361 -623L-2366 -604L-2388 -569L-2405 -513L-2433 -480L-2439 -477L-2462 -477L-2658 -420L-2660 -316L-2667 -316L-2667 -296L-2647 -296L-2647 -283L-2663 -274L-2560 -222L-2430 -87L-2356 20L-2233 179L-2082 227L-2065 226L-2037 203L-2021 185L-1992 142L-1981 135L-1970 133L-1940 137L-1911 155L-1910 152L-1895 152L-1876 165L-1858 168L-1867 158L-1867 140L-1872 128L-1898 103L-1888 45L-1918 37L-1910 -7L-1888 -47L-1910 -92L-1917 -125L-1923 -132L-1938 -134L-1995 -200L-2019 -208L-2018 -223L-2009 -237L-2016 -260L-2018 -267L-2028 -271L-2024 -284L-2037 -286L-2058 -333L-2040 -358L-2044 -382L-2034 -399L-2022 -395L-2013 -419L-1986 -440L-1965 -446L-1962 -454L-1963 -468L-1971 -488L-1966 -502L-1961 -508L-1938 -515L-1946 -522L-1980 -530L-1994 -551L-2011 -559L-2012 -599L-2026 -615L-2023 -641L-2032 -655L-2035 -698L-2045 -701L-2078 -686L-2083 -696L-2078 -718L-2083 -725L-2092 -729L-2109 -722L-2123 -726L-2168 -754L-2182 -753L-2195 -761L-2228 -742Z","ax":-2226,"ay":-262},{"code":"IRN","name":"이란","group":"서남아시아","d":"M-1160 610L-1166 604L-1197 611L-1211 605L-1212 620L-1255 633L-1260 632L-1259 639L-1248 641L-1205 630L-1195 634L-1169 612ZM-1240 -569L-1237 -518L-1243 -510L-1261 -512L-1268 -517L-1246 -523L-1259 -525L-1403 -511L-1440 -516L-1494 -540L-1540 -579L-1554 -596L-1567 -628L-1630 -652L-1651 -673L-1657 -714L-1652 -761L-1676 -763L-1687 -785L-1696 -790L-1702 -804L-1716 -822L-1710 -830L-1688 -835L-1687 -844L-1698 -855L-1698 -863L-1694 -870L-1676 -876L-1697 -913L-1716 -913L-1744 -902L-1772 -890L-1793 -876L-1805 -874L-1836 -853L-1856 -858L-1869 -856L-1923 -885L-1944 -918L-1960 -968L-1976 -985L-1989 -977L-2002 -952L-2033 -954L-2033 -936L-2027 -925L-2033 -903L-2028 -890L-2038 -840L-2027 -831L-2059 -790L-2058 -786L-2049 -783L-2032 -760L-2037 -755L-2041 -730L-2026 -710L-2033 -694L-2032 -655L-2023 -641L-2026 -615L-2012 -599L-2011 -559L-1994 -551L-1980 -530L-1946 -522L-1938 -515L-1961 -508L-1966 -502L-1971 -488L-1963 -468L-1962 -454L-1965 -446L-1986 -440L-2013 -419L-2022 -395L-2034 -399L-2044 -382L-2040 -358L-2058 -333L-2037 -286L-2024 -284L-2028 -271L-2018 -267L-2016 -260L-2009 -237L-2018 -223L-2019 -208L-1995 -200L-1938 -134L-1923 -132L-1917 -125L-1910 -92L-1888 -47L-1910 -7L-1918 37L-1888 45L-1898 103L-1872 128L-1867 140L-1867 158L-1858 168L-1845 163L-1826 162L-1820 157L-1819 133L-1815 126L-1803 122L-1805 115L-1785 123L-1784 130L-1790 133L-1803 128L-1808 130L-1806 135L-1772 164L-1762 178L-1719 165L-1711 167L-1706 200L-1670 263L-1672 293L-1654 306L-1660 320L-1658 327L-1642 346L-1642 370L-1630 405L-1631 415L-1605 449L-1563 460L-1549 474L-1523 489L-1512 505L-1506 525L-1480 549L-1437 577L-1433 588L-1415 605L-1380 609L-1363 615L-1326 641L-1315 642L-1259 618L-1246 621L-1221 600L-1192 597L-1174 587L-1150 583L-1114 595L-1097 612L-1087 635L-1084 683L-1077 707L-1078 721L-1067 749L-1028 761L-1023 769L-1008 766L-983 780L-923 789L-900 806L-858 802L-843 812L-822 814L-815 819L-802 817L-765 828L-753 815L-745 818L-738 833L-664 858L-646 848L-635 787L-626 778L-615 736L-590 727L-586 721L-575 723L-567 709L-554 702L-519 694L-482 695L-478 674L-472 670L-471 648L-465 643L-469 634L-478 628L-503 631L-518 627L-512 600L-517 543L-514 516L-533 516L-552 495L-597 478L-621 450L-646 395L-647 383L-690 326L-593 224L-590 215L-589 197L-593 173L-601 162L-680 144L-680 102L-674 61L-692 -31L-692 -40L-656 -78L-657 -82L-680 -86L-692 -96L-694 -104L-689 -118L-691 -147L-675 -169L-652 -169L-666 -192L-644 -206L-631 -227L-631 -235L-623 -253L-626 -274L-617 -277L-608 -299L-610 -316L-608 -339L-616 -351L-609 -365L-610 -417L-613 -426L-683 -430L-705 -468L-755 -504L-762 -514L-764 -531L-769 -536L-807 -557L-822 -555L-830 -560L-841 -555L-851 -557L-878 -580L-931 -602L-933 -619L-942 -630L-967 -632L-978 -638L-1007 -641L-1018 -636L-1022 -625L-1028 -624L-1084 -633L-1102 -630L-1147 -605L-1169 -573L-1216 -564Z","ax":-1263,"ay":-30},{"code":"IND","name":"인도","group":"남부아시아","d":"M17 1016L24 1044L35 1042L51 1028L79 1016L43 1047L66 1089L84 1104L127 1127L171 1136L218 1114L231 1111L240 1115L250 1099L256 1098L258 1107L251 1111L224 1156L207 1159L188 1170L178 1168L171 1175L160 1175L132 1189L117 1175L109 1172L102 1178L100 1189L104 1199L123 1222L182 1275L222 1319L260 1347L284 1357L301 1360L316 1357L355 1341L418 1307L442 1265L442 1250L437 1243L419 1233L442 1203L445 1192L432 1183L460 1185L474 1181L497 1185L471 1194L468 1215L487 1214L476 1225L471 1245L502 1245L530 1237L499 1253L480 1271L492 1270L481 1281L489 1302L502 1308L512 1357L495 1424L491 1451L498 1479L506 1485L502 1493L506 1502L527 1511L508 1509L508 1534L512 1545L519 1540L526 1525L530 1539L517 1581L522 1589L532 1641L551 1693L575 1820L591 1864L615 1901L621 1906L631 1905L625 1915L643 1934L629 1934L638 1944L646 1969L696 2030L710 2079L731 2119L744 2183L765 2239L795 2292L833 2329L856 2365L881 2427L914 2488L914 2501L932 2518L946 2559L937 2559L932 2528L920 2518L932 2569L941 2592L949 2600L960 2627L1020 2687L1047 2704L1071 2709L1099 2695L1131 2671L1137 2657L1143 2615L1167 2589L1229 2566L1255 2565L1277 2570L1261 2561L1233 2559L1221 2547L1222 2534L1255 2480L1254 2465L1260 2455L1283 2445L1299 2447L1317 2442L1313 2347L1306 2332L1295 2336L1305 2320L1300 2306L1308 2260L1320 2232L1336 2206L1344 2179L1351 2104L1345 2096L1325 2088L1319 2080L1328 2067L1346 2091L1320 2013L1325 1998L1325 1983L1307 1919L1310 1891L1327 1846L1336 1836L1363 1822L1378 1824L1384 1834L1400 1833L1405 1819L1415 1809L1428 1766L1440 1761L1479 1761L1529 1729L1538 1703L1528 1687L1535 1669L1558 1646L1618 1601L1661 1544L1705 1513L1759 1430L1765 1411L1807 1361L1828 1345L1820 1340L1801 1352L1799 1350L1806 1333L1826 1315L1831 1315L1836 1316L1838 1329L1833 1336L1841 1335L1910 1299L1913 1291L1905 1285L1919 1288L1929 1267L1953 1247L1953 1235L1970 1201L1951 1158L1951 1143L1958 1128L1980 1103L2027 1083L2041 1072L2052 1059L2068 1022L2046 1011L2042 998L2049 1009L2072 1020L2065 1071L2072 1077L2086 1076L2087 1060L2106 1073L2119 1065L2114 1047L2117 1013L2129 1024L2128 1055L2136 1071L2144 1061L2145 1051L2152 1060L2166 1057L2160 1038L2151 1028L2159 1026L2155 989L2136 952L2122 908L2127 890L2105 886L2104 866L2082 843L2090 804L2087 774L2053 767L2040 759L2026 761L2012 748L2019 714L2036 714L2044 678L2080 672L2092 660L2077 651L2069 638L2052 641L2042 638L2026 623L2013 615L2003 614L1995 607L1998 584L2021 547L2019 540L2010 536L2010 527L2015 525L2037 537L2046 551L2061 553L2075 550L2068 538L2070 533L2076 532L2081 535L2089 553L2098 562L2118 570L2136 566L2138 558L2135 546L2143 541L2163 568L2172 631L2177 640L2239 642L2322 622L2341 622L2395 607L2441 623L2443 627L2440 634L2419 635L2421 647L2417 690L2403 699L2399 718L2384 721L2367 737L2351 741L2341 763L2342 801L2366 851L2372 853L2369 839L2376 838L2387 855L2398 858L2410 847L2406 821L2419 793L2415 773L2426 772L2436 765L2440 769L2446 767L2462 805L2473 848L2491 872L2514 948L2525 928L2547 939L2552 936L2556 914L2566 907L2564 892L2548 855L2553 832L2550 818L2564 815L2568 802L2561 740L2543 705L2544 700L2546 698L2562 706L2580 698L2626 702L2632 649L2650 593L2655 559L2650 550L2636 544L2636 532L2641 514L2651 505L2662 481L2664 456L2672 439L2656 407L2654 393L2657 378L2685 352L2719 309L2729 286L2740 278L2789 256L2815 272L2829 270L2828 265L2802 240L2795 224L2800 210L2820 182L2827 178L2828 168L2821 158L2819 143L2792 133L2784 139L2765 141L2746 135L2729 151L2718 149L2723 124L2736 102L2714 75L2690 96L2685 79L2702 55L2691 58L2667 41L2626 81L2627 87L2618 102L2579 100L2558 102L2552 95L2540 91L2514 117L2502 140L2494 144L2492 156L2475 175L2430 198L2424 226L2418 236L2391 264L2387 274L2393 282L2382 297L2371 306L2355 307L2342 314L2332 326L2298 330L2299 353L2316 363L2339 356L2352 372L2347 395L2359 414L2354 422L2339 425L2323 435L2309 438L2299 433L2287 444L2235 458L2217 459L2195 453L2182 460L2176 472L2142 485L2127 486L2124 480L2098 477L2081 485L2050 474L2046 463L2034 453L2046 434L2032 424L2029 414L2031 374L2024 359L2001 354L1988 366L1962 378L1959 384L1965 390L1967 400L1961 440L1963 471L1979 492L1987 513L1982 548L1977 554L1962 551L1942 559L1920 560L1909 569L1889 565L1879 552L1851 571L1816 561L1779 559L1759 567L1753 564L1747 549L1742 545L1734 545L1708 560L1698 559L1690 549L1680 549L1644 536L1633 509L1580 495L1562 504L1556 512L1518 507L1504 520L1448 511L1440 495L1418 498L1370 477L1357 484L1301 456L1285 440L1225 412L1218 411L1215 418L1209 418L1173 398L1172 380L1175 367L1184 356L1183 330L1194 294L1206 274L1231 244L1236 240L1246 239L1243 232L1212 215L1163 204L1161 183L1157 180L1150 181L1121 164L1100 168L1092 164L1076 153L1051 123L1042 122L1039 132L1023 138L1018 135L1018 122L1015 119L1020 102L1009 89L1010 65L985 38L972 5L973 1L1000 -6L1008 8L1023 18L1036 14L1041 3L1049 -0L1042 -50L1032 -60L1033 -74L999 -107L986 -163L987 -172L1006 -190L1005 -198L975 -219L943 -226L907 -294L907 -320L894 -315L885 -320L822 -271L818 -257L800 -245L793 -232L784 -225L771 -227L746 -215L734 -214L705 -193L682 -195L657 -205L635 -204L575 -214L545 -199L531 -168L533 -162L549 -153L543 -135L548 -129L575 -127L576 -122L573 -116L554 -104L552 -96L555 -86L570 -73L568 -59L557 -43L558 -37L570 -25L587 -17L589 3L594 8L622 7L622 24L626 36L636 40L655 38L679 47L689 56L682 72L635 97L619 112L615 124L625 151L619 183L622 189L629 190L631 199L604 216L565 270L564 279L570 293L559 308L518 328L506 371L477 431L423 464L404 510L387 529L380 553L349 565L313 570L276 585L265 578L258 560L244 550L236 550L211 570L187 613L152 652L146 688L150 694L173 707L205 712L214 720L213 752L208 768L210 786L227 808L246 811L258 808L266 812L267 839L291 878L309 919L301 932L302 942L309 951L276 970L262 966L259 950L253 951L213 966L206 977L184 980L175 979L158 968L92 967L84 970L79 965L74 970L74 1003L29 1008ZM2903 2571L2892 2547L2888 2544L2873 2553L2873 2572L2878 2573L2895 2598ZM2872 2528L2862 2540L2867 2546L2877 2533ZM2795 2439L2792 2448L2798 2453L2804 2452ZM2839 2480L2829 2469L2825 2471L2823 2476L2830 2485ZM2846 2461L2844 2444L2839 2443L2836 2450L2842 2466ZM2753 2355L2749 2348L2742 2353L2746 2361ZM2706 2192L2697 2172L2682 2191L2687 2213L2698 2214ZM2710 2115L2708 2106L2702 2102L2699 2116L2705 2118ZM2714 2085L2713 2053L2707 2046L2717 2017L2712 1995L2719 1991L2724 1980L2717 1947L2707 1938L2722 1904L2715 1892L2720 1884L2716 1868L2703 1878L2697 1893L2697 1929L2700 1933L2700 1947L2694 1960L2698 1971L2695 1986L2698 2007L2705 2011L2707 2019L2696 2026L2692 2054L2685 2064L2692 2080L2709 2100ZM2735 2035L2729 2040L2742 2049ZM2690 1941L2685 1943L2688 1959L2690 1951Z","ax":1178,"ay":1067},{"code":"GEO","name":"조지아","group":"코카서스","d":"M-2030 -1155L-2001 -1150L-1964 -1150L-1914 -1138L-1915 -1144L-1902 -1142L-1872 -1155L-1841 -1135L-1844 -1130L-1838 -1121L-1820 -1110L-1808 -1111L-1788 -1092L-1772 -1099L-1765 -1112L-1789 -1143L-1790 -1154L-1795 -1157L-1791 -1169L-1782 -1170L-1768 -1182L-1783 -1197L-1802 -1207L-1823 -1231L-1808 -1259L-1813 -1265L-1837 -1272L-1847 -1291L-1868 -1305L-1879 -1292L-1886 -1307L-1896 -1312L-1945 -1303L-1955 -1306L-1960 -1313L-1953 -1326L-1999 -1366L-2004 -1379L-2019 -1393L-2035 -1395L-2044 -1406L-2073 -1410L-2108 -1423L-2121 -1440L-2141 -1451L-2169 -1478L-2179 -1478L-2205 -1493L-2211 -1493L-2223 -1481L-2196 -1440L-2170 -1423L-2158 -1403L-2156 -1391L-2137 -1375L-2134 -1365L-2135 -1284L-2149 -1257L-2170 -1240L-2148 -1224L-2138 -1229L-2097 -1211L-2081 -1223L-2070 -1220L-2067 -1209L-2047 -1182L-2049 -1175L-2046 -1169L-2034 -1165L-2029 -1160Z","ax":-1991,"ay":-1269},{"code":"CYP","name":"키프로스","group":"서남아시아","d":"M-3009 -747L-3002 -764L-2938 -785L-2985 -780L-3028 -780L-3053 -788L-3081 -804L-3094 -784L-3109 -788L-3105 -780L-3095 -772L-3069 -773L-3053 -766L-3050 -758L-3052 -746L-3046 -749L-3035 -742L-3016 -744L-3006 -737ZM-3113 -791L-3140 -785L-3146 -791L-3150 -777L-3148 -748L-3130 -732L-3115 -728L-3113 -716L-3107 -714L-3103 -720L-3094 -724L-3067 -721L-3035 -736L-3005 -727L-3006 -737L-3016 -744L-3035 -742L-3046 -749L-3052 -746L-3050 -758L-3053 -766L-3069 -773L-3095 -772Z","ax":-3099,"ay":-753},{"code":"BTN","name":"부탄","group":"남부아시아","d":"M2299 353L2296 312L2292 309L2257 302L2236 320L2205 315L2170 321L2166 303L2142 302L2122 307L2088 341L2064 385L2061 400L2049 417L2046 436L2034 453L2046 463L2050 474L2070 481L2081 485L2098 477L2124 480L2127 486L2142 485L2176 472L2182 460L2195 453L2217 459L2235 458L2287 444L2299 433L2309 438L2323 435L2339 425L2354 422L2359 414L2347 395L2352 372L2339 356L2316 363Z","ax":2189,"ay":394},{"code":"BGD","name":"방글라데시","group":"남부아시아","d":"M2155 989L2167 1032L2176 1041L2188 1047L2195 1044L2207 1020L2199 980L2216 1035L2237 1006L2237 960L2246 949L2239 968L2245 989L2251 999L2274 979L2264 997L2265 1011L2275 1017L2282 1014L2290 988L2310 960L2311 948L2285 908L2285 893L2294 889L2283 874L2294 863L2291 848L2283 841L2269 841L2255 834L2284 832L2283 819L2286 812L2302 874L2325 904L2339 915L2365 904L2387 872L2395 890L2415 909L2430 930L2435 922L2434 937L2449 973L2463 993L2478 1048L2512 1085L2501 1056L2491 1042L2489 1025L2500 1013L2523 1021L2527 1027L2533 1021L2491 872L2473 848L2462 805L2446 767L2440 769L2436 765L2426 772L2415 773L2419 793L2406 821L2410 847L2398 858L2387 855L2376 838L2369 839L2372 853L2366 851L2340 793L2341 763L2351 741L2367 737L2384 721L2399 718L2403 699L2417 690L2421 647L2419 635L2440 634L2443 627L2430 617L2395 607L2341 622L2322 622L2239 642L2177 640L2172 631L2163 568L2143 541L2135 546L2138 558L2136 566L2118 570L2098 562L2089 553L2081 535L2076 532L2070 533L2068 538L2075 550L2061 553L2046 551L2037 537L2015 525L2010 527L2009 534L2019 540L2021 547L1998 584L1995 607L2003 614L2013 615L2026 623L2042 638L2052 641L2069 638L2077 651L2092 660L2080 672L2044 678L2036 714L2019 714L2012 748L2026 761L2040 759L2053 767L2087 774L2090 804L2082 843L2104 866L2105 886L2127 890L2122 908L2136 952ZM2368 957L2365 936L2354 921L2358 967ZM2404 926L2393 906L2389 902L2388 918L2400 930ZM2336 966L2333 929L2317 915L2308 897L2299 893L2290 898L2301 921L2311 927L2318 950L2306 983L2332 975ZM2446 980L2442 970L2444 989ZM2460 1014L2455 990L2447 994L2451 1013L2454 1016ZM2294 874L2290 877L2294 881L2304 885Z","ax":2243,"ay":787},{"code":"BHR","name":"바레인","group":"서남아시아","d":"M-1736 661L-1728 627L-1732 618L-1728 614L-1740 613L-1744 642Z","ax":-1736,"ay":635},{"code":"AZE","name":"아제르바이잔","group":"코카서스","d":"M-1963 -975L-1944 -918L-1923 -885L-1873 -858L-1879 -894L-1875 -901L-1889 -920L-1883 -938L-1891 -942L-1912 -938L-1926 -953L-1933 -952L-1934 -967L-1939 -976ZM-1645 -803L-1625 -836L-1617 -829L-1618 -820L-1610 -826L-1600 -848L-1590 -854L-1588 -883L-1565 -933L-1556 -944L-1523 -951L-1504 -949L-1487 -941L-1489 -956L-1497 -968L-1511 -979L-1529 -983L-1550 -1012L-1564 -1040L-1567 -1072L-1592 -1133L-1598 -1140L-1618 -1117L-1649 -1107L-1671 -1083L-1677 -1083L-1713 -1100L-1721 -1129L-1745 -1168L-1749 -1171L-1760 -1170L-1760 -1178L-1768 -1182L-1782 -1170L-1791 -1169L-1795 -1161L-1789 -1143L-1765 -1112L-1772 -1099L-1781 -1093L-1790 -1093L-1808 -1111L-1820 -1110L-1828 -1115L-1842 -1126L-1841 -1135L-1872 -1155L-1899 -1143L-1888 -1124L-1900 -1119L-1874 -1102L-1864 -1084L-1866 -1079L-1886 -1069L-1884 -1052L-1878 -1037L-1850 -1010L-1862 -988L-1884 -992L-1889 -989L-1874 -974L-1848 -935L-1837 -936L-1825 -926L-1828 -917L-1839 -911L-1825 -888L-1842 -888L-1837 -872L-1841 -855L-1836 -853L-1805 -874L-1793 -876L-1772 -890L-1744 -902L-1716 -913L-1697 -913L-1676 -876L-1694 -870L-1698 -863L-1698 -855L-1687 -844L-1688 -835L-1710 -830L-1716 -825L-1715 -818L-1702 -804L-1696 -790L-1687 -785L-1673 -761L-1652 -761ZM-1877 -1058L-1879 -1064L-1874 -1065L-1874 -1059ZM-1907 -1113L-1904 -1120L-1908 -1121L-1909 -1115Z","ax":-1707,"ay":-991},{"code":"ARM","name":"아르메니아","group":"코카서스","d":"M-1963 -975L-1939 -976L-1934 -967L-1934 -954L-1926 -953L-1912 -938L-1886 -940L-1884 -931L-1889 -920L-1875 -901L-1879 -894L-1873 -858L-1841 -855L-1837 -872L-1842 -888L-1825 -888L-1839 -911L-1828 -917L-1825 -926L-1837 -936L-1848 -935L-1874 -974L-1889 -989L-1884 -992L-1862 -988L-1850 -1010L-1878 -1037L-1884 -1052L-1886 -1069L-1866 -1079L-1864 -1084L-1874 -1102L-1900 -1119L-1888 -1124L-1899 -1143L-1915 -1144L-1914 -1138L-1964 -1150L-2001 -1150L-2030 -1155L-2020 -1131L-2019 -1107L-2027 -1092L-2038 -1084L-2036 -1047L-2041 -1043L-2016 -1024L-1992 -1021L-1975 -999ZM-1907 -1113L-1909 -1118L-1906 -1121L-1904 -1117ZM-1872 -1063L-1876 -1065L-1880 -1060L-1874 -1059Z","ax":-1932,"ay":-1035},{"code":"AFG","name":"아프가니스탄","group":"남부아시아","d":"M-135 -484L-167 -492L-197 -510L-208 -499L-217 -475L-258 -475L-282 -464L-313 -377L-327 -364L-351 -353L-359 -342L-372 -342L-423 -327L-439 -327L-436 -308L-444 -296L-448 -283L-482 -263L-503 -264L-517 -256L-525 -269L-545 -288L-577 -288L-584 -292L-601 -312L-609 -311L-608 -299L-617 -277L-626 -274L-623 -253L-631 -235L-631 -227L-644 -206L-666 -192L-652 -169L-675 -169L-691 -147L-689 -118L-694 -104L-692 -96L-680 -86L-657 -82L-656 -78L-692 -40L-692 -31L-674 61L-680 102L-680 144L-601 162L-593 173L-589 197L-590 215L-593 224L-690 326L-535 386L-429 381L-378 394L-371 387L-349 378L-281 379L-171 347L-163 336L-169 320L-163 297L-164 265L-158 243L-153 231L-134 219L-111 192L-102 188L-68 198L-52 196L-25 184L-40 166L2 147L15 133L42 138L56 133L74 150L82 152L102 140L121 117L117 62L132 34L140 -3L159 -12L179 -14L210 -34L212 -43L198 -71L172 -101L174 -114L184 -119L214 -109L245 -109L281 -121L285 -129L284 -156L272 -174L300 -212L315 -224L329 -248L322 -260L326 -273L323 -289L309 -320L286 -343L290 -352L317 -381L324 -388L338 -388L371 -419L411 -435L513 -447L537 -441L580 -466L564 -480L595 -497L599 -492L610 -491L588 -508L576 -506L561 -509L553 -508L545 -498L509 -485L500 -485L498 -487L505 -495L505 -505L475 -509L433 -485L422 -474L413 -457L387 -451L339 -417L327 -417L321 -421L314 -433L304 -464L314 -551L288 -551L292 -579L284 -594L266 -606L251 -610L239 -606L228 -596L212 -567L194 -550L198 -521L193 -511L180 -507L171 -513L161 -514L132 -507L125 -500L124 -490L125 -469L116 -458L112 -457L81 -482L73 -475L59 -474L34 -460L27 -455L23 -446L19 -447L6 -439L-4 -442L-15 -452L-27 -470L-35 -469L-43 -474L-60 -468L-71 -471L-82 -482L-104 -487Z","ax":-191,"ay":-93},{"code":"XJ","name":"신장","group":"중국(신장)","d":"M891 -313L902 -321L907 -321L906 -296L920 -274L937 -231L944 -224L974 -220L1003 -202L1024 -215L1037 -216L1049 -222L1075 -218L1090 -252L1080 -275L1093 -285L1089 -295L1102 -316L1107 -347L1128 -336L1163 -333L1173 -329L1178 -331L1180 -341L1194 -334L1212 -337L1230 -330L1264 -344L1269 -358L1287 -372L1288 -384L1297 -390L1319 -389L1332 -395L1342 -395L1347 -390L1348 -375L1363 -367L1372 -371L1408 -369L1443 -381L1456 -378L1488 -405L1507 -412L1518 -424L1537 -434L1563 -439L1576 -430L1588 -445L1607 -448L1617 -463L1625 -494L1639 -501L1644 -507L1660 -510L1705 -528L1716 -538L1737 -537L1764 -547L1772 -555L1806 -565L1835 -561L1846 -564L1861 -556L1882 -559L1926 -548L1949 -553L1952 -574L1966 -562L2007 -569L2030 -562L2050 -575L2050 -583L2030 -620L2006 -624L1999 -630L1996 -643L2004 -662L2018 -667L2041 -682L2040 -694L2022 -710L2011 -729L1947 -749L1943 -772L1913 -804L1908 -816L1925 -825L1942 -844L1943 -851L1994 -871L2007 -882L2058 -909L2074 -928L2118 -950L2111 -981L2083 -1023L2089 -1052L2079 -1093L2107 -1100L2127 -1120L2145 -1185L2175 -1250L2206 -1283L2237 -1300L2260 -1303L2266 -1308L2275 -1330L2257 -1387L2274 -1414L2266 -1431L2218 -1459L2209 -1475L2168 -1527L2149 -1529L2145 -1544L2146 -1559L2120 -1548L2091 -1550L2080 -1558L2058 -1561L2042 -1573L2022 -1569L1999 -1587L1983 -1591L1929 -1587L1903 -1575L1883 -1571L1868 -1575L1830 -1564L1820 -1571L1816 -1566L1806 -1565L1789 -1571L1776 -1564L1760 -1588L1750 -1594L1747 -1623L1761 -1657L1744 -1686L1747 -1717L1743 -1719L1739 -1735L1731 -1741L1724 -1755L1709 -1759L1682 -1787L1682 -1794L1663 -1822L1641 -1828L1635 -1841L1627 -1840L1625 -1832L1615 -1830L1594 -1849L1580 -1846L1572 -1837L1559 -1836L1547 -1846L1539 -1844L1521 -1851L1515 -1866L1509 -1871L1503 -1869L1492 -1876L1467 -1880L1463 -1884L1468 -1898L1449 -1903L1441 -1910L1441 -1916L1448 -1923L1438 -1943L1418 -1934L1411 -1927L1390 -1929L1381 -1923L1372 -1923L1365 -1904L1374 -1893L1374 -1879L1366 -1856L1348 -1847L1342 -1838L1312 -1832L1309 -1825L1305 -1775L1320 -1729L1329 -1719L1332 -1707L1332 -1699L1325 -1695L1324 -1680L1304 -1675L1285 -1650L1273 -1644L1271 -1655L1263 -1661L1207 -1651L1177 -1656L1146 -1667L1136 -1665L1139 -1636L1122 -1549L1122 -1516L1113 -1473L1120 -1468L1142 -1464L1144 -1446L1140 -1431L1136 -1430L1116 -1440L1094 -1427L1081 -1431L1077 -1443L1069 -1446L1009 -1413L997 -1413L978 -1406L975 -1399L952 -1395L935 -1378L937 -1373L947 -1368L967 -1373L988 -1365L978 -1356L985 -1297L1026 -1228L1022 -1213L1032 -1208L1037 -1195L1033 -1189L1023 -1191L1005 -1177L1006 -1171L1021 -1166L1022 -1162L999 -1152L993 -1132L1009 -1089L1005 -1083L1011 -1072L1009 -1066L978 -1059L972 -1044L961 -1041L944 -1029L935 -1029L887 -996L884 -989L864 -976L865 -964L845 -936L824 -937L798 -925L756 -928L744 -923L737 -915L737 -904L729 -894L728 -877L718 -857L706 -846L698 -856L691 -847L682 -849L670 -838L652 -835L647 -845L649 -853L638 -872L609 -849L593 -848L578 -854L575 -844L582 -834L569 -834L539 -805L525 -806L509 -798L498 -769L505 -761L508 -746L501 -734L484 -730L483 -703L504 -679L503 -674L495 -672L492 -667L504 -637L516 -630L525 -630L525 -638L532 -646L550 -647L594 -628L596 -620L591 -608L594 -585L603 -579L607 -563L605 -557L612 -551L607 -532L632 -511L626 -509L625 -501L610 -491L601 -488L594 -497L586 -489L575 -489L572 -482L564 -481L566 -476L581 -466L591 -470L603 -466L611 -455L615 -462L630 -466L650 -460L656 -457L662 -438L674 -444L681 -443L700 -432L713 -413L713 -395L718 -387L709 -373L709 -368L714 -362L727 -360L735 -341L756 -346L768 -355L772 -338L805 -322L816 -323L826 -317L838 -319L848 -313L873 -314L883 -320Z","ax":1415,"ay":-1014},{"code":"XZ","name":"티베트(시짱)","group":"중국(티베트)","d":"M1001 -103L1029 -87L1062 -86L1056 -70L1059 -61L1054 -56L1061 -55L1084 -30L1069 -6L1057 -12L1055 -5L1039 4L1037 15L1025 19L1008 8L1003 -10L993 -3L971 2L979 16L981 37L1011 64L1006 86L1012 96L1022 103L1012 115L1018 121L1019 137L1035 139L1047 116L1053 118L1064 129L1067 139L1083 162L1090 162L1101 169L1116 163L1125 164L1149 181L1157 179L1165 186L1160 192L1164 199L1162 205L1203 211L1223 225L1242 230L1256 255L1268 254L1271 241L1279 236L1279 212L1291 215L1300 204L1317 209L1346 208L1347 219L1355 224L1353 230L1356 237L1372 238L1395 247L1404 255L1410 256L1411 261L1427 272L1433 268L1440 270L1450 278L1452 274L1460 272L1469 280L1470 287L1479 287L1500 316L1511 317L1515 309L1535 299L1552 300L1560 306L1558 312L1564 321L1570 323L1569 333L1586 341L1595 352L1612 354L1619 358L1619 363L1633 368L1644 367L1655 354L1665 357L1666 365L1660 376L1666 391L1690 391L1696 386L1714 388L1721 377L1727 389L1740 396L1752 413L1754 422L1764 421L1768 416L1761 400L1768 390L1775 406L1798 412L1806 406L1807 389L1813 390L1819 386L1825 389L1827 395L1836 394L1845 400L1853 398L1870 409L1883 408L1889 402L1891 408L1906 402L1911 404L1925 401L1934 388L1962 388L1960 379L1984 370L2004 352L2026 361L2032 377L2028 413L2033 426L2046 434L2056 431L2050 420L2050 409L2057 398L2063 397L2068 373L2078 365L2086 342L2095 329L2111 322L2119 307L2138 298L2146 298L2152 293L2160 302L2169 296L2189 299L2191 303L2182 314L2182 320L2200 314L2239 320L2250 305L2259 301L2273 309L2293 309L2297 312L2296 320L2307 323L2316 320L2321 328L2339 320L2354 305L2361 312L2363 307L2367 309L2368 303L2372 306L2386 300L2398 281L2387 275L2389 266L2397 257L2402 257L2413 243L2433 231L2429 221L2436 209L2437 200L2448 189L2486 176L2492 177L2494 157L2516 141L2522 129L2514 123L2514 117L2522 108L2533 103L2541 90L2555 97L2558 103L2578 99L2616 103L2627 96L2625 80L2629 75L2644 74L2643 60L2654 59L2679 47L2691 59L2699 52L2702 54L2700 64L2689 75L2695 93L2708 78L2718 80L2737 103L2739 108L2730 113L2732 117L2719 147L2727 150L2743 138L2757 135L2783 140L2796 132L2819 143L2829 131L2826 122L2831 102L2839 106L2843 101L2846 103L2856 116L2868 112L2880 119L2881 125L2894 130L2904 118L2905 102L2922 111L2932 98L2934 82L2923 59L2928 48L2919 25L2930 17L2942 35L2947 33L2950 28L2944 18L2949 6L2942 -9L2953 -16L2946 -24L2937 -52L2929 -60L2927 -91L2890 -168L2893 -177L2873 -189L2871 -201L2857 -213L2848 -216L2847 -233L2860 -227L2867 -243L2833 -262L2812 -281L2809 -301L2780 -324L2775 -334L2755 -341L2726 -342L2722 -329L2716 -331L2697 -328L2696 -317L2703 -316L2706 -305L2697 -299L2700 -279L2694 -276L2692 -269L2679 -266L2658 -254L2664 -247L2663 -238L2670 -230L2668 -223L2639 -224L2621 -236L2611 -229L2610 -220L2619 -213L2624 -198L2622 -192L2606 -208L2581 -199L2574 -204L2553 -198L2544 -203L2535 -217L2539 -226L2533 -241L2519 -247L2502 -244L2490 -248L2482 -262L2465 -267L2449 -278L2433 -265L2427 -266L2427 -258L2409 -245L2386 -242L2373 -247L2361 -243L2353 -235L2323 -245L2309 -240L2303 -249L2246 -238L2233 -232L2228 -245L2219 -245L2209 -238L2191 -248L2164 -255L2145 -272L2146 -278L2142 -279L2125 -275L2123 -265L2106 -259L2094 -245L2076 -247L2059 -255L2048 -253L2037 -263L2029 -280L2011 -284L1999 -302L1983 -310L1970 -326L1971 -333L1981 -343L1982 -361L1976 -366L1973 -382L1962 -399L1969 -415L1962 -423L1944 -421L1941 -435L1927 -449L1927 -464L1946 -479L1941 -486L1942 -521L1917 -521L1907 -533L1912 -541L1926 -548L1882 -559L1861 -556L1846 -564L1835 -561L1812 -566L1772 -555L1764 -547L1737 -537L1716 -538L1704 -527L1660 -510L1644 -507L1623 -491L1617 -463L1607 -448L1588 -445L1576 -430L1563 -439L1537 -434L1518 -424L1507 -412L1488 -405L1457 -379L1443 -381L1408 -369L1372 -371L1363 -367L1348 -375L1347 -390L1342 -395L1332 -395L1319 -389L1297 -390L1288 -384L1287 -372L1269 -358L1264 -344L1230 -330L1212 -337L1194 -334L1180 -341L1178 -331L1173 -329L1163 -333L1128 -336L1107 -347L1102 -316L1089 -295L1093 -285L1080 -275L1090 -252L1078 -220L1072 -217L1049 -222L1010 -208L1003 -202L1006 -188L986 -171L995 -134L996 -113Z","ax":1890,"ay":-42}],"context":[{"code":"VNM","d":"M3753 871L3697 883L3706 904L3694 929L3753 945ZM3739 457L3705 437L3673 474L3674 501L3667 514L3641 538L3616 535L3605 570L3567 554L3561 580L3540 565L3517 612L3486 598L3456 598L3437 647L3494 685L3508 707L3516 705L3519 688L3536 697L3538 746L3573 780L3630 784L3663 743L3677 741L3722 758L3708 788L3734 787L3744 801L3753 799L3753 457Z"},{"code":"UKR","d":"M-2948 -2698L-2951 -2678L-2971 -2661L-2989 -2667L-3103 -2619L-3122 -2581L-3120 -2565L-3125 -2562L-3139 -2577L-3194 -2541L-3204 -2525L-3197 -2521L-3194 -2482L-3184 -2473L-3187 -2453L-3162 -2458L-3152 -2439L-3109 -2404L-3087 -2398L-3075 -2361L-3028 -2361L-2979 -2347L-2958 -2363L-2935 -2359L-2913 -2365L-2890 -2351L-2864 -2352L-2829 -2304L-2826 -2284L-2819 -2288L-2805 -2277L-2804 -2255L-2790 -2251L-2794 -2229L-2814 -2201L-2799 -2167L-2812 -2134L-2799 -2111L-2810 -2079L-2802 -2061L-2826 -2062L-2830 -2076L-2838 -2074L-2856 -2091L-2867 -2085L-2861 -2100L-2879 -2100L-2901 -2058L-2952 -2033L-2959 -2017L-2982 -2020L-2974 -1996L-2956 -1980L-2950 -1987L-2902 -1979L-2889 -1953L-2872 -2003L-2824 -2000L-2774 -2029L-2751 -2055L-2706 -2045L-2688 -2056L-2695 -2045L-2673 -2033L-2657 -2061L-2654 -2095L-2653 -2066L-2662 -2028L-2644 -2011L-2626 -2010L-2648 -2001L-2699 -2033L-2674 -2007L-2678 -2000L-2695 -2002L-2693 -1996L-2658 -1957L-2604 -1946L-2593 -1928L-2580 -1927L-2570 -1938L-2560 -1933L-2529 -1903L-2526 -1890L-2509 -1885L-2509 -1862L-2497 -1851L-2488 -1903L-2470 -1906L-2451 -1920L-2454 -1901L-2480 -1890L-2401 -1924L-2368 -1916L-2344 -1920L-2329 -1909L-2305 -1920L-2282 -1917L-2262 -1929L-2214 -1914L-2190 -1962L-2161 -1966L-2142 -1980L-2073 -1963L-2046 -2000L-2052 -2006L-2044 -2032L-2055 -2041L-2037 -2061L-2022 -2058L-2036 -2084L-2020 -2086L-1998 -2101L-1987 -2136L-2008 -2142L-2033 -2171L-2037 -2185L-2056 -2188L-2090 -2227L-2110 -2218L-2125 -2245L-2130 -2284L-2192 -2281L-2209 -2296L-2216 -2314L-2229 -2323L-2252 -2323L-2256 -2345L-2238 -2397L-2248 -2405L-2247 -2423L-2271 -2428L-2299 -2449L-2291 -2456L-2284 -2495L-2266 -2493L-2262 -2499L-2276 -2574L-2312 -2588L-2337 -2588L-2357 -2603L-2389 -2585L-2420 -2605L-2459 -2615L-2502 -2590L-2516 -2554L-2527 -2547L-2539 -2580L-2593 -2593L-2595 -2625L-2628 -2616L-2630 -2631L-2651 -2650L-2671 -2658L-2687 -2651L-2682 -2661L-2704 -2675L-2710 -2699Z"},{"code":"UGA","d":"M-3891 3232L-3874 3104L-3845 3063L-3815 3041L-3805 3024L-3768 3011L-3768 2995L-3743 2964L-3742 2878L-3755 2836L-3783 2789L-3777 2735L-3804 2709L-3819 2658L-3878 2695L-3914 2683L-3929 2666L-4003 2665L-4027 2679L-4046 2663L-4059 2637L-4088 2643L-4121 2620L-4140 2622L-4166 2641L-4160 2652L-4182 2688L-4174 2707L-4193 2752L-4148 2787L-4139 2804L-4143 2814L-4237 2879L-4254 2880L-4272 2899L-4300 2908L-4305 2943L-4333 2980L-4363 3095L-4366 3141L-4339 3143L-4329 3161L-4309 3156L-4278 3131L-4228 3137Z"},{"code":"TUN","d":"M-4818 -1631L-4743 -1670L-4726 -1716L-4738 -1763L-4727 -1797L-4714 -1810L-4685 -1814L-4638 -1836L-4630 -1859L-4675 -1864L-4695 -1857L-4699 -1868L-4678 -1916L-4682 -1926L-4695 -1937L-4706 -1927L-4694 -1944L-4702 -1955L-4747 -1968L-4780 -1964L-4800 -1971L-4806 -1959L-4818 -1960Z"},{"code":"THA","d":"M3375 2364L3375 2335L3362 2329L3365 2373ZM3753 1058L3727 1036L3659 1048L3646 1098L3613 1133L3598 1121L3547 1108L3519 1137L3514 1156L3472 1215L3450 1217L3444 1214L3454 1145L3437 1115L3447 1048L3425 987L3400 988L3380 1005L3356 1008L3340 989L3341 939L3316 922L3302 943L3299 935L3273 930L3259 946L3232 949L3240 972L3227 984L3201 990L3193 1030L3141 1055L3104 1058L3091 1095L3097 1132L3092 1157L3104 1194L3082 1210L3068 1212L3079 1227L3099 1230L3118 1266L3117 1282L3209 1353L3246 1418L3262 1403L3268 1409L3265 1430L3245 1451L3255 1527L3221 1556L3227 1580L3235 1597L3277 1638L3321 1662L3349 1693L3363 1746L3361 1770L3377 1799L3400 1815L3436 1894L3404 1981L3367 2042L3369 2095L3344 2265L3349 2303L3366 2326L3386 2302L3401 2309L3413 2328L3444 2340L3450 2358L3461 2355L3471 2363L3485 2388L3511 2383L3508 2399L3528 2407L3529 2433L3581 2469L3584 2442L3593 2438L3604 2451L3649 2449L3665 2469L3684 2464L3691 2495L3684 2518L3700 2529L3713 2508L3743 2486L3753 2493L3753 2408L3722 2382L3671 2397L3620 2375L3602 2378L3574 2350L3565 2326L3575 2318L3582 2323L3581 2342L3592 2340L3602 2367L3614 2370L3561 2247L3553 2240L3550 2250L3533 2236L3505 2163L3459 2184L3443 2182L3444 2165L3425 2133L3416 2068L3439 1996L3444 1929L3468 1840L3455 1783L3461 1740L3447 1721L3456 1696L3503 1667L3537 1670L3543 1671L3553 1760L3610 1747L3637 1731L3673 1738L3697 1754L3699 1747L3734 1769L3737 1757L3753 1768L3749 1727L3718 1709L3680 1618L3702 1606L3727 1533L3753 1501Z"},{"code":"TZA","d":"M-3346 3758L-3501 3606L-3490 3580L-3494 3558L-3882 3234L-4228 3137L-4265 3136L-4234 3200L-4233 3266L-4240 3286L-4273 3286L-4287 3307L-4282 3314L-4289 3327L-4286 3336L-4252 3356L-4253 3388L-4272 3391L-4272 3399L-4296 3412L-4331 3458L-4354 3476L-4380 3485L-4415 3474L-4426 3514L-4402 3621L-4418 3651L-4413 3685L-4397 3723L-4364 3758Z"},{"code":"SDS","d":"M-3878 2695L-3661 2556L-3686 2507L-3703 2411L-3763 2329L-3775 2293L-3797 2267L-3842 2244L-3864 2221L-3824 2171L-3753 2191L-3739 2183L-3733 2169L-3722 2082L-3743 2071L-3726 2034L-3726 1997L-3773 1928L-3796 1910L-3789 1900L-3784 1813L-3758 1749L-3807 1733L-3810 1757L-3879 1736L-3858 1778L-3866 1822L-3862 1849L-3922 1881L-3959 1921L-4021 1954L-4063 1945L-4129 1859L-4174 1868L-4177 1884L-4194 1897L-4249 1899L-4266 1909L-4268 1924L-4350 1895L-4361 1858L-4443 1827L-4477 1829L-4498 1818L-4549 1717L-4547 1693L-4625 1674L-4635 1680L-4641 1699L-4670 1722L-4676 1749L-4691 1760L-4717 1811L-4759 1818L-4762 1856L-4748 1875L-4702 1908L-4674 1958L-4671 1969L-4682 1990L-4666 2018L-4607 2085L-4580 2133L-4589 2151L-4576 2202L-4517 2264L-4514 2317L-4495 2361L-4433 2455L-4408 2466L-4374 2457L-4323 2486L-4284 2470L-4272 2480L-4227 2565L-4196 2592L-4191 2618L-4173 2623L-4166 2641L-4154 2628L-4128 2618L-4088 2643L-4059 2637L-4046 2663L-4027 2679L-4003 2665L-3929 2666L-3914 2683Z"},{"code":"SDN","d":"M-4815 1787L-4761 1821L-4752 1812L-4717 1811L-4691 1760L-4676 1749L-4670 1722L-4641 1699L-4629 1675L-4553 1689L-4547 1722L-4488 1826L-4443 1827L-4361 1858L-4350 1895L-4268 1924L-4266 1909L-4249 1899L-4194 1897L-4177 1884L-4174 1868L-4129 1859L-4063 1945L-4021 1954L-3959 1921L-3922 1881L-3862 1849L-3866 1822L-3858 1778L-3879 1736L-3810 1757L-3807 1733L-3758 1749L-3784 1813L-3789 1900L-3796 1910L-3773 1928L-3726 1997L-3726 2034L-3743 2071L-3722 2082L-3684 2008L-3681 1970L-3671 1957L-3643 1940L-3625 1961L-3606 1952L-3595 1908L-3568 1853L-3494 1780L-3445 1778L-3434 1742L-3400 1690L-3373 1624L-3365 1524L-3290 1410L-3285 1373L-3263 1328L-3223 1339L-3203 1314L-3126 1305L-3081 1268L-3177 1146L-3181 1056L-3174 995L-3160 948L-3158 898L-3154 885L-3145 895L-3143 888L-3164 825L-3158 779L-3680 610L-3671 595L-3677 586L-3697 603L-3713 598L-3999 490L-4281 373L-4351 592L-4444 553L-4586 1026L-4669 993L-4680 997L-4691 1004L-4702 1045L-4724 1057L-4741 1083L-4774 1090L-4771 1140L-4818 1157L-4818 1557L-4783 1671L-4797 1724L-4818 1743Z"},{"code":"SOM","d":"M-3048 3504L-2992 3436L-2813 3295L-2709 3229L-2507 3145L-2408 3073L-2275 2961L-2140 2797L-2114 2734L-2060 2666L-2035 2615L-2005 2593L-1963 2528L-1914 2471L-1894 2373L-1863 2367L-1844 2374L-1845 2364L-1863 2353L-1865 2361L-1882 2363L-1868 2341L-1868 2266L-1844 2214L-1893 2190L-1911 2192L-1931 2213L-1972 2229L-2103 2239L-2122 2437L-2242 2580L-2429 2715L-2610 2858L-2715 2835L-2761 2836L-2814 2849L-2854 2881L-2941 2880L-3026 2967L-3070 2997L-3104 3402L-3048 3490Z"},{"code":"SOL","d":"M-2107 2239L-2142 2226L-2204 2236L-2270 2221L-2367 2252L-2447 2228L-2546 2254L-2607 2243L-2659 2192L-2696 2121L-2714 2100L-2791 2186L-2776 2234L-2744 2277L-2727 2326L-2665 2393L-2353 2561L-2242 2580L-2122 2437Z"},{"code":"SVK","d":"M-3522 -2697L-3525 -2672L-3505 -2625L-3447 -2589L-3429 -2607L-3382 -2593L-3366 -2598L-3351 -2578L-3319 -2579L-3295 -2596L-3236 -2564L-3233 -2534L-3206 -2524L-3194 -2541L-3139 -2577L-3161 -2609L-3160 -2627L-3171 -2642L-3203 -2663L-3222 -2660L-3247 -2685L-3278 -2676L-3294 -2689L-3285 -2699Z"},{"code":"SVN","d":"M-3663 -2553L-3653 -2594L-3664 -2603L-3684 -2590L-3693 -2601L-3718 -2607L-3751 -2627L-3785 -2621L-3826 -2669L-3862 -2658L-3854 -2639L-3875 -2627L-3870 -2621L-3882 -2606L-3879 -2574L-3903 -2577L-3904 -2572L-3892 -2556L-3880 -2559L-3859 -2540L-3836 -2549L-3835 -2522L-3803 -2498L-3789 -2526L-3758 -2523L-3736 -2557L-3689 -2549L-3673 -2561Z"},{"code":"SRB","d":"M-3468 -2198L-3455 -2195L-3460 -2213L-3443 -2222L-3468 -2280L-3452 -2309L-3464 -2368L-3498 -2395L-3529 -2391L-3540 -2400L-3557 -2399L-3567 -2392L-3577 -2365L-3573 -2351L-3584 -2342L-3571 -2308L-3597 -2314L-3605 -2296L-3618 -2289L-3600 -2284L-3596 -2274L-3644 -2230L-3632 -2183L-3638 -2179L-3659 -2189L-3662 -2147L-3670 -2140L-3682 -2150L-3692 -2138L-3683 -2094L-3655 -2045L-3656 -2031L-3625 -2041L-3616 -2057L-3600 -2057L-3585 -1990L-3591 -1982L-3571 -1960L-3607 -1934L-3605 -1921L-3556 -1910L-3545 -1900L-3529 -1911L-3527 -1930L-3513 -1951L-3494 -1946L-3459 -1967L-3472 -2010L-3466 -2050L-3449 -2071L-3434 -2072L-3417 -2084L-3416 -2117L-3395 -2121L-3404 -2140L-3440 -2138Z"},{"code":"RWA","d":"M-4339 3143L-4392 3148L-4418 3174L-4423 3215L-4455 3234L-4451 3263L-4441 3270L-4430 3259L-4410 3274L-4401 3292L-4368 3300L-4349 3297L-4338 3258L-4318 3272L-4286 3270L-4271 3284L-4240 3286L-4233 3266L-4234 3200L-4263 3151L-4262 3135L-4278 3131L-4309 3156L-4329 3161Z"},{"code":"RUS","d":"M-2390 -2695L-2386 -2672L-2409 -2626L-2403 -2594L-2382 -2586L-2357 -2603L-2337 -2588L-2303 -2586L-2272 -2569L-2262 -2499L-2266 -2493L-2284 -2495L-2291 -2456L-2299 -2449L-2271 -2428L-2247 -2423L-2248 -2405L-2238 -2397L-2256 -2345L-2252 -2323L-2229 -2323L-2216 -2314L-2209 -2296L-2192 -2281L-2130 -2284L-2125 -2245L-2110 -2218L-2090 -2227L-2056 -2188L-2037 -2185L-2033 -2171L-2008 -2142L-1987 -2136L-1998 -2101L-2020 -2086L-2036 -2084L-2022 -2058L-2037 -2061L-2055 -2041L-2044 -2032L-2052 -2006L-2046 -2000L-2073 -1963L-2142 -1980L-2161 -1966L-2190 -1962L-2206 -1939L-2202 -1933L-2214 -1914L-2183 -1922L-2169 -1920L-2188 -1913L-2180 -1909L-2138 -1911L-2141 -1885L-2209 -1880L-2211 -1862L-2228 -1873L-2250 -1870L-2264 -1877L-2263 -1849L-2251 -1844L-2234 -1801L-2256 -1809L-2269 -1795L-2270 -1808L-2277 -1805L-2318 -1767L-2323 -1746L-2358 -1745L-2383 -1770L-2390 -1768L-2377 -1754L-2405 -1751L-2405 -1744L-2371 -1713L-2361 -1677L-2334 -1668L-2321 -1630L-2286 -1603L-2223 -1481L-2205 -1493L-2169 -1478L-2108 -1423L-2019 -1393L-1953 -1326L-1960 -1313L-1955 -1306L-1896 -1312L-1886 -1307L-1879 -1292L-1868 -1305L-1847 -1291L-1837 -1272L-1809 -1262L-1823 -1231L-1802 -1207L-1760 -1178L-1760 -1170L-1745 -1168L-1713 -1100L-1677 -1083L-1649 -1107L-1618 -1117L-1598 -1140L-1610 -1155L-1656 -1289L-1620 -1379L-1643 -1346L-1640 -1408L-1656 -1439L-1675 -1452L-1673 -1468L-1643 -1497L-1638 -1490L-1587 -1556L-1586 -1577L-1576 -1564L-1568 -1574L-1532 -1572L-1502 -1588L-1485 -1580L-1484 -1602L-1436 -1615L-1481 -1660L-1476 -1677L-1453 -1666L-1445 -1672L-1479 -1786L-1526 -1807L-1542 -1803L-1550 -1829L-1544 -1860L-1568 -1886L-1567 -1905L-1554 -1928L-1520 -1960L-1530 -1987L-1525 -2001L-1503 -2036L-1480 -2048L-1467 -2076L-1451 -2087L-1438 -2082L-1409 -2016L-1377 -2017L-1369 -2025L-1368 -2093L-1355 -2089L-1313 -2109L-1295 -2131L-1238 -2144L-1190 -2184L-1167 -2170L-1159 -2149L-1141 -2147L-1094 -2164L-1075 -2135L-1022 -2127L-975 -2070L-956 -2011L-947 -2024L-949 -2056L-941 -2062L-876 -2005L-848 -2016L-812 -2045L-803 -2040L-775 -2046L-747 -2023L-732 -2026L-716 -2042L-680 -2035L-648 -1991L-609 -1979L-605 -1965L-584 -1973L-563 -2001L-539 -1980L-502 -1979L-469 -1995L-453 -2045L-465 -2058L-526 -2086L-530 -2100L-553 -2119L-482 -2158L-494 -2196L-472 -2227L-409 -2220L-402 -2226L-405 -2238L-428 -2252L-459 -2261L-455 -2278L-434 -2285L-470 -2299L-449 -2341L-404 -2330L-233 -2369L-192 -2362L-165 -2392L-81 -2403L10 -2429L13 -2449L34 -2454L63 -2474L96 -2471L141 -2451L177 -2467L209 -2391L205 -2349L221 -2343L265 -2350L276 -2364L296 -2323L305 -2329L306 -2344L326 -2342L348 -2327L376 -2341L378 -2326L355 -2300L364 -2272L392 -2293L416 -2290L426 -2281L432 -2299L455 -2320L480 -2329L493 -2352L580 -2398L572 -2365L557 -2364L562 -2350L664 -2278L849 -2023L877 -2046L875 -2072L893 -2086L922 -2079L922 -2054L944 -2056L954 -2033L1026 -2043L1041 -2064L1080 -2082L1126 -2065L1165 -2011L1216 -2000L1221 -1982L1244 -1955L1314 -1956L1341 -1993L1347 -1985L1344 -1969L1412 -1928L1450 -1948L1457 -1980L1502 -1990L1504 -2001L1514 -1995L1520 -2000L1526 -2016L1537 -2017L1552 -2032L1545 -2052L1566 -2066L1568 -2079L1605 -2103L1624 -2131L1649 -2143L1668 -2174L1694 -2182L1699 -2202L1724 -2189L1742 -2204L1759 -2189L1838 -2206L1857 -2172L1882 -2157L1902 -2165L1919 -2157L1947 -2163L1961 -2180L1973 -2177L1981 -2184L2001 -2179L2047 -2192L2068 -2181L2078 -2185L2086 -2208L2109 -2229L2113 -2265L2106 -2289L2084 -2295L2055 -2334L2051 -2380L2060 -2390L2059 -2415L2074 -2431L2076 -2469L2157 -2455L2193 -2465L2264 -2459L2314 -2467L2363 -2393L2446 -2379L2498 -2396L2515 -2422L2564 -2465L2625 -2471L2655 -2486L2705 -2469L2749 -2485L2769 -2456L2827 -2443L2866 -2463L2967 -2491L2993 -2533L3072 -2599L3081 -2617L3076 -2639L3101 -2699ZM-2570 -1938L-2582 -1909L-2688 -1885L-2684 -1874L-2662 -1867L-2628 -1823L-2632 -1801L-2660 -1769L-2650 -1750L-2620 -1737L-2579 -1758L-2558 -1761L-2531 -1750L-2491 -1771L-2476 -1766L-2466 -1751L-2426 -1744L-2399 -1774L-2426 -1791L-2441 -1786L-2452 -1794L-2483 -1795L-2497 -1851L-2509 -1862L-2509 -1885L-2526 -1890L-2529 -1903Z"},{"code":"ROU","d":"M-2980 -2006L-2983 -2039L-2975 -2042L-2962 -2077L-2918 -2142L-2911 -2182L-2922 -2233L-2918 -2337L-2929 -2356L-2958 -2363L-2979 -2347L-3028 -2361L-3075 -2361L-3082 -2393L-3109 -2404L-3152 -2439L-3162 -2458L-3214 -2444L-3236 -2452L-3268 -2440L-3397 -2349L-3422 -2359L-3438 -2354L-3463 -2365L-3452 -2309L-3468 -2280L-3443 -2222L-3460 -2213L-3455 -2195L-3470 -2194L-3444 -2157L-3440 -2138L-3404 -2140L-3395 -2121L-3420 -2112L-3405 -2056L-3423 -2049L-3426 -2035L-3403 -2028L-3261 -1926L-3234 -1925L-3194 -1936L-3125 -1923L-3110 -1897L-3080 -1878L-3076 -1856L-3067 -1845L-3043 -1830L-3011 -1886L-2980 -1907L-2986 -1909L-2963 -1943L-2953 -1948L-2946 -1942L-2960 -1921L-2920 -1914L-2889 -1953L-2902 -1979L-2950 -1987L-2956 -1980Z"},{"code":"POL","d":"M-3288 -2695L-3294 -2689L-3278 -2676L-3247 -2685L-3222 -2660L-3203 -2663L-3171 -2642L-3160 -2627L-3161 -2609L-3125 -2562L-3103 -2619L-2989 -2667L-2971 -2661L-2951 -2678L-2947 -2699Z"},{"code":"MNE","d":"M-3690 -2149L-3705 -2157L-3714 -2130L-3722 -2142L-3741 -2138L-3757 -2120L-3769 -2123L-3786 -2084L-3800 -2076L-3800 -2064L-3791 -2060L-3796 -2054L-3780 -1973L-3766 -2006L-3714 -2038L-3708 -2035L-3714 -2017L-3702 -2014L-3690 -2014L-3679 -2035L-3670 -2029L-3654 -2033L-3683 -2094Z"},{"code":"MNG","d":"M3101 -2699L3076 -2639L3081 -2617L3072 -2599L2993 -2533L2967 -2491L2866 -2463L2827 -2443L2769 -2456L2749 -2485L2705 -2469L2655 -2486L2625 -2471L2564 -2465L2515 -2422L2498 -2396L2446 -2379L2363 -2393L2314 -2467L2264 -2459L2193 -2465L2157 -2455L2076 -2469L2074 -2431L2059 -2415L2060 -2390L2051 -2380L2055 -2334L2084 -2295L2106 -2289L2113 -2265L2109 -2229L2086 -2208L2078 -2185L2068 -2181L2047 -2192L2001 -2179L1981 -2184L1973 -2177L1961 -2180L1947 -2163L1919 -2157L1902 -2165L1882 -2157L1857 -2172L1838 -2206L1759 -2189L1742 -2204L1724 -2189L1699 -2202L1694 -2182L1668 -2174L1649 -2143L1624 -2131L1605 -2103L1568 -2079L1566 -2066L1545 -2052L1552 -2032L1537 -2017L1526 -2016L1520 -2000L1514 -1995L1504 -2001L1502 -1990L1457 -1980L1457 -1958L1438 -1943L1447 -1926L1441 -1912L1468 -1898L1467 -1880L1510 -1870L1528 -1849L1564 -1837L1596 -1846L1617 -1831L1633 -1840L1643 -1827L1660 -1824L1685 -1785L1710 -1758L1722 -1756L1746 -1717L1746 -1682L1760 -1659L1748 -1620L1750 -1597L1776 -1566L1789 -1571L1833 -1566L1982 -1590L2092 -1551L2121 -1549L2142 -1558L2149 -1531L2167 -1527L2216 -1461L2262 -1434L2276 -1414L2336 -1441L2516 -1474L2551 -1499L2670 -1525L2735 -1503L2810 -1514L2869 -1506L2921 -1543L2931 -1519L2970 -1528L2979 -1549L3068 -1657L3161 -1720L3245 -1758L3302 -1830L3313 -1910L3342 -1945L3356 -1981L3337 -2000L3284 -2029L3273 -2084L3278 -2118L3312 -2136L3341 -2129L3407 -2147L3426 -2188L3431 -2248L3498 -2297L3513 -2345L3505 -2360L3501 -2414L3513 -2435L3544 -2451L3535 -2477L3558 -2482L3568 -2510L3606 -2538L3608 -2550L3647 -2555L3669 -2569L3674 -2582L3664 -2602L3633 -2623L3562 -2646L3536 -2644L3506 -2656L3482 -2646L3463 -2628L3461 -2579L3412 -2578L3381 -2557L3372 -2527L3343 -2535L3321 -2557L3329 -2579L3310 -2612L3293 -2699Z"},{"code":"MDA","d":"M-2935 -2359L-2918 -2337L-2922 -2233L-2911 -2182L-2918 -2142L-2962 -2077L-2975 -2042L-2983 -2039L-2982 -2020L-2959 -2017L-2952 -2033L-2901 -2058L-2879 -2100L-2861 -2100L-2867 -2085L-2856 -2091L-2838 -2074L-2830 -2076L-2826 -2062L-2802 -2061L-2810 -2079L-2799 -2111L-2812 -2134L-2799 -2167L-2814 -2201L-2794 -2229L-2790 -2251L-2804 -2255L-2805 -2277L-2819 -2288L-2826 -2284L-2829 -2304L-2864 -2352L-2890 -2351L-2913 -2365Z"},{"code":"MYS","d":"M3749 2488L3713 2508L3700 2529L3684 2518L3691 2495L3684 2464L3665 2469L3644 2448L3636 2454L3604 2451L3593 2438L3583 2446L3581 2469L3612 2513L3619 2557L3661 2652L3665 2683L3689 2716L3681 2725L3753 2786ZM3549 2477L3531 2485L3543 2499L3561 2484Z"},{"code":"MKD","d":"M-3556 -1910L-3622 -1928L-3635 -1920L-3647 -1936L-3672 -1936L-3687 -1918L-3699 -1924L-3726 -1893L-3738 -1866L-3742 -1822L-3729 -1804L-3695 -1793L-3686 -1782L-3642 -1793L-3599 -1770L-3588 -1770L-3576 -1783L-3564 -1780L-3538 -1817L-3537 -1854Z"},{"code":"LBY","d":"M-4818 121L-4638 377L-4461 608L-4444 553L-4351 592L-4181 77L-3999 -411L-3979 -532L-3936 -574L-3916 -649L-3878 -671L-3878 -701L-3885 -717L-3945 -749L-3965 -778L-4004 -805L-4012 -824L-4000 -856L-4057 -924L-4100 -949L-4123 -943L-4153 -956L-4197 -953L-4254 -936L-4290 -902L-4303 -826L-4317 -803L-4372 -770L-4430 -772L-4459 -808L-4478 -868L-4499 -900L-4565 -978L-4613 -1014L-4630 -1038L-4639 -1085L-4622 -1144L-4623 -1177L-4665 -1222L-4680 -1260L-4732 -1323L-4777 -1337L-4807 -1367L-4818 -1394Z"},{"code":"LAO","d":"M3746 803L3734 787L3708 788L3722 758L3677 741L3663 743L3630 784L3573 780L3538 746L3536 697L3519 688L3516 705L3508 707L3494 685L3433 644L3410 654L3394 648L3383 679L3415 720L3428 777L3438 785L3431 795L3413 791L3385 804L3365 767L3331 815L3322 848L3322 856L3334 860L3300 886L3298 929L3299 942L3316 922L3341 939L3340 989L3356 1008L3380 1005L3400 988L3425 987L3447 1048L3437 1115L3454 1145L3444 1214L3472 1215L3514 1156L3519 1137L3547 1108L3598 1121L3614 1132L3646 1098L3661 1060L3657 1053L3667 1044L3727 1036L3753 1058L3753 945L3698 932L3693 925L3706 904L3697 883L3753 870L3753 799Z"},{"code":"KOS","d":"M-3646 -2029L-3683 -2033L-3691 -2013L-3692 -1985L-3682 -1964L-3697 -1923L-3687 -1918L-3672 -1936L-3647 -1936L-3635 -1920L-3622 -1928L-3608 -1924L-3607 -1934L-3571 -1960L-3591 -1982L-3585 -1990L-3600 -2057L-3616 -2057L-3621 -2043Z"},{"code":"KEN","d":"M-3296 3758L-3249 3669L-3218 3640L-3202 3582L-3181 3571L-3154 3575L-3123 3552L-3123 3525L-3116 3530L-3110 3519L-3079 3525L-3048 3504L-3048 3490L-3104 3402L-3072 3000L-3026 2967L-2958 2894L-3040 2879L-3078 2836L-3185 2860L-3228 2894L-3380 2837L-3499 2722L-3594 2691L-3618 2646L-3609 2609L-3612 2586L-3641 2570L-3657 2572L-3661 2556L-3819 2658L-3804 2709L-3777 2735L-3783 2789L-3745 2865L-3742 2958L-3745 2972L-3768 2995L-3768 3011L-3805 3024L-3815 3041L-3845 3063L-3874 3104L-3891 3232L-3494 3558L-3490 3580L-3501 3606L-3346 3758Z"},{"code":"ITA","d":"M-4372 -2696L-4376 -2691L-4339 -2676L-4274 -2694L-4256 -2691L-4235 -2657L-4211 -2579L-4245 -2492L-4263 -2469L-4253 -2457L-4254 -2396L-4266 -2383L-4255 -2379L-4243 -2350L-4247 -2322L-4238 -2224L-4225 -2180L-4212 -2177L-4185 -2150L-4193 -2094L-4176 -2082L-4171 -2067L-4188 -2059L-4155 -2047L-4156 -2019L-4171 -1995L-4159 -1963L-4138 -1937L-4167 -1808L-4179 -1790L-4198 -1795L-4210 -1789L-4216 -1775L-4233 -1760L-4253 -1755L-4261 -1740L-4261 -1727L-4238 -1712L-4204 -1734L-4177 -1739L-4148 -1775L-4117 -1775L-4108 -1767L-4098 -1771L-4079 -1813L-4099 -1862L-4097 -1876L-4063 -1909L-4026 -1931L-4007 -1924L-4002 -1899L-3974 -1873L-3980 -1829L-3969 -1805L-3943 -1829L-3938 -1862L-3946 -1907L-4028 -2081L-4020 -2092L-3996 -2095L-3987 -2109L-4048 -2156L-4067 -2214L-4071 -2282L-4039 -2388L-4062 -2469L-4063 -2504L-4037 -2559L-4027 -2568L-4023 -2560L-4003 -2571L-4001 -2610L-3984 -2628L-3927 -2613L-3907 -2618L-3896 -2601L-3883 -2600L-3884 -2579L-3890 -2578L-3879 -2574L-3882 -2606L-3870 -2621L-3875 -2627L-3854 -2639L-3862 -2658L-3826 -2669L-3854 -2699ZM-4221 -2275L-4221 -2276L-4221 -2276ZM-4080 -2469L-4083 -2476L-4073 -2477ZM-4248 -1765L-4255 -1773L-4290 -1776L-4311 -1793L-4338 -1793L-4390 -1820L-4410 -1865L-4419 -1871L-4446 -1867L-4448 -1890L-4468 -1886L-4491 -1868L-4492 -1835L-4463 -1798L-4437 -1725L-4421 -1714L-4415 -1666L-4379 -1627L-4370 -1642L-4344 -1656L-4333 -1706L-4304 -1733ZM-4464 -2314L-4454 -2322L-4461 -2365L-4518 -2355L-4536 -2361L-4545 -2381L-4549 -2378L-4566 -2357L-4574 -2308L-4605 -2275L-4602 -2260L-4636 -2232L-4654 -2204L-4660 -2165L-4637 -2153L-4613 -2175L-4586 -2143L-4519 -2220L-4505 -2248L-4479 -2262Z"},{"code":"IDN","d":"M3342 3083L3331 3098L3313 3102L3339 3123L3354 3146L3377 3153L3388 3177L3403 3177L3412 3130ZM3585 3391L3541 3314L3513 3323L3506 3350L3535 3389L3564 3401ZM3739 2904L3716 2912L3726 2942L3683 2926L3584 2839L3473 2802L3458 2787L3417 2778L3409 2768L3407 2744L3377 2723L3364 2702L3320 2676L3243 2686L3205 2700L3165 2702L3106 2680L3062 2695L3063 2726L3112 2785L3217 2856L3257 2859L3277 2870L3330 2924L3354 2933L3371 2984L3475 3015L3502 3050L3554 3166L3613 3185L3638 3219L3692 3263L3716 3310L3753 3357L3753 2911ZM3731 3533L3727 3497L3697 3481L3699 3503ZM3697 3469L3672 3458L3677 3489L3690 3486ZM3655 3445L3634 3416L3621 3415L3619 3430L3627 3439ZM3478 3287L3491 3249L3475 3226L3465 3226L3478 3248L3468 3285ZM3235 3015L3228 2999L3167 2971L3156 2971L3147 2983L3159 2999L3184 3000L3221 3017Z"},{"code":"HUN","d":"M-3197 -2521L-3233 -2534L-3236 -2564L-3295 -2596L-3319 -2579L-3351 -2578L-3366 -2598L-3382 -2593L-3429 -2607L-3447 -2589L-3505 -2625L-3525 -2672L-3550 -2646L-3568 -2654L-3574 -2669L-3589 -2668L-3584 -2645L-3607 -2641L-3633 -2602L-3664 -2603L-3653 -2594L-3664 -2550L-3653 -2520L-3650 -2468L-3633 -2428L-3596 -2401L-3573 -2406L-3529 -2391L-3498 -2395L-3438 -2354L-3422 -2359L-3405 -2348L-3394 -2351L-3268 -2440L-3236 -2452L-3214 -2444L-3187 -2453L-3184 -2473L-3200 -2502Z"},{"code":"GRC","d":"M-3891 -1575L-3922 -1553L-3912 -1554L-3914 -1538L-3899 -1525ZM-3902 -1478L-3912 -1513L-3921 -1508L-3917 -1480L-3907 -1484ZM-3873 -1687L-3874 -1727L-3863 -1735L-3876 -1746L-3885 -1741L-3883 -1705ZM-3662 -1525L-3703 -1522L-3691 -1519L-3679 -1503L-3665 -1463L-3668 -1450L-3642 -1430L-3643 -1394L-3626 -1368L-3615 -1381L-3634 -1403L-3623 -1453L-3658 -1493ZM-3472 -1640L-3469 -1655L-3475 -1659L-3488 -1652L-3485 -1636ZM-3594 -1230L-3590 -1248L-3609 -1241L-3609 -1223ZM-3468 -1269L-3485 -1266L-3468 -1248L-3449 -1247L-3447 -1254ZM-3609 -1322L-3599 -1344L-3607 -1359L-3615 -1360ZM-3496 -1337L-3477 -1367L-3485 -1379L-3499 -1382L-3499 -1354L-3512 -1346L-3508 -1333ZM-3421 -1449L-3459 -1455L-3468 -1448L-3456 -1429L-3436 -1432L-3454 -1426L-3433 -1402L-3418 -1412ZM-3455 -1550L-3471 -1548L-3485 -1560L-3492 -1545L-3484 -1538L-3477 -1542L-3473 -1529ZM-3478 -1032L-3444 -1036L-3417 -1071L-3445 -1072L-3469 -1061ZM-3803 -1140L-3803 -1153L-3815 -1140L-3822 -1147L-3833 -1116L-3771 -1072L-3755 -1056L-3755 -1036L-3636 -993L-3618 -1019L-3668 -1018L-3663 -1045L-3685 -1050L-3738 -1091L-3770 -1098L-3782 -1122L-3773 -1123L-3773 -1130L-3788 -1129ZM-3313 -1702L-3326 -1699L-3336 -1667L-3355 -1666L-3407 -1683L-3419 -1705L-3435 -1712L-3442 -1742L-3476 -1756L-3483 -1751L-3513 -1757L-3576 -1783L-3588 -1770L-3608 -1772L-3642 -1793L-3686 -1782L-3695 -1793L-3729 -1804L-3737 -1778L-3750 -1768L-3763 -1769L-3792 -1741L-3824 -1741L-3829 -1719L-3846 -1712L-3861 -1725L-3862 -1674L-3849 -1627L-3820 -1610L-3828 -1596L-3841 -1610L-3854 -1608L-3853 -1536L-3843 -1534L-3835 -1545L-3834 -1522L-3793 -1512L-3770 -1492L-3759 -1497L-3719 -1435L-3744 -1438L-3747 -1427L-3752 -1431L-3808 -1509L-3828 -1500L-3845 -1512L-3882 -1491L-3869 -1416L-3892 -1388L-3892 -1359L-3887 -1340L-3869 -1364L-3858 -1363L-3853 -1317L-3863 -1297L-3858 -1285L-3832 -1316L-3823 -1313L-3807 -1259L-3783 -1391L-3778 -1394L-3765 -1374L-3762 -1352L-3731 -1353L-3732 -1369L-3744 -1381L-3741 -1416L-3698 -1411L-3684 -1357L-3672 -1364L-3654 -1420L-3671 -1439L-3686 -1488L-3725 -1536L-3680 -1534L-3688 -1538L-3686 -1555L-3685 -1566L-3676 -1568L-3661 -1554L-3670 -1538L-3654 -1539L-3660 -1657L-3633 -1703L-3607 -1701L-3619 -1683L-3599 -1648L-3606 -1621L-3587 -1607L-3596 -1633L-3589 -1648L-3574 -1635L-3567 -1598L-3558 -1613L-3564 -1644L-3549 -1640L-3529 -1602L-3529 -1626L-3549 -1648L-3539 -1686L-3517 -1672L-3477 -1680L-3460 -1660L-3430 -1663L-3370 -1601L-3340 -1618L-3330 -1645L-3300 -1651L-3293 -1674Z"},{"code":"FRA","d":"M-4331 -2508L-4326 -2529L-4351 -2502L-4360 -2512L-4388 -2516L-4420 -2504L-4419 -2491L-4433 -2484L-4431 -2472L-4448 -2460L-4441 -2453L-4455 -2439L-4449 -2424L-4462 -2417L-4454 -2379L-4379 -2434ZM-4507 -2699L-4470 -2683L-4449 -2692L-4376 -2691L-4370 -2699Z"},{"code":"ETH","d":"M-3686 2507L-3657 2572L-3641 2570L-3612 2586L-3609 2609L-3618 2646L-3594 2691L-3499 2722L-3380 2837L-3228 2894L-3185 2860L-3078 2836L-3040 2879L-2958 2894L-2941 2880L-2847 2878L-2814 2849L-2761 2836L-2715 2835L-2610 2858L-2429 2715L-2242 2580L-2353 2561L-2669 2390L-2704 2346L-2718 2339L-2744 2277L-2776 2234L-2791 2186L-2756 2148L-2794 2131L-2861 2132L-2877 2124L-2867 2046L-2792 1974L-2930 1755L-2994 1700L-3020 1695L-3056 1675L-3092 1673L-3102 1653L-3132 1662L-3172 1658L-3221 1596L-3267 1666L-3293 1623L-3321 1637L-3342 1626L-3373 1624L-3400 1690L-3434 1742L-3447 1781L-3494 1780L-3568 1853L-3595 1908L-3606 1952L-3625 1961L-3643 1940L-3659 1946L-3681 1970L-3684 2008L-3721 2076L-3736 2180L-3753 2191L-3824 2171L-3861 2216L-3856 2232L-3797 2267L-3775 2293L-3763 2329L-3703 2411Z"},{"code":"ERI","d":"M-3371 1624L-3342 1626L-3321 1637L-3293 1623L-3267 1666L-3221 1596L-3172 1658L-3132 1662L-3107 1652L-3092 1673L-3056 1675L-3020 1695L-2994 1700L-2930 1755L-2792 1974L-2781 1971L-2759 1991L-2738 1968L-2710 1964L-2720 1940L-2724 1950L-2742 1940L-2765 1894L-2778 1892L-2789 1847L-2844 1790L-2883 1708L-2920 1685L-2943 1658L-2977 1640L-2988 1600L-3004 1581L-3019 1617L-3054 1516L-3057 1381L-3081 1268L-3126 1305L-3203 1314L-3223 1339L-3263 1328L-3285 1373L-3290 1410L-3365 1524ZM-2970 1552L-2986 1537L-2983 1545L-2991 1553L-2979 1563L-2991 1558L-2990 1568L-2947 1582L-2960 1565L-2968 1570Z"},{"code":"EGY","d":"M-3158 776L-3204 690L-3231 669L-3247 640L-3250 580L-3242 542L-3234 528L-3211 533L-3251 456L-3301 179L-3293 117L-3307 62L-3298 30L-3334 -64L-3343 -119L-3334 -156L-3345 -197L-3324 -226L-3314 -228L-3316 -174L-3299 -102L-3302 -53L-3274 20L-3241 65L-3217 43L-3146 -84L-3124 -102L-3124 -325L-3177 -320L-3220 -330L-3223 -341L-3272 -346L-3297 -383L-3295 -371L-3314 -365L-3318 -382L-3336 -398L-3318 -414L-3302 -391L-3316 -421L-3351 -424L-3383 -454L-3395 -441L-3434 -451L-3398 -455L-3447 -461L-3470 -445L-3496 -452L-3550 -437L-3584 -438L-3623 -482L-3667 -507L-3675 -522L-3698 -534L-3716 -563L-3818 -640L-3865 -647L-3882 -670L-3916 -649L-3936 -574L-3979 -532L-3999 -411L-4146 -21L-4281 373L-3999 490L-3713 598L-3697 603L-3677 586L-3671 595L-3680 610Z"},{"code":"DJI","d":"M-2714 2100L-2749 2083L-2785 2085L-2791 2076L-2778 2080L-2759 2064L-2731 2059L-2691 2038L-2690 2007L-2710 1964L-2738 1968L-2759 1991L-2784 1970L-2867 2046L-2877 2124L-2861 2132L-2794 2131L-2756 2148Z"},{"code":"HRV","d":"M-3903 -2577L-3929 -2536L-3934 -2499L-3928 -2494L-3873 -2528L-3861 -2514L-3858 -2480L-3881 -2442L-3876 -2375L-3898 -2388L-3898 -2338L-3887 -2294L-3893 -2278L-3866 -2263L-3844 -2227L-3831 -2158L-3824 -2153L-3825 -2202L-3817 -2220L-3831 -2273L-3834 -2338L-3820 -2372L-3826 -2412L-3796 -2450L-3780 -2441L-3776 -2413L-3748 -2423L-3734 -2411L-3721 -2413L-3715 -2395L-3695 -2374L-3683 -2372L-3679 -2357L-3663 -2356L-3626 -2323L-3627 -2297L-3618 -2289L-3605 -2296L-3597 -2314L-3571 -2308L-3584 -2342L-3573 -2351L-3577 -2365L-3567 -2392L-3557 -2399L-3573 -2406L-3602 -2403L-3633 -2428L-3650 -2468L-3655 -2532L-3673 -2561L-3689 -2549L-3699 -2556L-3739 -2555L-3758 -2523L-3789 -2526L-3803 -2498L-3835 -2522L-3836 -2549L-3859 -2540L-3880 -2559L-3892 -2556ZM-3843 -2188L-3879 -2227L-3889 -2231L-3875 -2209ZM-3868 -2472L-3867 -2488L-3865 -2506L-3882 -2497L-3877 -2475ZM-3886 -2393L-3886 -2420L-3891 -2448L-3895 -2419L-3892 -2391ZM-3912 -2451L-3889 -2486L-3884 -2511L-3903 -2486ZM-3800 -2064L-3818 -2141L-3827 -2146L-3826 -2139L-3847 -2177L-3859 -2183L-3823 -2129Z"},{"code":"COD","d":"M-4364 3758L-4397 3723L-4416 3668L-4416 3645L-4402 3621L-4427 3521L-4415 3474L-4430 3400L-4422 3314L-4451 3263L-4455 3234L-4423 3215L-4420 3178L-4411 3165L-4392 3148L-4366 3141L-4363 3095L-4333 2980L-4305 2943L-4300 2908L-4272 2899L-4254 2880L-4237 2879L-4143 2814L-4139 2804L-4148 2787L-4193 2752L-4174 2707L-4182 2688L-4161 2646L-4173 2623L-4191 2618L-4196 2592L-4227 2565L-4272 2480L-4284 2470L-4323 2486L-4374 2457L-4415 2465L-4433 2455L-4465 2415L-4502 2342L-4530 2322L-4563 2326L-4693 2250L-4707 2251L-4727 2272L-4747 2271L-4779 2264L-4818 2240L-4818 3758Z"},{"code":"CHN","d":"M3293 -2699L3310 -2612L3329 -2579L3321 -2557L3353 -2531L3372 -2527L3381 -2557L3412 -2578L3461 -2579L3463 -2628L3482 -2646L3506 -2656L3536 -2644L3562 -2646L3633 -2623L3664 -2602L3674 -2582L3669 -2569L3647 -2555L3608 -2550L3606 -2538L3568 -2510L3558 -2482L3535 -2477L3544 -2451L3513 -2435L3501 -2414L3505 -2360L3513 -2345L3498 -2297L3431 -2248L3426 -2188L3407 -2147L3341 -2129L3312 -2136L3278 -2118L3273 -2084L3284 -2029L3337 -2000L3356 -1981L3342 -1945L3313 -1910L3302 -1830L3245 -1758L3161 -1720L3068 -1657L2979 -1549L2970 -1528L2931 -1519L2921 -1543L2869 -1506L2810 -1514L2735 -1503L2670 -1525L2551 -1499L2516 -1474L2336 -1441L2276 -1414L2262 -1434L2216 -1461L2167 -1527L2149 -1531L2142 -1558L2121 -1549L2092 -1551L1982 -1590L1833 -1566L1789 -1571L1776 -1566L1750 -1597L1748 -1620L1760 -1659L1746 -1682L1746 -1717L1722 -1756L1710 -1758L1662 -1822L1643 -1827L1633 -1840L1617 -1831L1589 -1847L1559 -1837L1519 -1853L1510 -1870L1467 -1880L1468 -1898L1441 -1912L1447 -1926L1438 -1943L1412 -1928L1374 -1921L1367 -1911L1372 -1876L1365 -1856L1310 -1829L1306 -1775L1331 -1704L1323 -1681L1305 -1675L1276 -1646L1264 -1660L1215 -1652L1137 -1663L1114 -1480L1116 -1472L1140 -1465L1139 -1431L1117 -1439L1094 -1429L1071 -1446L1009 -1413L949 -1392L937 -1376L948 -1368L968 -1372L987 -1364L980 -1345L987 -1295L1036 -1196L1035 -1189L1023 -1191L1007 -1179L1021 -1162L999 -1150L994 -1135L1009 -1067L978 -1058L973 -1046L894 -999L865 -975L848 -940L804 -927L748 -925L718 -858L705 -846L699 -855L651 -837L638 -871L602 -850L579 -851L579 -834L546 -811L511 -798L499 -770L507 -746L484 -730L483 -706L502 -678L493 -665L504 -638L524 -631L533 -645L545 -646L587 -632L596 -621L592 -597L610 -551L607 -532L629 -509L610 -491L595 -497L565 -478L580 -466L653 -458L661 -440L683 -442L699 -432L713 -404L710 -366L725 -360L736 -342L769 -353L778 -336L821 -320L854 -314L907 -320L907 -294L938 -230L975 -219L1005 -198L986 -163L999 -107L1033 -74L1049 -0L1023 18L1000 -6L972 5L985 38L1010 65L1009 89L1020 102L1015 119L1019 137L1051 123L1092 164L1121 164L1157 180L1163 204L1212 215L1243 232L1257 252L1270 244L1283 215L1303 207L1342 209L1363 236L1428 270L1458 273L1505 315L1537 299L1554 304L1571 336L1631 366L1665 357L1666 388L1720 384L1757 419L1767 395L1796 411L1806 405L1808 391L1821 387L1868 408L1883 407L1961 387L1962 378L2001 354L2019 357L2031 374L2032 424L2046 434L2088 341L2122 307L2166 303L2170 321L2205 315L2236 320L2257 302L2296 312L2298 330L2332 326L2392 286L2387 271L2424 226L2430 198L2475 175L2540 91L2558 102L2618 102L2626 81L2667 41L2691 58L2702 55L2685 79L2690 96L2714 75L2736 102L2718 149L2729 151L2746 135L2765 141L2792 133L2819 143L2831 105L2842 103L2893 130L2928 190L2940 174L2960 178L2994 271L3003 329L2995 345L3010 366L2994 379L2987 405L2969 412L2964 446L2947 456L2943 483L2950 500L2937 515L2936 532L2940 548L2956 556L2964 572L2958 611L2970 609L3015 571L3052 565L3074 553L3065 581L3087 607L3102 654L3158 652L3170 661L3162 680L3166 717L3159 760L3234 752L3244 781L3261 788L3271 806L3316 793L3354 748L3385 804L3413 791L3433 794L3438 783L3428 777L3415 720L3383 679L3394 648L3410 654L3426 643L3437 647L3459 595L3517 612L3538 567L3561 580L3567 554L3605 570L3616 535L3641 538L3667 514L3674 501L3673 474L3705 437L3739 457L3753 457L3753 -2699Z"},{"code":"TCD","d":"M-4818 1157L-4771 1140L-4774 1090L-4741 1083L-4724 1057L-4702 1045L-4691 1004L-4680 997L-4669 993L-4586 1026L-4461 608L-4638 377L-4818 121Z"},{"code":"CAF","d":"M-4818 2240L-4779 2264L-4747 2271L-4727 2272L-4707 2251L-4693 2250L-4563 2326L-4535 2320L-4502 2342L-4514 2317L-4517 2264L-4576 2202L-4589 2151L-4580 2133L-4620 2068L-4675 2004L-4682 1985L-4671 1969L-4674 1958L-4702 1908L-4755 1868L-4763 1845L-4757 1824L-4818 1780ZM-4802 1732L-4783 1671L-4818 1557L-4818 1743Z"},{"code":"KHM","d":"M3752 1502L3727 1533L3702 1606L3680 1618L3718 1709L3749 1727L3753 1762Z"},{"code":"MMR","d":"M3299 935L3300 886L3334 860L3322 856L3322 848L3331 815L3362 779L3359 748L3333 766L3316 793L3278 806L3267 803L3261 788L3244 781L3234 752L3161 762L3162 680L3170 661L3158 652L3102 654L3087 607L3065 581L3074 553L3052 565L3015 571L2970 609L2958 611L2964 572L2956 556L2940 548L2937 515L2950 500L2943 483L2947 456L2964 446L2969 412L2987 405L2994 379L3010 366L2995 345L3003 329L2994 271L2960 178L2940 174L2928 190L2893 130L2867 113L2857 116L2842 103L2831 105L2819 143L2828 173L2795 224L2829 270L2815 272L2789 256L2740 278L2657 378L2656 407L2672 439L2662 481L2636 532L2636 544L2655 559L2626 702L2580 698L2562 706L2544 700L2561 740L2566 779L2567 808L2550 818L2548 855L2566 907L2556 914L2552 936L2522 928L2514 948L2530 1026L2500 1013L2488 1032L2519 1092L2562 1130L2555 1101L2572 1114L2578 1122L2570 1138L2581 1143L2595 1114L2593 1136L2602 1135L2594 1148L2611 1170L2618 1163L2611 1149L2619 1143L2669 1150L2662 1167L2708 1195L2706 1208L2694 1222L2666 1210L2658 1215L2686 1248L2711 1257L2708 1229L2715 1211L2726 1254L2747 1267L2739 1269L2776 1322L2804 1388L2807 1417L2792 1512L2796 1568L2817 1554L2836 1522L2836 1502L2843 1570L2856 1559L2862 1533L2874 1573L2898 1566L2911 1532L2912 1570L2922 1572L2947 1537L2952 1513L3004 1468L2984 1436L2990 1435L2997 1453L3014 1459L3033 1447L3044 1428L3052 1388L3039 1349L3081 1373L3086 1396L3111 1432L3145 1417L3138 1432L3142 1482L3158 1494L3189 1604L3197 1616L3204 1611L3215 1621L3203 1624L3233 1673L3243 1723L3248 1729L3247 1691L3256 1717L3302 1771L3328 1858L3321 1871L3332 1871L3335 1926L3352 1917L3360 1922L3348 1939L3352 2008L3336 2048L3357 2116L3369 2095L3367 2042L3404 1981L3436 1894L3400 1815L3377 1799L3361 1770L3363 1746L3349 1693L3321 1662L3277 1638L3235 1597L3227 1580L3221 1556L3255 1527L3245 1451L3265 1430L3268 1409L3262 1403L3246 1418L3209 1353L3117 1282L3118 1266L3099 1230L3079 1227L3068 1212L3082 1210L3104 1194L3092 1157L3097 1132L3091 1095L3104 1058L3141 1055L3193 1030L3201 990L3227 984L3240 972L3232 949L3259 946L3273 930ZM3322 1922L3306 1928L3317 1951L3327 1951ZM3293 1832L3283 1831L3290 1869L3302 1850ZM2831 1560L2831 1538L2813 1567L2818 1582ZM2674 1191L2671 1198L2685 1214L2700 1210L2702 1198Z"},{"code":"BDI","d":"M-4273 3283L-4286 3270L-4318 3272L-4338 3258L-4349 3297L-4368 3300L-4401 3292L-4410 3274L-4430 3259L-4439 3264L-4442 3279L-4422 3314L-4430 3400L-4415 3474L-4380 3485L-4354 3476L-4331 3458L-4296 3412L-4272 3399L-4272 3391L-4253 3388L-4252 3356L-4288 3333L-4282 3314L-4287 3307Z"},{"code":"BGR","d":"M-3172 -1663L-3175 -1714L-3185 -1733L-3142 -1749L-3117 -1794L-3092 -1809L-3069 -1797L-3043 -1830L-3067 -1845L-3076 -1856L-3080 -1878L-3110 -1897L-3125 -1923L-3194 -1936L-3234 -1925L-3261 -1926L-3403 -2028L-3426 -2035L-3423 -2049L-3405 -2056L-3417 -2084L-3434 -2072L-3449 -2071L-3466 -2050L-3472 -2019L-3459 -1967L-3494 -1946L-3513 -1951L-3532 -1907L-3551 -1901L-3536 -1850L-3538 -1817L-3566 -1779L-3513 -1757L-3483 -1751L-3476 -1756L-3444 -1743L-3435 -1712L-3419 -1705L-3407 -1683L-3355 -1666L-3336 -1667L-3321 -1703L-3306 -1695L-3272 -1710L-3221 -1702L-3209 -1674Z"},{"code":"BIH","d":"M-3597 -2280L-3622 -2291L-3628 -2302L-3626 -2323L-3663 -2356L-3679 -2357L-3683 -2372L-3695 -2374L-3715 -2395L-3721 -2413L-3734 -2411L-3748 -2423L-3776 -2413L-3780 -2441L-3796 -2450L-3826 -2412L-3820 -2372L-3834 -2325L-3825 -2232L-3817 -2220L-3825 -2202L-3821 -2157L-3829 -2153L-3818 -2141L-3798 -2080L-3786 -2084L-3772 -2121L-3757 -2120L-3741 -2138L-3722 -2142L-3714 -2130L-3705 -2157L-3666 -2142L-3659 -2153L-3659 -2189L-3638 -2179L-3632 -2183L-3642 -2234Z"},{"code":"BLR","d":"M-2708 -2698L-2704 -2675L-2682 -2661L-2687 -2651L-2671 -2658L-2651 -2650L-2630 -2631L-2628 -2616L-2595 -2625L-2593 -2593L-2539 -2580L-2527 -2547L-2516 -2554L-2510 -2582L-2480 -2606L-2451 -2616L-2408 -2600L-2409 -2626L-2386 -2672L-2390 -2699Z"},{"code":"AUT","d":"M-3852 -2697L-3785 -2621L-3751 -2627L-3718 -2607L-3693 -2601L-3684 -2590L-3668 -2603L-3631 -2603L-3607 -2641L-3584 -2645L-3589 -2668L-3574 -2669L-3568 -2654L-3550 -2646L-3525 -2672L-3521 -2699Z"},{"code":"ALB","d":"M-3780 -1973L-3769 -1955L-3778 -1940L-3800 -1924L-3827 -1873L-3852 -1850L-3858 -1819L-3868 -1825L-3868 -1798L-3852 -1766L-3861 -1725L-3850 -1711L-3829 -1719L-3824 -1741L-3792 -1741L-3763 -1769L-3750 -1768L-3735 -1782L-3728 -1811L-3742 -1822L-3738 -1866L-3726 -1893L-3694 -1929L-3683 -1957L-3691 -2013L-3714 -2017L-3709 -2038L-3766 -2006Z"},{"code":"KAS","d":"M822 -271L853 -295L885 -320L854 -314L791 -330Z"}],"spots":[{"id":"kashmir","name":"카슈미르","x":698,"y":-159},{"id":"hormuz","name":"호르무즈 해협","x":-1152,"y":656},{"id":"babelmandeb","name":"바브엘만데브 해협","x":-2680,"y":1971},{"id":"fergana","name":"페르가나 분지","x":305,"y":-850},{"id":"caspian","name":"카스피해","x":-1419,"y":-1101},{"id":"aral","name":"아랄해","x":-645,"y":-1381},{"id":"indus","name":"인더스강 유역","x":225,"y":487},{"id":"tigris","name":"티그리스·유프라테스강","x":-2367,"y":-717},{"id":"amudarya","name":"아무다리야강","x":-194,"y":-513},{"id":"ganges","name":"갠지스·브라마푸트라강","x":2173,"y":754}]};window.NEWS_FALLBACK={
+ "site": "서부 및 남부 아시아 지리 뉴스(임송무)",
+ "updated": "2026-11-02T14:34:25+09:00",
+ "items": [
+  {
+   "id": "2026-11-02-cyclone-murasu",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "land",
+   "country": "IND",
+   "related": [
+    "LKA",
+    "NPL"
+   ],
+   "spot": null,
+   "title": "벵골만에 사이클론 '무라수' 발생…3일 인도 안드라프라데시 남부 상륙 예상, 스리랑카는 강풍 경보",
+   "titleOrig": "Another cyclone develops over Bay of Bengal",
+   "source": "Peoples' Review (네팔)",
+   "lang": "en",
+   "url": "https://peoplesreview.com.np/2026/11/01/another-cyclone-develops-over-bay-of-bengal/",
+   "video": null,
+   "why": "10월 말 사이클론 아르나브에 이어 벵골만에서 또 열대 저기압이 생겼습니다. 같은 바다에서 만들어진 폭풍이 진로에 따라 인도 동해안, 스리랑카 북동 해역, 히말라야 산간에 서로 다른 피해를 줍니다.",
+   "summary": "인도 기상청은 벵골만 남서부의 저기압이 11월 1일 깊은 저기압으로, 2일에는 강한 사이클론으로 발달해 3일 안드라프라데시 남부 해안을 지날 것으로 내다봤습니다. 스리랑카 기상 당국은 이 시스템이 '무라수'라는 이름의 사이클론이 됐다며 만나르~트링코말리 앞바다의 원양 어선에 강풍·높은 파도 경보를 냈습니다. 네팔 전문가는 이번에는 네팔 쪽으로 오지 않을 가능성이 크다고 봤습니다.",
+   "note": "10~11월은 남서 계절풍이 물러나는 몬순 후기로, 벵골만 사이클론이 가장 잦은 시기입니다. 지난번 아르나브는 북상해 네팔 무스탕에 폭설을 내렸지만 이번 진로는 서북서쪽이라 피해 지역이 인도 동해안으로 바뀝니다.",
+   "critique": "네팔 매체 기사라 네팔에 미칠 영향이 중심이고, 실제 상륙지인 안드라프라데시의 대피·해안 저지대 상황은 다루지 않았습니다. 이름(무라수)과 세기는 스리랑카 경보 기준이라 인도 기상청 최신 발표와 맞춰 볼 필요가 있습니다.",
+   "tags": [
+    "열대 저기압",
+    "벵골만",
+    "몬순 후기"
+   ]
+  },
+  {
+   "id": "2026-11-02-qatar-lng-tanker",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "res",
+   "country": "QAT",
+   "related": [
+    "IRN",
+    "SAU",
+    "KWT"
+   ],
+   "spot": null,
+   "title": "걸프 해역서 카타르 LNG 운반선 피격…카타르·쿠웨이트·사우디 일제히 규탄",
+   "titleOrig": "Qatari gas tanker struck in Arabian Gulf, state media says",
+   "source": "Khaleej Times",
+   "lang": "en",
+   "url": "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-1-2026",
+   "video": null,
+   "why": "카타르 LNG는 라스라판에서 출발해 걸프 안쪽 바다를 지나 호르무즈를 빠져나가야만 세계 시장에 닿습니다. 해협 밖이 아니라 걸프 안쪽에서 공격이 일어났다는 점은 위험 구역이 넓어졌다는 뜻입니다.",
+   "summary": "카타르 국영 매체는 11월 1일 자국 가스 운반선이 걸프 해역에서 공격받았다고 밝혔고, 선원은 무사한 것으로 전해졌습니다. 카타르·쿠웨이트·사우디가 잇따라 규탄 성명을 냈지만, 공격 주체와 정확한 위치·피해 규모는 공개되지 않았습니다. 같은 날 이란 협상단은 카타르 중재 회담을 위해 도하에 있었습니다.",
+   "note": "카타르는 전쟁 중재국이면서 동시에 걸프 해상로에 수출을 전적으로 의존하는 나라입니다. 중재국 선박이 공격받은 것이라 협상 판에도 압박이 될 수 있습니다.",
+   "critique": "라이브 블로그는 공격 주체·위치·선박명을 전하지 않아, '걸프 해역'이 카타르 근해인지 호르무즈 근처인지 구분할 수 없습니다. 이 수준의 정보만으로 특정 세력의 소행으로 단정해선 안 됩니다.",
+   "tags": [
+    "걸프 지정학",
+    "초크포인트",
+    "해상 수출로"
+   ]
+  },
+  {
+   "id": "2026-11-02-iran-hormuz-two-days",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT",
+    "OMN"
+   ],
+   "spot": "hormuz",
+   "title": "아락치 \"미국이 요구 수용하면 호르무즈 이틀 안에 재개방\"…\"미국과 회담 계획은 없다\"",
+   "titleOrig": "Trump says war in Iran will be put away very soon \"one way or the other\"",
+   "source": "CBS News · Khaleej Times",
+   "lang": "en",
+   "url": "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/",
+   "video": null,
+   "why": "좁은 해협 하나를 열고 닫는 일이 협상 카드가 되고 있습니다. 호르무즈는 이란과 오만(무산담반도) 사이 가장 좁은 곳이 약 39km라 연안국이 통항을 좌우하기 쉬운 지형입니다.",
+   "summary": "Khaleej Times에 따르면 아락치 이란 외무장관은 1일 미국이 이란의 요구를 받아들이면 호르무즈 해협이 이틀 안에 다시 열릴 수 있다고 말했습니다. CBS는 그가 알자지라 인터뷰에서 현재 미국 관리와 만날 계획은 없다고 했다고 전했고, 카타르 중재자가 이란에 새 종전 합의안을 건넸다고 보도했습니다. 트럼프 대통령은 전쟁이 \"어떻게든\" 곧 끝날 것이라고 말했습니다.",
+   "note": "'이틀 안 재개방'은 기뢰 제거·통항 체계 정비가 그만큼 빨리 가능하다는 주장인데, 이란이 주장해 온 기뢰 피격이 사실이라면 실제 소해 작업에는 더 오래 걸릴 수 있습니다.",
+   "critique": "이란이 내건 '요구'의 내용은 두 매체 모두 구체적으로 전하지 않았습니다. 미국 측은 공습 재개 여부를 정하지 않았다는 입장이라, 양측 발언 모두 협상용 신호로 봐야 합니다.",
+   "tags": [
+    "초크포인트",
+    "중재 외교",
+    "해상 봉쇄"
+   ]
+  },
+  {
+   "id": "2026-11-02-yemen-west-displaced",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "pop",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": null,
+   "title": "유엔 \"예멘 서부 전투로 30만 명 넘게 피란\"…호데이다 항구 공습 주장도",
+   "titleOrig": "UN says more than 300,000 have fled fighting in western Yemen",
+   "source": "The Times of Israel (AFP 인용)",
+   "lang": "en",
+   "url": "https://www.timesofisrael.com/liveblog-november-1-2026",
+   "video": null,
+   "why": "피란이 집중된 예멘 서부는 홍해 연안의 좁은 티하마 평야와 그 뒤의 고원 사이 지역입니다. 항구 도시 호데이다가 전장이 되면 식량·연료 수입 통로가 막혀 내륙 인구 전체가 영향을 받습니다.",
+   "summary": "유엔은 후티 반군과 사우디가 지원하는 정부군의 전투가 격해지면서 예멘 서부에서 30만 명 이상이 집을 떠났다고 밝혔습니다. 후티 측 매체는 1일 호데이다 대학과 항구가 공습받았다고 주장했고, 정부 측 합동군은 후티가 예멘과 사우디의 민간 시설을 계속 공격한다고 비난했습니다. 같은 날 사우디는 자국 내 예멘인 체류 위반자에 대한 비자 사면을 발표했습니다.",
+   "note": "호데이다는 예멘 수입 물자의 핵심 관문이라 전투가 길어질수록 피란민은 내륙 고원(사나 방면)이나 남쪽으로 흩어지게 됩니다. 사우디의 비자 사면은 국경 너머 이주 압력을 관리하려는 조치로도 읽힙니다.",
+   "critique": "공습 주장은 후티 매체, 민간인 공격 비난은 정부 측 발표라 양쪽 모두 독립적으로 확인되지 않았습니다. 30만 명이 어느 주에서 어디로 이동했는지가 빠져 있어 피란 경로를 지도에서 읽기 어렵습니다.",
+   "tags": [
+    "강제 이주",
+    "대리전",
+    "항구 도시"
+   ]
+  },
+  {
+   "id": "2026-11-02-rubio-pak-afg",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "geo",
+   "country": "PAK",
+   "related": [
+    "AFG",
+    "IND"
+   ],
+   "spot": null,
+   "title": "루비오 \"아프간발 테러에 대한 파키스탄 우려 듣고 있다…필요하면 건설적 역할\"",
+   "titleOrig": "US hears Pakistan's concerns over terrorism from Afghanistan, would play 'productive role' if there is one: Rubio",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041358/us-hears-pakistans-concerns-over-terrorism-from-afghanistan-would-play-productive-role-if-there-is-one-rubio",
+   "video": null,
+   "why": "파키스탄-아프간 갈등의 무대는 듀랜드 라인을 따라 이어진 험한 산악 국경입니다. 같은 파슈툰족이 양쪽에 걸쳐 살고 통로가 많아 무장 세력의 이동을 막기 어렵다는 지형·민족 조건이 갈등의 바탕입니다.",
+   "summary": "루비오 미 국무장관은 미국이 아프가니스탄에서 비롯되는 테러에 대한 파키스탄의 우려를 듣고 있으며, 할 수 있는 역할이 있다면 건설적으로 나서겠다고 말했습니다. 다음 날 파키스탄군 대변인은 인도가 파키스탄 내 테러의 최대 배후이고 탈레반 정권은 그 대리인이라고 주장하며, 아프간을 고립시키지는 않겠지만 국제사회가 탈레반을 압박해야 한다고 말했습니다.",
+   "note": "미국이 중재 가능성을 언급한 것은 10월 내내 이어진 국경 충돌 이후 처음 나온 외교적 출구 신호입니다. 파키스탄은 서쪽(아프간)과 동쪽(인도)을 한 묶음으로 보는 '양면 전선' 프레임을 강화하고 있습니다.",
+   "critique": "파키스탄 매체 보도라 파키스탄 측 우려가 중심이고, 탈레반 정부는 파키스탄의 공습과 민간인 피해를 문제 삼아 왔다는 반대 시각은 빠져 있습니다. 인도 배후설은 파키스탄군의 주장이며 인도는 부인해 왔습니다.",
+   "tags": [
+    "듀랜드 라인",
+    "대리전",
+    "양면 전선"
+   ]
+  },
+  {
+   "id": "2026-11-02-pak-groundwater-isotope",
+   "added": "2026-11-02",
+   "date": "2026-11-01",
+   "topic": "env",
+   "country": "PAK",
+   "related": [],
+   "spot": "indus",
+   "title": "IAEA \"동위원소 기술로 파키스탄 지하수 추적 능력 향상\"…물의 기원·연대·오염 경로 파악",
+   "titleOrig": "Nuclear science boosts Pakistan's ability to track groundwater",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041294/nuclear-science-boosts-pakistans-ability-to-track-groundwater",
+   "video": null,
+   "why": "인더스 평원의 농업과 도시는 강물만큼이나 지하수에 기대고 있습니다. 지하수가 어디서 와서 얼마나 오래 머물렀는지 알아야 상류 하천 유량이 줄 때 버틸 수 있는 양을 계산할 수 있습니다.",
+   "summary": "국제원자력기구(IAEA) 보고서에 따르면 파키스탄은 동위원소 분석 기법으로 지하수가 어디서 왔는지, 얼마나 오래된 물인지, 오염 물질이 어떻게 퍼지는지를 추적할 수 있게 됐습니다. 같은 날 Dawn에는 인도가 물을 지렛대로 파키스탄 경제를 압박한다는 칼럼도 실렸습니다.",
+   "note": "인더스강 조약을 둘러싼 긴장 속에서 지하수는 상류국 인도가 직접 통제할 수 없는 '숨은 수자원'입니다. 다만 과잉 양수로 지하수위가 떨어지고 있어 측정 기술이 곧 해결책은 아닙니다.",
+   "critique": "기사에 제시된 정보는 보고서 요약 수준이라 어느 대수층·지역이 대상인지, 지하수위 하락 수치가 얼마인지는 확인할 수 없습니다. 함께 실린 칼럼은 파키스탄 측 시각의 의견 기사라 사실 보도와 구분해 읽어야 합니다.",
+   "tags": [
+    "상류국-하류국",
+    "지하수",
+    "국제 하천"
+   ]
+  },
+  {
+   "id": "2026-11-01-iran-no-geo-limit",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT"
+   ],
+   "spot": "hormuz",
+   "title": "이란 외무장관 \"밴스 서한은 긍정적 조치\"…최고지도자는 군에 '지리적 제한 없는 대응' 지시",
+   "titleOrig": "Iran war live: Iran security chief says US ‘shifted tone’ in Vance letter",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/liveblog/2026/10/31/iran-war-live-oil-tankers-hit-in-hormuz-trump-says-conflict-will-end-soon",
+   "video": null,
+   "why": "'지리적 제한 없는' 대응 지시는 전장을 이란 영토와 호르무즈 해협에 묶어 두지 않고 걸프 연안 전체로 넓힐 수 있다는 신호입니다. 같은 걸프 안의 카타르 도하가 중재 무대가 되고 있다는 점과 대비됩니다.",
+   "summary": "아락치 이란 외무장관은 알자지라에 밴스 미 부통령의 서한을 검토했다며 미국의 대화 시도를 \"긍정적 조치\"라고 평가했고, 자신의 보좌관이 카타르에서 중재자들과 협의를 이어가고 있다고 밝혔습니다. 같은 날 이란 최고지도자는 군에 어떤 위협에도 지리적 제한 없이 즉각 대응하라고 지시했습니다. 이란은 호르무즈에서 유조선 4척이 기뢰에 맞아 불탔다고 주장하지만 독립적으로 확인되지는 않았습니다.",
+   "note": "협상 신호와 무력 경고가 같은 날 나온 것은 해협 통제력을 협상 지렛대로 쓰려는 의도로 읽힙니다. 지리적으로는 '대응 범위'가 호르무즈 바깥 걸프 연안국 기반 시설까지 넓어질지가 관건입니다.",
+   "critique": "라이브 블로그 특성상 이란 관리 발언이 중심이고 미국 측 직접 발언은 거의 없습니다. The National은 10월 호르무즈·오만만·걸프에서 공격받은 선박 수가 9월의 두 배를 넘었다고 전했지만 수치의 출처는 밝히지 않았습니다.",
+   "tags": [
+    "초크포인트",
+    "중재 외교",
+    "걸프 지정학"
+   ]
+  },
+  {
+   "id": "2026-11-01-mustang-korala-snow",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "land",
+   "country": "NPL",
+   "related": [
+    "XZ"
+   ],
+   "spot": null,
+   "title": "사이클론 아르나브 영향으로 네팔 무스탕에 폭설…코랄라 국경 검문소 닫혀 네팔-중국 교역 중단",
+   "titleOrig": "Heavy snowfall and rain disrupt life in Mustang; Korala road blocked",
+   "source": "Khabarhub",
+   "lang": "en",
+   "url": "https://english.khabarhub.com/2026/31/573819/",
+   "video": null,
+   "why": "벵골만에서 생긴 열대 저기압의 습기가 히말라야까지 올라와 고지대에서는 눈이 되면서, 해발 4천 m가 넘는 티베트 접경 고개의 교역로를 막았습니다. 같은 비구름이 고도에 따라 비와 눈으로 갈리는 산악 기후의 수직 차이가 잘 드러난 사례입니다.",
+   "summary": "31일 네팔 무스탕 북부 로만탕·로게카르 다모다르쿤다 일대에 전날 밤부터 눈이 내려, 코랄라 검문소 주변에 60~90cm(2~3피트) 정도 쌓였습니다. 검문소가 닫히면서 네팔-중국 국경 교역과 수출입이 멈췄고, 좀솜-코랄라 도로도 산사태로 두 곳이 끊겼습니다. 아래쪽 무스탕(추상 이남)에는 비가 내렸습니다.",
+   "note": "같은 날 네팔 전역에서는 산사태로 12곳 넘는 주요 도로 구간이 막혔습니다(Nepal News 브리핑). Khabarhub는 원인을 사이클론 아르나브의 영향으로, Nepal News는 서부 네팔 부근에 남은 저기압으로 설명해 표현에 차이가 있습니다.",
+   "critique": "기사는 국경 폐쇄를 날씨 문제로만 다룹니다. 같은 날 중국이 국경 교역 지점을 '항구'급으로 올리기 위한 공동 관리위원회를 제안했다는 보도도 있었는데, 고지대 교역로가 기후에 얼마나 취약한지가 그런 인프라 논의의 핵심 변수라는 점은 다루지 않습니다.",
+   "tags": [
+    "히말라야",
+    "열대 저기압",
+    "산악 교통"
+   ]
+  },
+  {
+   "id": "2026-11-01-israel-jewish-arab-rally",
+   "added": "2026-11-01",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "ISR",
+   "related": [
+    "PSX"
+   ],
+   "spot": null,
+   "title": "이스라엘 총선 뒤 '유대-아랍 연립정부' 요구 집회…맞불 집회는 '도둑맞은 선거' 주장",
+   "titleOrig": "Thousands rally in Tel Aviv to demand Jewish-Arab government; counterprotest held against 'stolen' election",
+   "source": "The Times of Israel",
+   "lang": "en",
+   "url": "https://www.timesofisrael.com/liveblog-october-31-2026/",
+   "video": null,
+   "why": "야권 67석 가운데 19석이 아랍계 비시온주의 정당 몫이어서, 아랍계 시민이 몰려 사는 갈릴리·'트라이앵글' 지역의 표가 정부 구성의 열쇠가 됐습니다. 집회 장소에 트라이앵글의 도시 타이베가 들어간 것도 이 지리를 보여 줍니다.",
+   "summary": "시민단체 '스탠딩 투게더'는 31일 저녁 텔아비브 하비마 광장, 예루살렘 파리 광장, 베에르셰바·하이파·타이베에서 집회를 열고 야권 '변화 진영'에 아랍 정당과 함께 정부를 꾸리라고 촉구했습니다. 개표 결과 야권은 67석(시온주의 정당 48석, 아랍 정당 19석), 현 연정 측은 53석입니다. 유대계 야권 지도자들은 그동안 아랍 정당과 협력하지 않겠다는 입장이었습니다.",
+   "note": "10월 29일의 '과반 진영 없음' 보도와 이번 '야권 67석' 집계는 서로 어긋나는 것이 아니라, 아랍 정당을 연정 셈에 넣느냐의 차이입니다. 민족 구성에 따른 거주지 분리가 곧 의석 계산의 분리로 이어지는 구조입니다.",
+   "critique": "라이브 블로그 항목이라 집회 참가 인원과 맞불 집회의 규모는 확인되지 않습니다. 네타냐후 측이 아랍 정당 표에 부정이 있었다고 주장한다는 보도(알자지라)도 있으나, 아직 근거는 제시되지 않았습니다.",
+   "tags": [
+    "선거 지리",
+    "민족 구성"
+   ]
+  },
+  {
+   "id": "2026-11-01-gaza-yellow-line",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "PSX",
+   "related": [
+    "ISR"
+   ],
+   "spot": null,
+   "title": "유엔 인권사무소 \"이스라엘군, 가자 '옐로라인' 넘어 이동\"…주민 공간 축소에 강제 이주 우려",
+   "titleOrig": "Ethnic cleansing fears rise as Israel squeezes space in Gaza: UN",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/30/ethnic-cleansing-fears-rise-as-israel-squeezes-space-in-gaza-un",
+   "video": null,
+   "why": "가자지구는 약 365㎢의 좁은 해안 띠에 200만 명이 넘게 사는 곳이라, 군 배치선이 조금만 움직여도 사람이 살 수 있는 땅이 크게 줄어듭니다. 임시 휴전선이 어디에 그어지느냐가 곧 인구 분포를 결정합니다.",
+   "summary": "유엔 인권최고대표사무소(OHCHR) 점령 팔레스타인 사무소는 이스라엘군이 2025년 10월 휴전 때 정한 배치선 '옐로라인'을 넘어 움직이고 있으며, 이 선 주변을 사실상 사격 구역처럼 다뤄 피란민이 집으로 돌아가지 못한다고 밝혔습니다. 알자지라는 이스라엘이 배치 지역을 가자 면적의 70%까지 넓히려 한다고 전했습니다. 가자 보건부는 휴전 이후 1,574명이 숨졌다고 집계했습니다.",
+   "note": "핵심은 사망자 수보다 '선의 이동'입니다. 임시 배치선이 사실상 영구 경계로 굳어지면 가자 내부가 군사 통제 구역과 과밀한 거주 구역으로 나뉘게 됩니다.",
+   "critique": "기사에는 이스라엘 정부·군의 입장이 실려 있지 않고, '70%' 목표의 근거와 현재 실제 통제 비율도 나오지 않아 검증이 필요합니다. 사상자 수는 하마스가 운영하는 가자 보건부 집계이며, '인종청소'는 유엔 쪽 우려를 옮긴 표현입니다.",
+   "tags": [
+    "완충지대",
+    "강제 이주",
+    "점령지"
+   ]
+  },
+  {
+   "id": "2026-11-01-aden-houthi-missiles",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": "babelmandeb",
+   "title": "후티, 한 달째 아덴 공항·항구에 미사일 공격…임시수도 주민들 \"플랜 B 필요\"",
+   "titleOrig": "'Need a Plan B': Yemenis in Aden prepare for another war as missiles fall",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/30/need-a-plan-b-yemenis-in-aden-prepare-for-another-war-as-missiles-fall",
+   "video": null,
+   "why": "아덴은 바브엘만데브 해협 동쪽 입구의 천연 항구이자 예멘 정부의 임시 수도입니다. 후티가 9월 모카와 해협 연안을 장악한 데 이어 아덴까지 압박하면서, 홍해 출입구 양쪽 해안의 통제 구도가 흔들리고 있습니다.",
+   "summary": "지난 한 달 동안 후티의 미사일·드론이 아덴 국제공항, 군 기지, 항구, 대통령궁을 노리면서 항공편 취소·지연·회항이 잇따랐습니다. 후티는 9월 서부에서 사우디가 지원하는 국민저항군(NRF)을 상대로 공세를 펴 호데이다·타이즈주 일부와 모카를 차지했고, 10월 정부군 반격은 홍해 연안에서 제한적 성과에 그쳤습니다. 타이즈와 아덴을 잇는 도로도 후티가 장악해 타이즈 포위가 더 조여졌습니다.",
+   "note": "공항이 집중 표적이 된 것은 아덴이 정부 쪽 지역의 핵심 대외 관문이기 때문입니다. 산악 내륙(후티)과 해안 평야·항구(정부)라는 오랜 지형적 구도가 다시 전선이 되고 있습니다.",
+   "critique": "기사에는 사상자 수와 후티 측이 밝힌 공격 이유가 없고, 아덴 내부 남부 세력 간 권력 구도도 빠져 있습니다. 아덴 함락을 노린다는 관측은 우려 단계로, 확인된 사실은 아닙니다.",
+   "tags": [
+    "초크포인트",
+    "대리전"
+   ]
+  },
+  {
+   "id": "2026-11-01-kgz-tjk-border-fence",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "KGZ",
+   "related": [
+    "TJK"
+   ],
+   "spot": "fergana",
+   "title": "키르기스스탄, 타지크 접경 바트켄주 국경 철책 328km 완공…경계 표지 설치는 계속",
+   "titleOrig": "Kyrgyzstan-Tajikistan Border Fencing Complete in Batken, Demarcation Continues",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/kyrgyzstan-tajikistan-border-fencing-complete/",
+   "video": null,
+   "why": "페르가나 분지 남쪽 가장자리는 소련 시기 행정 경계가 마을·농지·용수로를 가로질러 그어져 2021년과 2022년 유혈 충돌까지 낳은 곳입니다. 철책은 그 모호했던 경계를 땅 위의 물리적 선으로 고정하는 작업입니다.",
+   "summary": "키르기스스탄 바트켄주 당국은 10월 29일 타지키스탄과 맞닿은 약 328km 구간의 철책 공사를 마쳤다고 확인했습니다. 2025~2026년 바트켄·레일레크 지구에는 순찰로 338.5km도 놓였고, 2026년 7월 시작한 경계 표지 설치와 공식 경계 문서 작업은 이어지고 있습니다. 잔이-도스투크 주민 73가구는 집과 농지를 내준 데 대한 보상 액수와 주택 배정에 여전히 이의를 제기하고 있습니다.",
+   "note": "2025년 3월 국경 조약 이후 닫혔던 검문소가 다시 열리고 양국 교역도 늘었습니다. 다만 철책은 국경 양쪽 마을이 함께 쓰던 물·목초지 같은 생활 공간을 나누는 효과도 낼 수 있습니다.",
+   "critique": "약 1,008km 국경 가운데 일부만 다룬 키르기스 측 발표 위주의 기사로, 타지크 쪽 주민 시각이나 보루흐 같은 월경지가 어떻게 처리되는지는 나오지 않습니다.",
+   "tags": [
+    "국경 획정",
+    "구소련 행정 경계"
+   ]
+  },
+  {
+   "id": "2026-11-01-geo-aze-border",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "GEO",
+   "related": [
+    "AZE"
+   ],
+   "spot": null,
+   "title": "조지아·아제르바이잔, 미확정 국경 획정 작업 서두르기로 합의",
+   "titleOrig": "Georgia agrees to accelerate border delimitation and demarcation process with Azerbaijan",
+   "source": "APA",
+   "lang": "en",
+   "url": "https://en.apa.az/foreign-policy/georgia-agrees-to-accelerate-border-delimitation-and-demarcation-process-with-azerbaijan-533142",
+   "video": null,
+   "why": "두 나라 국경은 소련 해체 뒤 30년 넘게 상당 구간이 확정되지 않은 채 남아 있습니다. 국경 산등성이에 걸친 다비트 가레자 수도원 단지처럼 종교 유산과 영토가 겹친 곳이 대표적 쟁점입니다.",
+   "summary": "아제르바이잔 총리 알리 아사도프의 조지아 방문 중 열린 정부 간 경제위원회와 양자 회담에서, 조지아 총리 이라클리 코바히제는 국경 획정과 경계 표지 설치를 서두르기로 합의했다고 밝혔습니다. 그는 조지아의 입장은 그대로이며 \"진전을 봐야 한다\"고 말했고, 아제르바이잔의 반응이 진정성 있었다고 평가했습니다. 구체적 대상 지역은 공개되지 않았습니다.",
+   "note": "같은 위원회에서 에너지·교통과 중앙회랑이 함께 논의됐다는 점에서, 카스피해와 흑해를 잇는 통과 회랑의 안정성이 국경 확정과 맞물려 있습니다.",
+   "critique": "아제르바이잔 매체의 짧은 보도로 쟁점 지역이 어디인지 나오지 않으며, 다비트 가레자도 기사에는 언급되지 않습니다. 조지아 남동부 크베모 카르틀리의 아제르바이잔계 주민 같은 접경 인구 문제도 다루지 않습니다.",
+   "tags": [
+    "국경 획정",
+    "중앙회랑"
+   ]
+  },
+  {
+   "id": "2026-11-01-ca-power-demand",
+   "added": "2026-11-01",
+   "date": "2026-10-30",
+   "topic": "res",
+   "country": "KAZ",
+   "related": [
+    "UZB",
+    "KGZ",
+    "TJK"
+   ],
+   "spot": null,
+   "title": "유라시아개발은행 \"중앙아시아 전력 수요 2030년까지 27% 증가\"…송전망·저장 설비 투자 시급",
+   "titleOrig": "Central Asia Electricity Demand Expected to Rise 27% by 2030, EDB Says",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/central-asia-electricity-demand-expected-to-rise-27-by-2030-edb-says/",
+   "video": null,
+   "why": "중앙아시아는 상류국(키르기스스탄·타지키스탄)의 수력과 하류국의 화석연료가 소련 시기 통합 전력망으로 묶여 있던 지역이라, 전력 수요 급증은 물·에너지 교환 문제와 바로 이어집니다.",
+   "summary": "유라시아개발은행(EDB)은 29일 '국경 없는 에너지' 보고서에서 공장 신설과 도시 팽창으로 2030년까지 지역 전력 수요가 27% 늘 것으로 내다봤습니다. 각국은 2035년까지 태양광·풍력을 35GW 넘게 늘릴 계획이지만, 은행은 발전소뿐 아니라 송전망 개선, 저장 설비, 예비 발전 능력이 함께 필요하다고 강조했습니다. 2024년 12월 10일 최대 수요 때는 통합 계통에서 약 6.6GW가 가동 불능이거나 제한 상태였습니다.",
+   "note": "EDB는 3월 보고서에서 2024년 약 2,700억kWh에서 2030년 약 3,700억kWh로 40% 가까이 늘 것이라고 했습니다. 이번 27%와 수치가 다른데, 기사에 기준 연도가 없어 직접 비교하기 어렵습니다.",
+   "critique": "EDB는 러시아와 카자흐스탄이 주도해 세운 다자 개발은행이라 역내 전력망 통합을 강조하는 시각이 깔려 있을 수 있습니다. 기사에는 나라별 수치와, 수력 의존국이 겨울 갈수기에 겪는 전력난 위험이 빠져 있습니다.",
+   "tags": [
+    "상류국-하류국",
+    "수력 발전",
+    "전력망 통합"
+   ]
+  },
+  {
+   "id": "2026-10-31-oman-rescue-qatar-tehran",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "OMN",
+   "related": [
+    "IRN",
+    "QAT"
+   ],
+   "spot": "hormuz",
+   "title": "오만 해군, 무산담 앞바다 피격 상선 선원 25명 구조…카타르 대표단은 테헤란 도착",
+   "titleOrig": "Qatari delegation arrives in Tehran for peace talks",
+   "source": "Dawn (AFP 인용)",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041098/qatari-delegation-arrives-in-tehran-for-peace-talks",
+   "video": null,
+   "why": "오만의 무산담반도는 호르무즈 해협 남쪽 기슭에 붙은 월경지로, 해협 표준 항로가 이 앞바다를 지납니다. 해협 양쪽 연안국인 이란과 오만이 사고 현장과 가장 가깝습니다.",
+   "summary": "카타르 대표단이 종전 협상을 위해 테헤란에 도착했습니다. 같은 무렵 오만은 공격받은 상선에서 선원 25명을 구조했고, 이란은 호르무즈 해협에서 유조선 3척을 멈춰 세웠습니다.",
+   "note": "걸프 남쪽의 두 중재국(카타르·오만)이 한쪽은 외교, 한쪽은 해상 구조로 동시에 움직이는 모습입니다. 무산담 앞바다가 반복해서 사고 무대가 된다는 점이 표준 항로의 취약성을 보여 줍니다.",
+   "critique": "기사는 선박이 누구에게 왜 공격받았는지, 이란이 유조선을 멈춘 정확한 위치(영해·국제수역)를 밝히지 않았습니다. 해협 안 위치에 따라 통과통항권 적용 여부가 달라지는 만큼 중요한 빈칸입니다.",
+   "tags": [
+    "초크포인트",
+    "월경지(엑스클레이브)",
+    "중재 외교"
+   ]
+  },
+  {
+   "id": "2026-10-31-punjab-crop-fires",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "env",
+   "country": "PAK",
+   "related": [
+    "IND"
+   ],
+   "spot": null,
+   "title": "파키스탄 펀자브 볏짚 소각 탐지, 인도 펀자브의 4.2배…오카라·구즈란왈라 최다",
+   "titleOrig": "Pakistan's Punjab records 4.2 times more crop-fire detections than Indian Punjab: report",
+   "source": "Dawn",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041172/pakistans-punjab-records-42-times-more-crop-fire-detections-than-indian-punjab-report",
+   "video": null,
+   "why": "펀자브 평원은 1947년 분할로 인도와 파키스탄에 나뉘었지만 같은 쌀-밀 이모작 지대입니다. 늦가을 볏짚 연기는 국경과 상관없이 서풍과 기온 역전을 타고 라호르와 델리를 함께 덮습니다.",
+   "summary": "보고서에 따르면 10월 1~29일 위성으로 탐지된 농작물 소각 지점이 파키스탄 펀자브에서 인도 펀자브보다 4.2배 많았습니다. 지역별로는 오카라가 가장 많았고 구즈란왈라, 난카나사히브가 뒤를 이었습니다.",
+   "note": "10월 29일 실린 '델리 대기질에 볏짚 소각 영향 미미' 분석과 함께 보면, 오염원의 국경 너머 이동과 도시 자체 배출원 중 무엇을 더 중시하느냐는 논쟁이 양국에서 동시에 벌어지고 있습니다.",
+   "critique": "위성 탐지 '지점 수'는 태운 면적이나 배출량과 같지 않고, 구름·관측 시각에 따라 빠지는 불도 있습니다. 보고서 작성 주체가 기사 요약에 드러나지 않아 비교 방법을 확인하기 어렵습니다.",
+   "tags": [
+    "농업 부산물 소각",
+    "대기 오염",
+    "이모작"
+   ]
+  },
+  {
+   "id": "2026-10-31-sost-khunjerab-green-channel",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "econ",
+   "country": "PAK",
+   "related": [
+    "XJ"
+   ],
+   "spot": null,
+   "title": "파키스탄·중국, 소스트-쿤제랍 국경에 농산물 '그린 채널' 합의…Dawn 사설 \"품질 기준·공급망부터\"",
+   "titleOrig": "Will the Sost-Khunjerab border agreement help Pakistan's agricultural exports?",
+   "source": "Dawn (사설)",
+   "lang": "en",
+   "url": "https://www.dawn.com/news/2041143/china-green-channel",
+   "video": null,
+   "why": "쿤제랍 고개는 해발 약 4,700m로 카라코람 하이웨이가 파키스탄 길기트발티스탄과 신장을 잇는 유일한 육로 관문입니다. 겨울에는 눈 때문에 닫히는 계절 국경이라 상하기 쉬운 농산물에는 통관 속도가 특히 중요합니다.",
+   "summary": "파키스탄과 중국이 소스트-쿤제랍 국경에서 농산물 신속 통관 '그린 채널'을 운영하기로 합의했습니다. Dawn 사설은 파키스탄이 어떤 농산물을 수출할 수 있는지 정하고, 중국 품질 기준을 맞추고, 믿을 만한 공급망을 갖춰야 효과가 있다고 지적했습니다.",
+   "note": "동쪽(인도)과 서쪽(아프간) 국경 교역이 막힌 상황에서 북쪽 산악 관문의 비중이 커지고 있습니다. 다만 겨울 폐쇄와 좁은 도로 용량이 근본적인 한계입니다.",
+   "critique": "사설은 경제 정책만 다루고 고개의 겨울 폐쇄 기간, 도로 용량, 신장 쪽 카스(카슈가르) 시장까지의 거리 같은 지리적 제약은 언급하지 않았습니다. 의견 기사라 합의 내용 자체는 별도로 확인할 필요가 있습니다.",
+   "tags": [
+    "산악 교통",
+    "관문 통로",
+    "계절 국경"
+   ]
+  },
+  {
+   "id": "2026-10-31-ots-azimov",
+   "added": "2026-10-31",
+   "date": "2026-10-31",
+   "topic": "geo",
+   "country": "UZB",
+   "related": [
+    "TUR",
+    "KAZ",
+    "AZE"
+   ],
+   "spot": null,
+   "title": "튀르크국가기구 새 사무총장에 우즈베키스탄 아지모프…창설 이후 첫 우즈베크 출신",
+   "titleOrig": "Uzbek Diplomat Mirvokhid Azimov Appointed Secretary General of Organization of Turkic States",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/uzbek-diplomat-mirvokhid-azimov-appointed-secretary-general-of-organization-of-turkic-states/",
+   "video": null,
+   "why": "튀르크국가기구는 아나톨리아에서 카스피해를 건너 중앙아시아까지 이어지는 튀르크어권을 묶는 조직입니다. 중앙아시아 인구가 가장 많은 우즈베키스탄이 사무국을 맡으면서 무게중심이 동쪽으로 옮겨 가는 모양새입니다.",
+   "summary": "10월 30일 앙카라 정상회의에서 우즈베크 외교관 미르보히드 아지모프가 사무총장으로 임명돼 키르기스 출신 전임자의 뒤를 잇습니다. 2009년 튀르크 평의회로 출범한 이 기구는 아제르바이잔·카자흐스탄·키르기스스탄·튀르키예가 창설했고 우즈베키스탄은 2019년 가입했으며, 역대 사무총장은 다른 네 회원국에서 한 번씩 나왔습니다.",
+   "note": "사무총장 자리가 회원국을 돌아가며 맡는 구조라, 이번 임명으로 모든 정회원국이 한 번씩 수장을 배출했습니다. 중앙회랑 교통 협력처럼 우즈베키스탄이 내륙국으로서 얻을 것이 많은 의제에 힘이 실릴 수 있습니다.",
+   "critique": "중앙아시아 매체 보도로 인사 자체에 집중했고, 같은 회의에서 아제르바이잔 대통령이 불참하는 등 회원국 사이의 온도 차는 다루지 않았습니다. 투르크메니스탄은 아직 옵서버라는 점도 지역 범위를 읽을 때 함께 봐야 합니다.",
+   "tags": [
+    "지역 협력 기구",
+    "문화권",
+    "내륙국"
+   ]
+  },
+  {
+   "id": "2026-10-30-hormuz-mines",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "OMN",
+    "ARE"
+   ],
+   "spot": "hormuz",
+   "title": "이란 \"호르무즈서 유조선 4척 기뢰 피격\" 주장…미군의 '항로 정리' 발표와 정면 충돌",
+   "titleOrig": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
+   "source": "CNBC",
+   "lang": "en",
+   "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html",
+   "video": null,
+   "why": "세계 해상 원유 수송의 핵심 초크포인트에서 '어느 항로가 안전한가'를 두고 정보전이 벌어지고 있습니다. 해협 안 항로 배치 자체가 전략이 되는 사례입니다.",
+   "summary": "이란은 해협 남쪽(오만 연안) 항로를 '무허가 항로'로 규정하고, 이곳을 지나던 유조선 4척이 기뢰에 맞아 불탔다고 발표했습니다. 하루 전 미 중부사령부는 주요 항로의 기뢰를 제거했다고 밝힌 상태였고, 혁명수비대는 독립적인 증거를 내놓으라며 반박했습니다. 미국 중간선거 뒤 추가 공습 가능성이 거론되는 가운데 나온 발표입니다.",
+   "note": "피격 주장은 이란 측 발표라 독립 검증이 필요합니다. 지리적으로 더 중요한 지점은 해협 안에서 이란 연안 항로와 오만 연안 항로가 갈리며 '통항 경로의 정치화'가 진행되고 있다는 점입니다.",
+   "critique": "양측 발표를 나란히 전한 점은 균형적이지만, 시장·군사 긴장 위주라 해협을 오가는 선원과 오만·UAE 연안의 현장 시각은 상대적으로 적습니다.",
+   "tags": [
+    "초크포인트",
+    "해상 봉쇄",
+    "통과통항권"
+   ]
+  },
+  {
+   "id": "2026-10-30-nepal-8000ers",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "land",
+   "country": "NPL",
+   "related": [
+    "XZ",
+    "IND"
+   ],
+   "spot": null,
+   "title": "네팔 \"8천 미터 봉우리 6개 더 인정해 달라\"…국제산악연맹 총회서 공식 제안",
+   "titleOrig": "Nepal officially bids to expand global eight-thousander roster with 6 new distinct peaks",
+   "source": "Clickmandu",
+   "lang": "en",
+   "url": "https://english.clickmandu.com/2026/10/12173/",
+   "video": null,
+   "why": "'어디까지가 독립된 산인가'는 높이만이 아니라 봉우리 사이의 고도 차(돌출도)와 지형적 분리로 정합니다. 산의 정의가 관광·경제·국가 정체성과 맞물리는 사례입니다.",
+   "summary": "카트만두에서 열린 국제산악연맹(UIAA) 총회에서 네팔 정부와 네팔산악협회가 칸첸중가 산괴의 봉우리 4개와 로체 산괴의 봉우리 2개를 독립된 8천 미터급 봉우리로 인정해 달라고 제안했습니다. 받아들여지면 세계 8천 미터 봉우리는 14개에서 20개로, 네팔에 있는 것은 8개에서 14개로 늘어납니다. 네팔은 이미 이 봉우리들에 별도 등반 허가를 내주고 있습니다.",
+   "note": "UIAA는 과거 칸첸중가를 '다섯 봉우리를 한 산으로 보는 현지 이름의 뜻'을 들어 하나의 산으로 본 적이 있어 통과는 불투명합니다. 숫자보다 봉우리 간 고도 차 같은 측량 근거가 얼마나 설득력 있는지가 관건입니다.",
+   "critique": "네팔 정부와 산악협회의 논리가 중심이고, UIAA 기준이나 산악계의 회의적 시각은 거의 다루지 않습니다. 관광 수익 기대도 구체적 근거 없이 제시됩니다.",
+   "tags": [
+    "히말라야",
+    "산의 독립성(돌출도)",
+    "산악 관광"
+   ]
+  },
+  {
+   "id": "2026-10-30-bhutan-glof-gasa",
+   "added": "2026-10-30",
+   "date": "2026-10-30",
+   "topic": "land",
+   "country": "BTN",
+   "related": [
+    "IND",
+    "NPL"
+   ],
+   "spot": "ganges",
+   "title": "부탄 가사 빙하호 붕괴 홍수로 가사 온천 단지 유실…인도, 하류 서벵골·아삼에 홍수 경보",
+   "titleOrig": "Glacial Lake Outburst Flood Destroys Gasa Tsachu Hot Springs in Bhutan as India Issues Transboundary Alerts",
+   "source": "Nepal News",
+   "lang": "en",
+   "url": "https://english.nepalnews.com/s/main-left/nepal-news-evening-briefing-friday-october-30-2026/",
+   "video": null,
+   "why": "히말라야 빙하호에서 터진 물이 모추강·푸나창추강을 따라 내려가 국경을 넘어 인도 평야(산코시강 유역)까지 위험을 옮깁니다. 상류의 산악 재해가 하류국의 홍수 문제가 되는 전형적인 사례입니다.",
+   "summary": "부탄 북부 가사주의 신타푸 빙하호가 자연 둑을 넘어 터지면서 가사 온천 단지가 완전히 파괴되고 푸나카-가사 도로 일부가 크게 부서졌습니다. 인도 중앙수자원위원회는 서벵골 알리푸르두아르와 아삼 두브리 지역에 높은 단계의 홍수 경보를 내리고 산코시강을 24시간 감시하라고 권고했습니다. 같은 날 네팔군은 고르카 지역 빙하 토석류가 부디간다키강을 막아 1,025명을 대피시켰다고 의회에 보고했습니다.",
+   "note": "10월 말 사이클론 아르나브가 히말라야에 비와 눈을 쏟은 직후라, 계절풍이 끝난 뒤에도 빙하호 홍수가 일어날 수 있음을 보여 줍니다. 네팔군이 고위험 빙하호 45곳에 조기경보 확대를 요구한 것도 같은 맥락입니다.",
+   "critique": "네팔 매체의 종합 브리핑이라 부탄 피해의 사상자·이재민 수가 없고, 부탄 정부 발표를 직접 인용하지 않았습니다. 하류 브라마푸트라 유역(방글라데시)까지 영향이 갈지에 대한 언급도 빠져 있습니다.",
+   "tags": [
+    "빙하호 홍수(GLOF)",
+    "상류국-하류국",
+    "히말라야"
+   ]
+  },
+  {
+   "id": "2026-10-29-vance-letter",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "IRN",
+   "related": [
+    "QAT",
+    "ISR"
+   ],
+   "spot": null,
+   "title": "밴스 미 부통령, 이란 안보수장에 서한…카타르 중재로 협상 재개 타진",
+   "titleOrig": "What we know of Vance's letter to Rezaei, as Trump warns Gulf to 'prepare'",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://aljazeera.com/news/2026/10/29/what-we-know-of-vances-letter-to-rezaei-as-trump-warns-gulf-to-prepare",
+   "video": null,
+   "why": "8개월째인 미국·이란 전쟁에서 카타르가 다시 협상 통로가 되고 있습니다. 걸프의 소국이 위치와 관계망으로 외교적 무게를 갖는 구조를 볼 수 있습니다.",
+   "summary": "미국 언론 보도에 따르면 JD 밴스 부통령이 카타르 중재단을 통해 이란 최고국가안보회의 사무총장 모흐센 레자이에게 직접 협상을 제안하는 서한을 보냈습니다. 핵 프로그램을 처음부터 의제에 올려야 한다는 요구가 담긴 것으로 전해집니다. 이란은 해상 봉쇄 해제와 동결 자산 반환 등 선결 조건을 고수하고 있습니다.",
+   "note": "쟁점은 '순서'입니다. 봉쇄 해제가 먼저냐, 핵 논의가 먼저냐에 따라 협상 구도가 달라집니다. 걸프 동맹국에 대비를 당부했다는 보도가 함께 나온 만큼, 협상과 군사적 압박이 동시에 진행되는 국면으로 읽는 것이 균형 잡힌 해석입니다.",
+   "critique": "서한이 공개되지 않아 미국 언론의 익명 소식통에 크게 기대고 있습니다. 이란 내부 여론과 강경파의 반응은 상대적으로 얕게 다뤘습니다.",
+   "tags": [
+    "중재 외교",
+    "해상 봉쇄",
+    "걸프 지정학"
+   ]
+  },
+  {
+   "id": "2026-10-29-israel-election",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "ISR",
+   "related": [
+    "PSX"
+   ],
+   "spot": null,
+   "title": "이스라엘 총선 개표 완료…어느 진영도 과반 61석 넘지 못해",
+   "titleOrig": "Israel election result shows no overall majority as vote count complete",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/news/2026/10/29/israel-election-result-shows-no-overall-majority-as-vote-count-complete",
+   "video": null,
+   "why": "2023년 10월 7일 이후 첫 총선 결과는 가자·레바논·이란 전선 정책의 방향을 좌우합니다. 아랍계 정당의 의석이 변수로 떠오른 점은 국가 내부의 민족 구성이 정치 지형을 바꾸는 모습을 보여줍니다.",
+   "summary": "10월 27일 치러진 총선 개표 결과 네타냐후 총리 진영 53석, 가디 아이젠코트가 이끄는 야권 48석, 아랍계 정당 19석으로 집계됐습니다. 어느 진영도 전체 120석 가운데 과반인 61석을 확보하지 못해 연립정부 협상이 시작됐습니다. 선거관리위원회는 외국 개입 의혹에 대해 정보기관에 조사를 요청했습니다.",
+   "note": "의석수만큼 중요한 것은 아랍계 의석이 연정 계산에 들어가느냐입니다. 유대계 주요 진영이 아랍 정당의 지지에 선을 긋는 분위기라 숫자가 곧 정책 방향을 말해 주지는 않습니다. 공식 결과는 다음 주에 확정됩니다.",
+   "critique": "의석 수치는 충실하지만 지역·집단별 투표 양상 같은 '선거의 지리'는 다루지 않아, 결과가 공간적으로 무엇을 뜻하는지 읽기 어렵습니다.",
+   "tags": [
+    "선거 지리",
+    "민족 구성",
+    "분쟁과 국내 정치"
+   ]
+  },
+  {
+   "id": "2026-10-29-afpak-border",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "geo",
+   "country": "AFG",
+   "related": [
+    "PAK"
+   ],
+   "spot": null,
+   "title": "아프가니스탄·파키스탄 국경 충돌 계속…양국 교역 급감",
+   "titleOrig": "Afghanistan-Pakistan border clashes continue amid reported Pakistani outreach to anti-Taliban groups",
+   "source": "FDD's Long War Journal",
+   "lang": "en",
+   "url": "https://www.longwarjournal.org/archives/2026/10/afghanistan-pakistan-border-clashes-continue-amid-reported-pakistani-outreach-to-anti-taliban-groups.php",
+   "video": null,
+   "why": "식민지 시대에 그어진 듀랜드 라인을 사이에 둔 충돌이 내륙국 아프가니스탄의 생명선인 교역로를 막고 있습니다. 국경선의 역사와 내륙국의 취약성을 함께 볼 수 있습니다.",
+   "summary": "10월 19일 이후 탈레반군과 파키스탄군이 국경에서 최소 세 차례 교전했고, 파키스탄 측이 반탈레반 세력과 접촉했다는 보도도 나왔습니다. 파키스탄 무역개발청 자료를 인용해 양국 교역이 전년보다 95% 줄었다고 전했습니다. 아프간 상공인들은 파키스탄을 거쳐 중앙아시아로 이어지던 통과 교역까지 사실상 멈췄다고 말합니다.",
+   "note": "출처인 FDD는 미국의 안보 싱크탱크로 안보 관점이 강합니다. 교역 감소율도 매체마다 74~95%로 엇갈립니다. 지리적으로는 토르함·차만 같은 소수의 관문에 교역이 몰린 구조가 충돌의 경제적 파급을 키운다는 점이 핵심입니다.",
+   "critique": "군사적 경과는 자세하지만 국경 양쪽에 걸쳐 사는 파슈툰 공동체의 시각은 빠져 있고, 교역 통계도 한 출처에 기대고 있습니다.",
+   "tags": [
+    "듀랜드 라인",
+    "내륙국",
+    "관문 통로"
+   ]
+  },
+  {
+   "id": "2026-10-29-syria-floods",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "land",
+   "country": "SYR",
+   "related": [],
+   "spot": null,
+   "title": "시리아 북동부 돌발 홍수…라카·데이르에조르서 최소 5명 사망",
+   "titleOrig": "Men pulled from vehicle stranded by floods in Syria",
+   "source": "Al Jazeera (영상)",
+   "lang": "en",
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/10/29/men-pulled-from-vehicle-stranded-by-floods-in-syria",
+   "video": {
+    "url": "https://www.aljazeera.com/video/newsfeed/2026/10/29/men-pulled-from-vehicle-stranded-by-floods-in-syria",
+    "source": "Al Jazeera NewsFeed",
+    "dur": "0:52"
+   },
+   "why": "건조 기후 지역은 비가 드문 대신 한 번 오면 땅이 물을 받아들이지 못해 돌발 홍수가 나기 쉽습니다. 유프라테스강 다리 붕괴는 교통망이 소수의 하천 횡단 지점에 기대고 있다는 사실도 드러냅니다.",
+   "summary": "시리아 여러 지역에 폭우가 내려 라카와 데이르에조르 일대에서 어린이 4명을 포함해 최소 5명이 숨졌습니다. 탑까 서쪽의 알살마니 다리가 무너지면서 라카와 알레포를 잇는 도로가 끊겼습니다. 영상에는 데이르에조르에서 물에 고립된 차량 속 남성들이 구조되는 장면이 담겼습니다.",
+   "note": "피해가 하사카의 실향민 캠프까지 미친 것을 보면, 재해의 크기는 강수량만이 아니라 오랜 내전으로 약해진 주거·기반시설에 좌우됩니다.",
+   "critique": "1분 남짓한 영상이라 구조 장면이 중심이고, 피해 규모나 배수·하천 관리 같은 원인 설명은 부족합니다.",
+   "tags": [
+    "돌발 홍수",
+    "건조 기후",
+    "하천 횡단 교통"
+   ]
+  },
+  {
+   "id": "2026-10-29-rogun-accident",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "env",
+   "country": "TJK",
+   "related": [
+    "UZB",
+    "TKM"
+   ],
+   "spot": null,
+   "title": "타지키스탄 로군 댐 공사 터널서 사고…부상자 수 두고 엇갈린 발표",
+   "titleOrig": "Industrial accident hits Rogun Dam in Tajikistan",
+   "source": "Eurasianet",
+   "lang": "en",
+   "url": "https://eurasianet.org/industrial-accident-hits-rogun-dam-in-tajikistan",
+   "video": null,
+   "why": "아무다리야강 상류에 짓는 초대형 댐은 상류국(전력)과 하류국(농업용수)의 이해가 부딪히는 중앙아시아 물 문제의 상징입니다.",
+   "summary": "10월 21~22일께 로군 수력발전소 건설 구간 터널로 물이 밀려드는 사고가 났습니다. 타지키스탄 당국은 다친 사람이 없다고 밝혔지만, 자유유럽방송(RFE/RL) 계열 라디오 오조디는 노동자 5명 이상이 다쳤다고 보도했습니다.",
+   "note": "사고 규모보다 정보 공개 방식이 더 중요한 쟁점입니다. 하류국 우즈베키스탄·투르크메니스탄에게 댐의 안전과 방류 계획은 직결된 문제여서, 대형 댐의 투명성은 국경을 넘는 문제입니다.",
+   "critique": "당국 발표와 현지 보도의 차이를 나란히 보여준 점은 좋지만, 하류국 정부의 반응은 확인하지 않았습니다.",
+   "tags": [
+    "상류국-하류국",
+    "수력 발전",
+    "국제 하천"
+   ]
+  },
+  {
+   "id": "2026-10-29-delhi-stubble",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "env",
+   "country": "IND",
+   "related": [
+    "PAK"
+   ],
+   "spot": null,
+   "title": "\"델리 대기질, 농촌 볏짚 소각 영향 미미\"…새 분석 보고서",
+   "titleOrig": "Stubble burning in Punjab, Haryana did not spike city's AQI",
+   "source": "The Hans India (PTI)",
+   "lang": "en",
+   "url": "https://www.thehansindia.com/news/cities/new-delhi/stubble-burning-in-punjab-haryana-did-not-spike-citys-aqi-1136797",
+   "video": null,
+   "why": "델리 스모그의 원인을 농촌 소각으로 볼지, 도시 자체 배출과 기상 조건으로 볼지에 따라 정책 대상이 달라집니다. 오염 원인을 어느 공간에 돌리느냐를 다투는 전형적인 환경지리 논쟁입니다.",
+   "summary": "델리의 한 기후연구기관이 2024~2026년 9~10월 자료를 분석한 결과, 펀자브·하리아나의 소각 건수는 2025년과 2026년이 거의 같았는데 델리의 대기질지수(AQI)는 15.8% 좋아졌습니다. 연구진은 이를 근거로 같은 기간 소각의 영향이 크지 않았다고 봤습니다. 다만 발표 당일 델리 대기질은 다시 '나쁨' 단계로 떨어졌습니다.",
+   "note": "소각이 본격화하는 시기는 보통 10월 말~11월 중순이라 9~10월 분석만으로 결론 내리기는 이릅니다. 겨울철 기온 역전과 약한 바람이 오염물질을 가두는 기상 조건도 함께 봐야 합니다.",
+   "critique": "한 연구기관의 비교 분석을 원인 판단처럼 읽히게 제목을 달았습니다. 해마다 다른 기상 조건을 어떻게 고려했는지는 기사만으로 알기 어렵습니다.",
+   "tags": [
+    "대기 오염",
+    "농업 부산물 소각",
+    "기온 역전"
+   ]
+  },
+  {
+   "id": "2026-10-29-kultepe",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "hist",
+   "country": "TUR",
+   "related": [],
+   "spot": null,
+   "title": "한·튀르키예 공동 발굴단, 퀼테페서 헬레니즘 시대 도시 유적과 모자이크 확인",
+   "titleOrig": "Korean tech helps uncover ancient Hellenistic city in Turkey",
+   "source": "The Korea Times",
+   "lang": "en",
+   "url": "https://www.koreatimes.co.kr/lifestyle/koreanheritage/20261029/korean-tech-helps-uncover-ancient-hellenistic-city-in-turkey",
+   "video": null,
+   "why": "아나톨리아 중부의 퀼테페(고대 카네시)는 청동기 시대 아시리아 상인들의 교역 거점이었습니다. 한 장소에 수천 년의 생활층이 쌓인 텔(유적 언덕)은 역사지리의 압축판입니다.",
+   "summary": "국가유산청은 한국과 튀르키예 공동 발굴단이 카이세리 인근 퀼테페에서 대규모 헬레니즘 시대 주거·신전 복합 유적과 모자이크 바닥을 확인했다고 밝혔습니다. 한국의 디지털 스캔·기록 기술이 유적 분석에 쓰였습니다. 튀르키예 문화관광부는 이 모자이크가 해당 유적에서 처음 나온 것이라고 설명했습니다.",
+   "note": "일부 보도에는 연대가 '기원전 2000년경'으로 적혀 있지만, 튀르키예 측 발표로는 모자이크가 헬레니즘 시대(기원전 323~30년) 층에서 나왔습니다. 카네시에는 기원전 3천년기부터 사람이 살았습니다.",
+   "critique": "한국 기술의 기여를 부각한 국내 시각의 기사이고, 연대 표기에 혼선이 있습니다. 튀르키예 측 발표와 대조해 읽는 것이 좋습니다.",
+   "tags": [
+    "텔(유적 언덕)",
+    "아나톨리아 교역로",
+    "헬레니즘"
+   ]
+  },
+  {
+   "id": "2026-10-29-eshnunna",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "hist",
+   "country": "IRQ",
+   "related": [],
+   "spot": null,
+   "title": "바그다드 텔 무함마드서 4천 년 전 에슈눈나 왕국 유물 공개",
+   "titleOrig": "Iraqi excavations to reveal secrets of life in Mesopotamia 4,000 years ago",
+   "source": "The National",
+   "lang": "en",
+   "url": "https://www.thenationalnews.com/news/mena/2026/10/29/iraqi-excavations-to-reveal-secrets-of-life-in-mesopotamia-4000-years-ago/",
+   "video": null,
+   "why": "에슈눈나는 티그리스강 지류인 디얄라강 유역을 기반으로 한 메소포타미아 도시국가였습니다. 전쟁과 제재로 멈췄던 이라크 발굴이 재개되는 흐름은 문화유산과 관광의 지리를 함께 보여줍니다.",
+   "summary": "이라크 고고유산청은 이탈리아 카타니아대학과의 공동 조사로 바그다드의 텔 무함마드 유적에서 고대 에슈눈나 왕국 시기의 유물을 확인했다고 밝혔습니다. 출토 유물은 이라크 박물관으로 옮겨지고 유적에는 보호 덮개가 설치됐습니다. 당국은 외국 발굴단을 늘려 유적을 관광 자원으로 키우겠다는 계획입니다.",
+   "note": "유적이 대도시 한가운데 있다는 점이 핵심입니다. 도시 확장과 보존이 같은 땅을 두고 경쟁하는 구조라, 발굴 성과만큼 보존 관리를 꾸준히 이어갈 수 있느냐가 관건입니다.",
+   "critique": "정부 발표를 바탕으로 관광 가치를 강조한 기사라, 출토 유물이 학술적으로 무엇을 새로 알려 주는지는 짧게 다뤘습니다.",
+   "tags": [
+    "메소포타미아",
+    "하천 문명",
+    "문화유산 관광"
+   ]
+  },
+  {
+   "id": "2026-10-29-ots-ankara",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "econ",
+   "country": "TUR",
+   "related": [
+    "AZE",
+    "KAZ",
+    "UZB"
+   ],
+   "spot": null,
+   "title": "튀르크국가기구 앙카라 정상회의…'중앙회랑' 교통 협력이 핵심 의제",
+   "titleOrig": "Türkiye hosts 13th OTS summit to further 'unity in language, thought, deed'",
+   "source": "Anadolu Agency",
+   "lang": "en",
+   "url": "https://www.aa.com.tr/en/turkiye/turkiye-hosts-13th-ots-summit-to-further-unity-in-language-thought-deed-/4104539",
+   "video": null,
+   "why": "튀르크어권이라는 문화권이 교통 회랑과 경제 협력으로 이어지는 사례입니다. 러시아를 우회해 카스피해를 건너는 '중앙회랑'이 왜 주목받는지 보여줍니다.",
+   "summary": "10월 29~30일 앙카라에서 튀르크국가기구(OTS) 13차 정상회의가 열려 튀르키예가 아제르바이잔으로부터 의장국을 넘겨받습니다. 정상들은 '앙카라 선언'을 채택하고 '튀르크 세계 비전 2040'에 따른 협력을 점검할 예정입니다. 무역·교통·농업·우주 분야 협력이 주요 의제로 꼽혔습니다.",
+   "note": "문화적 연대가 강조되지만 실제 성과는 물류에서 갈립니다. 카스피해 수위가 낮아져 항만 적재량이 제한되는 등 회랑의 물리적 병목이 남아 있다는 점도 함께 봐야 합니다.",
+   "critique": "관영 통신사 기사라 기구의 비전을 긍정적으로 소개하는 데 무게가 있고, 회원국 간 이견이나 러시아·중국과의 관계는 다루지 않았습니다.",
+   "tags": [
+    "중앙회랑",
+    "문화권",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-29-cyclone-arnab",
+   "added": "2026-10-29",
+   "date": "2026-10-29",
+   "topic": "land",
+   "country": "IND",
+   "related": [
+    "NPL"
+   ],
+   "spot": null,
+   "title": "'매우 강한' 사이클론 아르나브, 인도 동해안 상륙…18만 명 대피",
+   "titleOrig": "At least three killed, thousands evacuated as cyclone hits India's eastern coast",
+   "source": "ABC News (호주)",
+   "lang": "en",
+   "url": "https://www.abc.net.au/news/2026-10-29/cyclone-arnab-hits-india-east-coast/107321328",
+   "video": null,
+   "why": "벵골만은 수온이 높고 해안이 낮고 평평해 열대저기압과 폭풍 해일 피해가 큰 곳입니다. 몬순이 끝난 뒤인 10~12월이 사이클론이 잦은 시기라는 계절성도 확인할 수 있습니다.",
+   "summary": "인도 기상청 분류상 '매우 강한 사이클론 폭풍'인 아르나브가 10월 28일 새벽 안드라프라데시주 해안에 상륙했습니다. 안드라프라데시와 오디샤에서 18만 명 넘게 대피했고, 최소 3명이 숨졌으며 주택·농작물 피해와 정전이 이어졌습니다.",
+   "note": "사망자가 적었던 데는 사전 대피 효과가 컸지만, 피해는 농경지와 저지대 어촌에 집중됩니다. 남은 수증기는 네팔 등 내륙에도 비와 눈을 뿌릴 것으로 예보돼, 한 재해가 국경을 넘어 이어지는 경로도 보여줍니다.",
+   "critique": "대피 성과와 피해 집계 중심이라, 해마다 반복되는 동해안 사이클론에 대한 장기 적응(맹그로브 복원, 해안 제방 등) 논의는 빠져 있습니다.",
+   "tags": [
+    "열대 저기압",
+    "폭풍 해일",
+    "벵골만"
+   ]
+  },
+  {
+   "id": "2026-10-28-tripp",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "econ",
+   "country": "ARM",
+   "related": [
+    "AZE",
+    "TUR"
+   ],
+   "spot": null,
+   "title": "아르메니아 의회, '트럼프 루트(TRIPP)' 협정 비준…아제르바이잔 본토-나히치반 연결",
+   "titleOrig": "Armenian Parliament approves Trump Route agreement",
+   "source": "OC Media",
+   "lang": "en",
+   "url": "https://oc-media.org/armenia-parliament-approves-trump-route-agreement/",
+   "video": null,
+   "why": "아제르바이잔 본토와 떨어진 영토(월경지) 나히치반을 아르메니아 남부 시우니크를 거쳐 잇는 통로입니다. 월경지·회랑·주권이 얽힌 정치지리의 교과서적 사례입니다.",
+   "summary": "아르메니아 의회가 미국과 맺은 TRIPP 기본협정을 찬성 63, 반대 32로 비준했습니다. 이 노선은 아르메니아 영토를 지나 아제르바이잔 본토와 나히치반을 연결하며, 민간 운영사가 서류 확인과 요금 처리를 맡는 방식이 제안됐습니다. 정부는 아르메니아도 아제르바이잔을 거쳐 제3국과 연결될 수 있다고 설명합니다.",
+   "note": "야당은 평화조약 서명 전에 노선이 열리면 아제르바이잔이 조약을 맺을 동기가 약해진다고 우려하고, 정부는 상호 통행이 보장돼야 운송이 시작된다고 반박합니다. 약 42km의 짧은 구간이 이란·러시아·튀르키예 사이의 지역 균형까지 흔들 수 있다는 점이 핵심입니다.",
+   "critique": "찬반 주장을 고루 담았지만, 노선이 지나갈 시우니크 지역 주민의 목소리는 드러나지 않습니다.",
+   "tags": [
+    "월경지(엑스클레이브)",
+    "회랑",
+    "영토 주권"
+   ]
+  },
+  {
+   "id": "2026-10-28-caspian",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "env",
+   "country": "TKM",
+   "related": [
+    "KAZ",
+    "AZE",
+    "IRN"
+   ],
+   "spot": "caspian",
+   "title": "카스피해 연안 5개국, 아슈하바트서 해양 과학조사 협력 논의",
+   "titleOrig": "In Ashgabat, Caspian States Discuss Cooperation on Marine Research",
+   "source": "The Times of Central Asia",
+   "lang": "en",
+   "url": "https://timesca.com/in-ashgabat-caspian-states-discuss-cooperation-on-marine-research/",
+   "video": null,
+   "why": "카스피해는 '바다냐 호수냐'에 따라 자원을 나누는 원칙이 달라지는 독특한 수역입니다. 석유·가스 개발과 해양 환경 보호가 같은 수역 안에서 부딪히는 구조를 보여줍니다.",
+   "summary": "투르크메니스탄이 카스피해 연안국(아제르바이잔·이란·카자흐스탄·러시아·투르크메니스탄) 회의를 열어 해양 과학조사 협정 초안을 논의했습니다. 각국은 대규모 석유·가스 자원을 개발하려 하면서도 해양 환경에 미치는 영향을 줄여야 하는 과제를 안고 있습니다.",
+   "note": "합의문보다 실제 자료 공유 수준이 관건입니다. 카스피해 수위가 낮아지며 항만과 해운에도 제약이 생기고 있어, 과학조사 협력은 환경뿐 아니라 물류 문제와도 연결됩니다.",
+   "critique": "외교부 발표를 옮긴 짧은 기사라, 협정 초안의 쟁점이나 각국의 입장 차이는 알 수 없습니다.",
+   "tags": [
+    "내해(카스피해)",
+    "해양 환경",
+    "자원 분할"
+   ]
+  },
+  {
+   "id": "2026-10-28-afghan-returnees",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "pop",
+   "country": "AFG",
+   "related": [
+    "IRN",
+    "PAK"
+   ],
+   "spot": null,
+   "title": "이란·파키스탄서 3년간 600만 명 귀환…아프간, 일자리·주거 경쟁 심화",
+   "titleOrig": "Afghans compete for jobs, homes as millions return from Iran, Pakistan",
+   "source": "Arab News",
+   "lang": "en",
+   "url": "https://arabnews.pk/pakistan/afghans-compete-for-jobs-homes-as-millions-return-from-iran-pakistan-3005466",
+   "video": null,
+   "why": "수십 년 동안 난민을 받던 이웃 나라들이 대규모 송환으로 돌아선 것은 세계 최대 규모의 인구 이동 가운데 하나입니다. 귀환민이 고향보다 일자리가 있는 곳으로 몰리며 국내 인구 분포까지 바뀌고 있습니다.",
+   "summary": "이란과 파키스탄이 송환을 강화하면서 지난 3년여 동안 600만 명 넘는 아프간인이 귀국했습니다. 국경에서 수백 km 떨어진 북부 조즈잔주까지 귀환민이 몰려 일용직 일자리와 주거를 두고 경쟁이 벌어지고 있습니다. 유엔 자료로는 인구의 약 3분의 1인 1,590만 명이 위기 수준 이상의 식량 불안을 겪고 있습니다.",
+   "note": "2026년 이란에서 돌아온 아프간인의 85%가 강제 송환이라는 유엔난민기구(UNHCR) 집계도 있습니다. 송환국의 경제·안보 사정과 귀환국의 수용 능력을 함께 봐야 '자발적이고 안전한 귀환' 논의가 가능합니다.",
+   "critique": "개인 사례로 현실감을 살렸지만, 귀환민이 어느 지역에 얼마나 몰리는지 보여주는 공간 통계는 부족합니다.",
+   "tags": [
+    "귀환 이주",
+    "강제 송환",
+    "인구 압력"
+   ]
+  },
+  {
+   "id": "2026-10-28-syria-jordan-nassib",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "geo",
+   "country": "SYR",
+   "related": [
+    "JOR"
+   ],
+   "spot": null,
+   "title": "시리아-요르단 나시브 국경 재개방…요르단 공습으로 7명 숨진 데 대해 공동 조사",
+   "titleOrig": "Syria-Jordan border reopens amid probe into deadly air strikes",
+   "source": "Al Jazeera",
+   "lang": "en",
+   "url": "https://aljazeera.com/news/2026/10/28/syria-jordan-border-reopens-amid-probe-into-deadly-airstrikes",
+   "video": null,
+   "why": "나시브는 요르단과 시리아를 잇는 유일한 국경 통과소로, 걸프와 레바논·튀르키예를 잇는 육상 화물의 길목입니다. 공습이 일어난 다라·수와이다의 라자(용암 대지) 지대는 지형이 험해 무장 세력의 은신처가 되기 쉽습니다.",
+   "summary": "요르단이 시리아 남부의 IS 은신처라며 공습한 뒤 다라와 수와이다에서 한 가족 5명을 포함해 최소 7명이 숨졌습니다. 양국 외무장관은 정보를 공유하고 공습 영향을 조사할 안보위원회를 만들기로 했고, 닫혔던 나시브 통과소는 여객·화물 통행을 다시 시작했습니다.",
+   "note": "국경을 넘은 군사 행동과 국경 재개방이 동시에 결정됐다는 점이 핵심입니다. 요르단은 남부 시리아를 마약·무기 밀수의 통로로 보고 있어, 이 국경 지대가 앞으로도 마찰 지점이 될 가능성이 큽니다.",
+   "critique": "요르단은 공격 대상을 IS 근거지라고 설명했지만 숨진 사람 중 어린이가 포함돼 있어 양측 설명이 엇갈리고, 독립적인 확인은 없습니다. 31일 요르단군이 시리아에서 넘어오려던 무장 인원 14명을 막았다고 밝혀 긴장은 이어지고 있습니다.",
+   "tags": [
+    "국경 통과소",
+    "완충지대",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-28-iraq-pm-damascus-pipeline",
+   "added": "2026-10-28",
+   "date": "2026-10-28",
+   "topic": "res",
+   "country": "IRQ",
+   "related": [
+    "SYR"
+   ],
+   "spot": null,
+   "title": "이라크 총리, 아사드 정권 붕괴 후 첫 다마스쿠스 방문…하루 200만 배럴 송유관 복원 논의",
+   "titleOrig": "Syria hosts Iraqi PM for visit amid security challenges in north and south",
+   "source": "FDD's Long War Journal",
+   "lang": "en",
+   "url": "https://www.longwarjournal.org/archives/2026/10/syria-hosts-iraqi-pm-for-visit-amid-security-challenges-in-north-and-south.php",
+   "video": null,
+   "why": "이라크 석유는 대부분 남쪽 바스라에서 걸프와 호르무즈를 거쳐 나갑니다. 시리아를 가로질러 지중해로 가는 송유관은 해협이 막혔을 때 쓸 수 있는 서쪽 우회로입니다.",
+   "summary": "알자이디 이라크 총리가 10월 28일 다마스쿠스를 찾아 알샤라 시리아 대통령과 교역·에너지 협력을 논의했습니다. 이라크 총리실에 따르면 양국은 하루 최대 200만 배럴을 보낼 수 있는 이라크-시리아 송유관을 되살리려 하고 있습니다. 같은 시기 시리아는 남부의 요르단 공습, 북부 이들리브의 외국인 무장 세력 충돌 등 안보 문제를 겪고 있습니다.",
+   "note": "호르무즈 위기가 이라크로 하여금 오랫동안 쓰지 않던 사막 횡단 송유관 노선을 다시 보게 만든 셈입니다. 송유관이 IS 잔존 세력이 남아 있는 시리아 동부 사막을 지나야 한다는 점이 가장 큰 위험 요인입니다.",
+   "critique": "미국 싱크탱크(FDD) 계열 매체라 안보 위협 위주로 서술했고, 송유관의 구체적 경로와 종착 항구, 유프라테스강 물 문제는 다루지 않았습니다. 200만 배럴은 이라크 정부가 밝힌 목표 용량이지 실제 가동 규모가 아닙니다.",
+   "tags": [
+    "대체 수송로(송유관)",
+    "초크포인트",
+    "사막 횡단로"
+   ]
+  },
+  {
+   "id": "2026-10-27-houthi-saudi",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "geo",
+   "country": "YEM",
+   "related": [
+    "SAU"
+   ],
+   "spot": "babelmandeb",
+   "title": "사우디 \"후티 탄도미사일·드론 요격\"…바브엘만데브 해협 긴장 고조",
+   "titleOrig": "Saudi-led coalition says it intercepted Houthi missiles, drones attacking kingdom",
+   "source": "bdnews24 (Reuters)",
+   "lang": "en",
+   "url": "https://bdnews24.com/world/middle-east/ejb86qs7ir",
+   "video": null,
+   "why": "호르무즈가 막힌 상황에서 홍해 남쪽 관문인 바브엘만데브까지 불안해지면 아라비아반도를 둘러싼 두 초크포인트가 동시에 흔들립니다.",
+   "summary": "사우디 주도 연합군은 후티 반군이 동부 지역을 겨냥해 쏜 탄도미사일과 남부로 향한 드론을 요격했다고 밝혔습니다. 후티는 9월 공세로 예멘 홍해 연안의 상당 부분을 장악하며 해협 쪽으로 진출했고, 사우디는 이후 공습을 강화했습니다.",
+   "note": "사우디는 호르무즈를 피해 송유관으로 홍해 쪽 수출을 늘려 왔는데, 그 출구마저 위협받는 구조입니다. 다만 10월 27일 기준으로 상선 피격은 확인되지 않아, 위협과 실제 통항 차질은 구분해 볼 필요가 있습니다.",
+   "critique": "사우디 측 발표 위주의 짧은 통신 기사라, 후티 측 주장이나 예멘 민간인 피해는 다루지 않았습니다.",
+   "tags": [
+    "초크포인트",
+    "대체 수송로(송유관)",
+    "대리전"
+   ]
+  },
+  {
+   "id": "2026-10-27-tripp-framework",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "econ",
+   "country": "ARM",
+   "related": [
+    "AZE"
+   ],
+   "spot": null,
+   "title": "아르메니아 외무장관, 의회에 TRIPP 협정 설명…\"주권·관할권 유지\" 강조",
+   "titleOrig": "Armenia-US TRIPP Agreement sets out framework for regional transport links",
+   "source": "Public Radio of Armenia",
+   "lang": "en",
+   "url": "https://en.armradio.am/2026/10/27/armenia-us-tripp-agreement-sets-out-framework-for-regional-transport-links/",
+   "video": null,
+   "why": "같은 회랑을 두고 '연결'과 '주권'이라는 두 논리가 어떻게 조율되는지 정부의 설명을 볼 수 있습니다.",
+   "summary": "아라라트 미르조얀 외무장관은 TRIPP 협정이 아르메니아·아제르바이잔·미국 사이의 정치적 합의를 실행 틀로 옮긴 것이라고 설명했습니다. 그는 노선이 지나는 아르메니아 영토의 주권과 관할권은 그대로 유지된다고 강조했습니다.",
+   "note": "공영방송 보도라 정부 입장이 중심입니다. 다음 날 비준 표결 기사와 함께 읽으면 찬반 논리를 균형 있게 볼 수 있습니다.",
+   "critique": "정부 설명을 그대로 전한 기사로, 야당이 제기한 '통행 보장의 비대칭' 문제는 반영되지 않았습니다.",
+   "tags": [
+    "회랑",
+    "영토 주권",
+    "월경지(엑스클레이브)"
+   ]
+  },
+  {
+   "id": "2026-10-27-ots-preview",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "econ",
+   "country": "TUR",
+   "related": [
+    "KGZ",
+    "KAZ"
+   ],
+   "spot": null,
+   "title": "앙카라서 튀르크국가기구 정상회의 예고…주제는 '언어·사고·행동의 통합'",
+   "titleOrig": "Ankara to host 13th Summit of Organization of Turkic States",
+   "source": "AKIpress",
+   "lang": "en",
+   "url": "https://akipress.com/news:927554",
+   "video": null,
+   "why": "회원국(튀르키예·아제르바이잔·카자흐스탄·키르기스스탄·우즈베키스탄)이 지중해에서 톈산산맥까지 이어져, 문화권이 지역 협력체로 묶이는 공간 범위를 볼 수 있습니다.",
+   "summary": "10월 30일 앙카라에서 열리는 튀르크국가기구 13차 정상회의는 '튀르크의 세기: 언어·사고·행동의 통합'을 주제로 합니다. 튀르키예가 의장국을 맡고 '앙카라 선언'과 기구의 제도를 강화하는 문서들이 채택될 예정입니다.",
+   "note": "키르기스스탄 매체의 사전 보도라 의제 소개가 중심입니다. 실제 합의 내용은 회의 뒤 보도로 확인이 필요합니다.",
+   "critique": "의제 소개에 그친 사전 보도라, 회원국마다 무엇을 기대하는지에 대한 분석은 없습니다.",
+   "tags": [
+    "문화권",
+    "지역 협력 기구",
+    "통과 운송"
+   ]
+  },
+  {
+   "id": "2026-10-27-sharaa-iraq-water-oil",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "env",
+   "country": "SYR",
+   "related": [
+    "IRQ",
+    "TUR"
+   ],
+   "spot": "tigris",
+   "title": "알샤라 시리아 대통령 \"이라크와 물 문제 전략적으로 다뤄야\"…이라크 원유 시리아 경유 수송도 진행",
+   "titleOrig": "Oil, Water and Security: Sharaa Outlines Ties With Iraq",
+   "source": "Enab Baladi",
+   "lang": "en",
+   "url": "https://english.enabbaladi.net/archives/2026/10/oil-water-and-security-sharaa-outlines-ties-with-iraq",
+   "video": null,
+   "why": "시리아와 이라크는 튀르키예에서 시작하는 유프라테스강을 차례로 나눠 쓰는 중류국과 하류국입니다. 상류 댐과 가뭄으로 유량이 줄면서 물은 두 나라 관계의 핵심 의제가 됐습니다.",
+   "summary": "알샤라 대통령은 10월 27일 이라크 디즐라 TV 인터뷰에서 두 나라 사이 교통과 교역이 빠르게 늘고 있다고 말했습니다. 그는 물이 양국의 가장 중요한 공동 현안이며, 두 나라 농지를 지역 전체의 곡창으로 보고 공유 수자원을 최대한 효율적으로 써야 한다고 했습니다. 최근 양국은 국경 통과소를 열고 호르무즈 위기 속에 이라크 원유를 시리아 땅으로 수송하기로 합의했습니다.",
+   "note": "시리아가 하류국 이라크와 '공동 이용'을 말하면서도 상류국 튀르키예와의 배분 문제는 언급하지 않은 점이 눈에 띕니다. 메소포타미아 하천 체계에서 실제 수량을 좌우하는 것은 튀르키예의 댐입니다.",
+   "critique": "시리아 반정부 성향에서 출발한 독립 매체로, 대통령 인터뷰 내용을 정리하는 데 그쳐 구체적 수치(유량, 경작 면적)가 없습니다. 이라크 측 반응은 실리지 않았습니다.",
+   "tags": [
+    "상류국-하류국",
+    "국제 하천",
+    "메소포타미아"
+   ]
+  },
+  {
+   "id": "2026-10-27-aze-iran-hijab-language",
+   "added": "2026-10-27",
+   "date": "2026-10-27",
+   "topic": "cult",
+   "country": "AZE",
+   "related": [
+    "IRN",
+    "TUR"
+   ],
+   "spot": null,
+   "title": "아제르바이잔 학교 히잡 제한 놓고 이란과 설전…바쿠 \"이란 내 아제르인 4천만 명은 모국어 교육도 못 받아\"",
+   "titleOrig": "Azerbaijan and Iran trade fresh accusations amid hijab ban in Azerbaijani schools",
+   "source": "JAMnews",
+   "lang": "en",
+   "url": "https://jam-news.net/news-in-azerbaijan-armenia-georgia-26-30-october-2026/",
+   "video": null,
+   "why": "아제르바이잔인은 아라스강을 경계로 북쪽의 아제르바이잔 공화국과 남쪽의 이란 북서부에 나뉘어 삽니다. 이란 쪽 아제르인이 공화국 인구보다 훨씬 많다는 민족 분포가 종교·교육 논쟁 밑에 깔려 있습니다.",
+   "summary": "아제르바이잔이 학교 교복 규정으로 사실상 히잡을 금지하자, 이란은 아제르바이잔 여학생을 자국 대학에 받겠다고 제안했습니다. 아제르바이잔 교육부는 내정 간섭이라 반발하며 이란에 사는 약 4천만 명의 아제르인은 모국어로 배울 학교조차 없다고 맞받았고, 시민단체 55곳은 이란 대통령에게 아제르어 교육을 요구하는 공개서한을 보냈습니다. 히잡 제한을 비판한 튀르키예 대통령 보좌관은 사임했고 비판적 튀르키예 언론인은 이스탄불에서 구금됐습니다.",
+   "note": "세속주의 시아파 국가(아제르바이잔)와 신정 시아파 국가(이란)가 종교 문제를 민족·언어 문제로 되받아치는 구도입니다. 튀르키예까지 얽히면서 '하나의 민족, 두 국가'로 불리던 아제르-튀르키예 관계에도 미묘한 균열이 보입니다.",
+   "critique": "'4천만 명'은 아제르바이잔 정부의 추정치로, 이란 인구조사는 민족 통계를 내지 않아 학계 추정은 대체로 이보다 적습니다. 지역 매체의 하루 요약이라 이란 측 공식 입장은 짧게만 소개됐습니다.",
+   "tags": [
+    "민족 구성",
+    "분단 민족",
+    "세속주의와 종교"
+   ]
+  }
+ ]
+};</script>
+<script>(function () {
+  'use strict';
+  const GEO = window.GEO;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  const TOPICS = [
+    { id: 'geo', name: '지정학·분쟁' }, { id: 'res', name: '자원·에너지' }, { id: 'env', name: '물·기후·환경' }, { id: 'land', name: '지형·자연재해' },
+    { id: 'pop', name: '인구·도시·이주' }, { id: 'econ', name: '경제·교통·교역' }, { id: 'cult', name: '종교·민족·문화' }, { id: 'hist', name: '역사지리·유산' }];
+  const TN = Object.fromEntries(TOPICS.map(t => [t.id, t.name]));
+  const tc = id => `var(--t-${id})`;
+  const C = {}; GEO.countries.forEach(c => { C[c.code] = c; c.bb = bboxOf(c.d); });
+  const SP = {}; GEO.spots.forEach(s => SP[s.id] = s);
+  const GROUPS = ['서남아시아', '코카서스', '중앙아시아', '남부아시아', '중국(신장)', '중국(티베트)'];
+  function bboxOf(d) {
+    const n = d.match(/-?\d+(\.\d+)?/g).map(Number); let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (let i = 0; i + 1 < n.length; i += 2) { x0 = Math.min(x0, n[i]); x1 = Math.max(x1, n[i]); y0 = Math.min(y0, n[i + 1]); y1 = Math.max(y1, n[i + 1]); }
+    return [x0, y0, x1, y1];
+  }
+  const union = bbs => bbs.reduce((a, b) => [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])], [1e9, 1e9, -1e9, -1e9]);
+  const HOME = union(GEO.countries.filter(c => c.code !== 'MDV').map(c => c.bb));
+
+  /* ---------- 날짜 ---------- */
+  const todayKST = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  const TODAY = todayKST();
+  const dayDiff = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400e3);
+  const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+  const fmtDate = s => { const d = new Date(s + 'T00:00:00Z'); return `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일 (${DOW[d.getUTCDay()]})`; };
+  const ageLabel = a => a === 0 ? '오늘' : a === 1 ? '어제' : a + '일 전';
+
+  /* ---------- 상태 ---------- */
+  let ITEMS = [], DATA = null;
+  const S = { view: 'map', sel: null, hover: null, topics: new Set(TOPICS.map(t => t.id)), aDate: 'all', aTopics: new Set(TOPICS.map(t => t.id)), aCountry: '' };
+  const age = it => dayDiff(it.added, TODAY);
+  const onMap = it => { const a = age(it); return a >= 0 && a <= 2; };
+  const inWeek = it => { const a = age(it); return a >= 0 && a <= 6; };
+  const placeName = code => C[code] ? C[code].name : code;
+
+  /* ---------- 테마 ---------- */
+  function setTheme(t) { document.documentElement.dataset.theme = t; try { localStorage.setItem('gn_theme', t); } catch (e) { } }
+  let theme; try { theme = localStorage.getItem('gn_theme'); } catch (e) { }
+  if (!theme) theme = matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  setTheme(theme);
+  $('#theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+
+  /* ---------- 지도 ---------- */
+  const svg = $('#map'), world = $('#world'), overlay = $('#overlay'), wrap = $('#mapwrap');
+  const T = { k: 1, x: 0, y: 0 };
+  let kHome = 1, userMoved = false;
+  const regPath = {};
+  function buildWorld() {
+    const g1 = el('g', {}, world), g2 = el('g', {}, world);
+    GEO.context.forEach(c => el('path', { d: c.d, class: 'ctx' }, g1));
+    GEO.countries.forEach(c => { regPath[c.code] = el('path', { d: c.d, class: 'reg', 'data-code': c.code }, g2); });
+  }
+  const size = () => [wrap.clientWidth, wrap.clientHeight];
+  function fitT(bb, pad = 30, maxK) {
+    const [W, H] = size(); const bw = Math.max(bb[2] - bb[0], 1), bh = Math.max(bb[3] - bb[1], 1);
+    let k = Math.min((W - 2 * pad) / bw, (H - 2 * pad) / bh); if (maxK) k = Math.min(k, maxK);
+    return { k, x: W / 2 - (bb[0] + bb[2]) / 2 * k, y: H / 2 - (bb[1] + bb[3]) / 2 * k };
+  }
+  function apply() { world.setAttribute('transform', `translate(${T.x} ${T.y}) scale(${T.k})`); renderOverlay(); }
+  let anim = null;
+  function animateTo(t, ms = 480) {
+    cancelAnimationFrame(anim); const s = { ...T }, t0 = performance.now();
+    const step = now => {
+      const p = Math.min(1, (now - t0) / ms), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      const lk = Math.log(s.k) + (Math.log(t.k) - Math.log(s.k)) * e; const k = Math.exp(lk);
+      // 화면 중심 기준으로 보간
+      const [W, H] = size();
+      const cs = [(W / 2 - s.x) / s.k, (H / 2 - s.y) / s.k], ct = [(W / 2 - t.x) / t.k, (H / 2 - t.y) / t.k];
+      const cx = cs[0] + (ct[0] - cs[0]) * e, cy = cs[1] + (ct[1] - cs[1]) * e;
+      T.k = k; T.x = W / 2 - cx * k; T.y = H / 2 - cy * k; apply();
+      if (p < 1) anim = requestAnimationFrame(step);
+    };
+    anim = requestAnimationFrame(step);
+  }
+  function home(animate) { const t = fitT(HOME, 18); kHome = t.k; if (animate) animateTo(t); else { Object.assign(T, t); apply(); } }
+  function zoomAt(f, sx, sy) {
+    const nk = Math.max(kHome * 0.7, Math.min(kHome * 14, T.k * f)); const r = nk / T.k;
+    T.x = sx - (sx - T.x) * r; T.y = sy - (sy - T.y) * r; T.k = nk; userMoved = true; apply();
+  }
+  const scr = (wx, wy) => [wx * T.k + T.x, wy * T.k + T.y];
+
+  // 포인터 팬/핀치
+  const ptrs = new Map(); let dragMoved = 0, pinch0 = null, downId = null;
+  svg.addEventListener('pointerdown', e => {
+    const mk0 = e.target.closest && e.target.closest('.mk'); downId = mk0 ? mk0.dataset.id : null;
+    svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); dragMoved = 0; cancelAnimationFrame(anim);
+    if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), k: T.k }; }
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!ptrs.has(e.pointerId)) { hoverTip(e); return; }
+    const prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+    const r = svg.getBoundingClientRect();
+    if (ptrs.size === 1) {
+      const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; dragMoved += Math.abs(dx) + Math.abs(dy);
+      if (dragMoved > 4) { svg.classList.add('drag'); T.x += dx; T.y += dy; userMoved = true; apply(); }
+    } else if (ptrs.size === 2 && pinch0) {
+      const [a, b] = [...ptrs.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); dragMoved += 10;
+      const mx = (a[0] + b[0]) / 2 - r.left, my = (a[1] + b[1]) / 2 - r.top;
+      zoomAt((pinch0.k * d / pinch0.d) / T.k, mx, my);
+    }
+  });
+  const endPtr = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch0 = null; if (!ptrs.size) setTimeout(() => svg.classList.remove('drag'), 0); };
+  svg.addEventListener('pointerup', e => {
+    const wasDrag = dragMoved > 4; endPtr(e);
+    if (wasDrag) return;
+    if (downId) select(downId, true);
+    else if (S.sel) deselect();
+  });
+  svg.addEventListener('pointercancel', endPtr);
+  svg.addEventListener('wheel', e => { e.preventDefault(); const r = svg.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+  $('#zin').onclick = () => { const [W, H] = size(); zoomAt(1.5, W / 2, H / 2); };
+  $('#zout').onclick = () => { const [W, H] = size(); zoomAt(1 / 1.5, W / 2, H / 2); };
+  $('#zhome').onclick = () => { userMoved = false; home(true); };
+
+  // 툴팁
+  const tip = $('#tip');
+  function hoverTip(e) {
+    if (e.pointerType !== 'mouse') return;
+    const mk = e.target.closest && e.target.closest('.mk');
+    setHover(mk ? mk.dataset.id : null);
+    if (!mk) { tip.classList.remove('on'); return; }
+    const it = ITEMS.find(i => i.id === mk.dataset.id); if (!it) return;
+    const r = wrap.getBoundingClientRect();
+    tip.innerHTML = `<b style="color:${tc(it.topic)}">${esc(TN[it.topic])} · ${esc(ageLabel(age(it)))}</b>${esc(it.title)}`;
+    let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14; if (x > r.width - 270) x = e.clientX - r.left - 270;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.classList.add('on');
+  }
+  svg.addEventListener('pointerleave', () => { tip.classList.remove('on'); setHover(null); });
+  function setHover(id) { if (id === S.hover) return; S.hover = id; paintCountries(); renderOverlay(); }
+
+  /* ---------- 오버레이(라벨·연결선·마커) ---------- */
+  function anchorOf(it) { if (it.spot && SP[it.spot]) return [SP[it.spot].x, SP[it.spot].y]; const c = C[it.country]; return c ? [c.ax, c.ay] : null; }
+  function markerLayout() {
+    const groups = new Map();
+    ITEMS.filter(onMap).forEach(it => { const key = it.spot ? 'S' + it.spot : 'C' + it.country; if (!groups.has(key)) groups.set(key, []); groups.get(key).push(it); });
+    const pos = {};
+    groups.forEach(list => {
+      list.sort((a, b) => age(a) - age(b));
+      const a = anchorOf(list[0]); if (!a) return; const [sx, sy] = scr(a[0], a[1]); const n = list.length;
+      list.forEach((it, i) => {
+        if (n === 1) { pos[it.id] = [sx, sy]; return; }
+        const R = 10 + n * 2, ang = -Math.PI / 2 + i * 2 * Math.PI / n;
+        pos[it.id] = [sx + Math.cos(ang) * R, sy + Math.sin(ang) * R];
+      });
+    });
+    return pos;
+  }
+  function renderOverlay() {
+    overlay.textContent = '';
+    const gl = el('g', {}, overlay), ga = el('g', {}, overlay), gm = el('g', {}, overlay);
+    const pos = markerLayout();
+    const anchored = new Set(ITEMS.filter(onMap).map(it => it.spot ? null : it.country));
+    // 국가 이름
+    const placed = [];
+    GEO.countries.map(c => ({ c, w: (c.bb[2] - c.bb[0]) * T.k, h: (c.bb[3] - c.bb[1]) * T.k })).sort((a, b) => b.w * b.h - a.w * a.h).forEach(({ c, w, h }) => {
+      if (Math.max(w, h) < 38) return;
+      const [x, y] = scr(c.ax, c.ay); const dy = anchored.has(c.code) ? 24 + Math.min(10, ITEMS.filter(i => onMap(i) && !i.spot && i.country === c.code).length * 3) : 4;
+      const tw = c.name.length * 10.5, r = [x - tw / 2, y + dy - 11, x + tw / 2, y + dy + 3];
+      if (placed.some(p => r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1])) return;
+      placed.push(r);
+      el('text', { x, y: y + dy, 'text-anchor': 'middle', class: 'lbl' }, gl).textContent = c.name;
+    });
+    // 접경 지점 이름
+    const usedSpots = new Set(ITEMS.filter(onMap).map(i => i.spot).filter(Boolean));
+    usedSpots.forEach(id => { const s = SP[id]; if (!s) return; const [x, y] = scr(s.x, s.y); el('text', { x: x + 14, y: y - 12, class: 'spotl' }, gl).textContent = s.name; });
+    // 연결선
+    ITEMS.filter(onMap).forEach(it => {
+      const p = pos[it.id]; if (!p || !(it.related || []).length) return;
+      const show = S.topics.has(it.topic); if (!show) return;
+      it.related.forEach(code => {
+        const c = C[code]; if (!c) return; const [x2, y2] = scr(c.ax, c.ay);
+        const dx = x2 - p[0], dy = y2 - p[1], L = Math.hypot(dx, dy) || 1; const cx = (p[0] + x2) / 2 - dy / L * L * 0.18, cy = (p[1] + y2) / 2 + dx / L * L * 0.18;
+        el('path', { d: `M${p[0]} ${p[1]}Q${cx} ${cy} ${x2} ${y2}`, class: 'arc' + (S.sel === it.id || S.hover === it.id ? ' on' : ''), stroke: tc(it.topic) }, ga);
+        if (S.sel === it.id || S.hover === it.id) el('circle', { cx: x2, cy: y2, r: 3.5, fill: tc(it.topic) }, ga);
+      });
+    });
+    // 마커 (선택된 것을 맨 위로)
+    const top = id => id === S.sel || id === S.hover; const list = ITEMS.filter(onMap).sort((a, b) => top(a.id) - top(b.id) || age(b) - age(a));
+    list.forEach(it => {
+      const p = pos[it.id]; if (!p) return; const a = age(it), fresh = a === 0, sel = S.sel === it.id;
+      const g = el('g', { class: 'mk' + (S.topics.has(it.topic) ? '' : ' dim') + (sel ? ' sel' : ''), transform: `translate(${p[0]} ${p[1]})`, tabindex: 0, role: 'button', 'aria-label': it.title, 'data-id': it.id }, gm);
+      const hov = S.hover === it.id, s = (sel || hov ? 1.3 : 1) * (fresh ? 1 : 0.55), col = tc(it.topic);
+      el('circle', { r: 14, fill: 'transparent' }, g); // 작은 마커도 누르기 쉽게
+      if (it.spot) {
+        const R = 12 * s, r = 7.5 * s;
+        el('path', { d: `M0 ${-R}L${R} 0 0 ${R} ${-R} 0Z`, class: 'ring', stroke: col, 'stroke-width': 2 }, g);
+        el('path', { d: `M0 ${-r}L${r} 0 0 ${r} ${-r} 0Z`, class: 'core', fill: col }, g);
+      } else {
+        el('circle', { r: 10.5 * s, class: 'ring', stroke: col, 'stroke-width': 2 }, g);
+        el('circle', { r: 6.5 * s, class: 'core', fill: col }, g);
+      }
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(it.id, true); } });
+    });
+  }
+  function paintCountries() {
+    const has = new Set(); ITEMS.filter(onMap).forEach(i => { if (S.topics.has(i.topic)) has.add(i.country); });
+    const fid = S.hover || S.sel, it = fid ? ITEMS.find(i => i.id === fid) : null;
+    for (const code in regPath) {
+      const p = regPath[code]; p.classList.toggle('has', has.has(code));
+      p.classList.toggle('sel', !!it && it.country === code);
+      p.classList.toggle('rel', !!it && (it.related || []).includes(code));
+      p.style.setProperty('--tc', it ? tc(it.topic) : '');
+    }
+  }
+
+  /* ---------- 주제 칩 ---------- */
+  function renderTopics() {
+    const box = $('#topics'); box.innerHTML = '';
+    TOPICS.forEach(t => {
+      const n = ITEMS.filter(i => onMap(i) && i.topic === t.id).length;
+      const b = document.createElement('button'); b.className = 'tchip' + (S.topics.has(t.id) ? ' on' : ' off') + (n ? '' : ' zero'); b.style.setProperty('--c', tc(t.id));
+      b.innerHTML = `<i></i>${t.name}<em>${n}</em>`; b.title = '눌러서 지도·목록에서 켜고 끄기';
+      b.onclick = () => {
+        if (S.topics.size === TOPICS.length) { S.topics = new Set([t.id]); }
+        else if (S.topics.has(t.id)) { S.topics.delete(t.id); if (!S.topics.size) S.topics = new Set(TOPICS.map(x => x.id)); }
+        else S.topics.add(t.id);
+        renderTopics(); renderList(); paintCountries(); renderOverlay();
+      };
+      box.appendChild(b);
+    });
+  }
+
+  /* ---------- 목록 ---------- */
+  function rowHTML(it, opts = {}) {
+    const a = age(it); const where = it.spot && SP[it.spot] ? SP[it.spot].name : placeName(it.country);
+    const rel = (it.related || []).length ? ` ↔ ${it.related.map(placeName).join('·')}` : '';
+    return `<button class="item${S.sel === it.id ? ' sel' : ''}" data-id="${it.id}" style="--tc:${tc(it.topic)}"><span class="dw"><span class="dot${a === 0 ? '' : ' old'}"></span></span>
+<span><div class="m"><b>${esc(TN[it.topic])}</b> · ${esc(where)}${esc(rel)} · ${esc(it.source)}${opts.badge && onMap(it) ? '<span class="badge">지도 표시 중</span>' : ''}${it.video ? '<span class="badge">▶ 영상</span>' : ''}</div>
+      <h3>${esc(it.title)}</h3>${opts.short ? '' : `<p class="w">${esc(it.why)}</p>`}</span></button>`;
+  }
+  function renderList() {
+    const box = $('#list'); const items = ITEMS.filter(i => onMap(i) && S.topics.has(i.topic));
+    if (!items.length) { box.innerHTML = '<div class="empty">표시할 뉴스가 없어요. 위의 주제 필터를 확인해 주세요.</div>'; return; }
+    let h = '';
+    [0, 1, 2].forEach(a => {
+      const day = items.filter(i => age(i) === a); if (!day.length) return;
+      const d = new Date(Date.parse(TODAY) - a * 86400e3).toISOString().slice(0, 10);
+      h += `<div class="dayh"><span>${ageLabel(a)} · ${fmtDate(d)}</span><span>${day.length}건</span></div>` + day.map(i => rowHTML(i)).join('');
+    });
+    box.innerHTML = h;
+    box.querySelectorAll('.item').forEach(b => { b.onclick = () => select(b.dataset.id, true); b.onmouseenter = () => setHover(b.dataset.id); b.onmouseleave = () => setHover(null); });
+  }
+
+  /* ---------- 상세 ---------- */
+  function related(it) {
+    return ITEMS.filter(o => o.id !== it.id && inWeek(o) && o.topic === it.topic)
+      .map(o => ({ o, s: (o.tags || []).some(t => (it.tags || []).includes(t)) ? 2 : 1 }))
+      .sort((a, b) => (b.s - a.s) || (a.o.added < b.o.added ? 1 : a.o.added > b.o.added ? -1 : 0)).slice(0, 5);
+  }
+  function detailHTML(it, withBack) {
+    const where = [it.spot && SP[it.spot] ? SP[it.spot].name : null, placeName(it.country)].filter(Boolean).join(' · ');
+    const rel = (it.related || []).map(placeName).join(', ');
+    const vidSame = it.video && it.video.url === it.url;
+    const r = related(it);
+    return `<div style="--tc:${tc(it.topic)}">
+      ${withBack ? '<button class="back" data-back>← 목록으로</button>' : ''}
+      <span class="tbadge"><i></i>${esc(TN[it.topic])}</span>
+      <h2>${esc(it.title)}</h2>
+      ${it.titleOrig ? `<p class="orig">${esc(it.titleOrig)}</p>` : ''}
+      <div class="meta"><span><b>지역</b>${esc(where)}</span>${rel ? `<span><b>관련국</b>${esc(rel)}</span>` : ''}<span><b>기사</b>${esc(fmtDate(it.date))}</span><span><b>출처</b>${esc(it.source)}</span></div>
+      ${onMap(it) ? '' : '<div class="offmap">3일이 지나 지도에서는 내려간 뉴스예요.</div>'}
+      <div class="why"><h4>왜 지리적으로 읽어야 할까</h4><p>${esc(it.why)}</p></div>
+      <div class="sec"><h4>요약 <span class="aitag">AI 작성</span></h4><p>${esc(it.summary)}</p></div>
+      ${it.note ? `<div class="sec"><h4>해설</h4><p>${esc(it.note)}</p></div>` : ''}
+      ${it.critique ? `<div class="sec crit"><h4>비평</h4><p>${esc(it.critique)}</p></div>` : ''}
+      <div class="tags">${(it.tags || []).map(t => `<span>#${esc(t)}</span>`).join('')}</div>
+      <div class="btns">
+        <a class="pri" href="${esc(it.url)}" target="_blank" rel="noopener">${vidSame ? '▶ 영상 기사 보기' : '기사 원문 보기'} ↗</a>
+        ${it.video && !vidSame ? `<a href="${esc(it.video.url)}" target="_blank" rel="noopener">▶ 영상 보기${it.video.dur ? ' (' + esc(it.video.dur) + ')' : ''} ↗</a>` : ''}
+      </div>
+      <div class="rel"><h4>연관 뉴스 ${r.length ? r.length + '건' : ''}</h4>${r.length ? r.map(x => rowHTML(x.o, { short: true, badge: true })).join('') : '<div class="note2">최근 1주일 안에 같은 주제의 뉴스가 아직 없어요.</div>'}</div>
+      <p class="note2"><span class="aitag">AI 작성</span> '왜 지리적으로 읽어야 할까'·요약·해설·비평은 생성형 AI가 원문 기사를 바탕으로 작성했습니다. 사실관계는 원문 기사에서 확인해 주세요. 삭제 요청: <a href="mailto:a56500727@gmail.com">a56500727@gmail.com</a></p>
+    </div>`;
+  }
+  const isMobile = () => matchMedia('(max-width:860px)').matches;
+  function wireDetail(box) {
+    box.querySelectorAll('.item').forEach(b => { b.onclick = () => select(b.dataset.id, true); b.onmouseenter = () => { if (S.view === 'map') setHover(b.dataset.id); }; b.onmouseleave = () => { if (S.view === 'map') setHover(null); }; });
+    const bk = box.querySelector('[data-back]'); if (bk) bk.onclick = deselect;
+  }
+  function select(id, focus) {
+    const it = ITEMS.find(i => i.id === id); if (!it) return;
+    S.sel = id; tip.classList.remove('on');
+    if (S.view === 'map') {
+      if (onMap(it) && focus) {
+        const bbs = [it.spot && SP[it.spot] ? [SP[it.spot].x - 350, SP[it.spot].y - 350, SP[it.spot].x + 350, SP[it.spot].y + 350] : C[it.country].bb, ...(it.related || []).filter(c => C[c]).map(c => C[c].bb)];
+        const [W, H] = size();
+        animateTo(fitT(union(bbs), Math.min(70, W * 0.12), kHome * 4)); userMoved = true;
+      }
+      paintCountries(); renderOverlay(); renderList();
+      if (isMobile()) openSheet(it);
+      else { $('#list').hidden = true; const d = $('#detail'); d.hidden = false; d.innerHTML = detailHTML(it, true); wireDetail(d); $('#sideScroll').scrollTop = 0; }
+    } else openSheet(it);
+  }
+  function deselect() {
+    S.sel = null; closeSheet(); $('#detail').hidden = true; $('#list').hidden = false;
+    paintCountries(); renderOverlay(); renderList(); renderArchive();
+  }
+  const sheet = $('#sheet');
+  function openSheet(it) {
+    const d = $('#sdetail'); d.innerHTML = detailHTML(it, false); wireDetail(d);
+    sheet.classList.toggle('desk', !isMobile()); sheet.classList.add('on'); sheet.querySelector('.pn').scrollTop = 0;
+  }
+  function closeSheet() { sheet.classList.remove('on'); }
+  sheet.querySelector('.bd').onclick = () => { closeSheet(); if (S.view === 'map') deselect(); else { S.sel = null; renderArchive(); } };
+  addEventListener('keydown', e => { if (e.key === 'Escape' && S.sel) deselect(); });
+
+  /* ---------- 지난 뉴스 ---------- */
+  function renderArchiveFilters() {
+    const fd = $('#fDate'); fd.innerHTML = '';
+    const days = [...Array(7)].map((_, i) => new Date(Date.parse(TODAY) - i * 86400e3).toISOString().slice(0, 10));
+    const mk = (val, label, n) => { const b = document.createElement('button'); b.className = 'dchip' + (S.aDate === val ? ' on' : ''); b.innerHTML = `${label}<em>${n}</em>`; b.onclick = () => { S.aDate = val; renderArchiveFilters(); renderArchive(); }; fd.appendChild(b); };
+    mk('all', '전체', ITEMS.filter(inWeek).length);
+    days.forEach((d, i) => { const n = ITEMS.filter(it => it.added === d).length; const dd = new Date(d + 'T00:00:00Z'); mk(d, i === 0 ? '오늘' : `${dd.getUTCMonth() + 1}/${dd.getUTCDate()}(${DOW[dd.getUTCDay()]})`, n); });
+    const ft = $('#fTopic'); ft.innerHTML = '';
+    TOPICS.forEach(t => {
+      const b = document.createElement('button'); b.className = 'tchip' + (S.aTopics.has(t.id) ? ' on' : ' off'); b.style.setProperty('--c', tc(t.id));
+      b.innerHTML = `<i></i>${t.name}<em>${ITEMS.filter(i => inWeek(i) && i.topic === t.id).length}</em>`;
+      b.onclick = () => {
+        if (S.aTopics.size === TOPICS.length) S.aTopics = new Set([t.id]);
+        else if (S.aTopics.has(t.id)) { S.aTopics.delete(t.id); if (!S.aTopics.size) S.aTopics = new Set(TOPICS.map(x => x.id)); }
+        else S.aTopics.add(t.id);
+        renderArchiveFilters(); renderArchive();
+      };
+      ft.appendChild(b);
+    });
+  }
+  function buildCountrySelect() {
+    const s = $('#fCountry'); s.innerHTML = '<option value="">전체 국가·지역</option>';
+    GROUPS.forEach(g => {
+      const cs = GEO.countries.filter(c => c.group === g).sort((a, b) => a.name.localeCompare(b.name, 'ko')); if (!cs.length) return;
+      const og = document.createElement('optgroup'); og.label = g; cs.forEach(c => { const o = document.createElement('option'); o.value = c.code; o.textContent = c.name; og.appendChild(o); }); s.appendChild(og);
+    });
+    const og = document.createElement('optgroup'); og.label = '접경 지점'; GEO.spots.forEach(sp => { const o = document.createElement('option'); o.value = 'spot:' + sp.id; o.textContent = sp.name; og.appendChild(o); }); s.appendChild(og);
+    s.onchange = () => { S.aCountry = s.value; renderArchive(); };
+  }
+  function renderArchive() {
+    const c = S.aCountry;
+    const items = ITEMS.filter(i => inWeek(i) && (S.aDate === 'all' || i.added === S.aDate) && S.aTopics.has(i.topic) &&
+      (!c || (c.startsWith('spot:') ? i.spot === c.slice(5) : (i.country === c || (i.related || []).includes(c)))))
+      .sort((a, b) => a.added < b.added ? 1 : a.added > b.added ? -1 : 0);
+    const box = $('#alist');
+    box.innerHTML = items.length ? items.map(i => rowHTML(i, { badge: true })).join('') : '<div class="empty">조건에 맞는 뉴스가 없어요.</div>';
+    box.querySelectorAll('.item').forEach(b => b.onclick = () => select(b.dataset.id, false));
+  }
+
+  /* ---------- 화면 전환 ---------- */
+  function setView(v) {
+    S.view = v; document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
+    $('#vMap').hidden = v !== 'map'; $('#vArchive').hidden = v !== 'archive'; closeSheet();
+    if (v === 'map') { requestAnimationFrame(() => { if (!userMoved) home(false); else apply(); }); }
+    else { renderArchiveFilters(); renderArchive(); }
+    try { if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v); } catch (e) { }
+  }
+  document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => setView(b.dataset.view));
+  addEventListener('hashchange', () => { const v = location.hash.slice(1); if (v === 'map' || v === 'archive') setView(v); });
+  addEventListener('resize', () => { if (S.view !== 'map') return; if (!userMoved) home(false); else apply(); });
+
+  /* ---------- 시작 ---------- */
+  async function load() {
+    let data = null;
+    try { const r = await fetch('news.json', { cache: 'no-store' }); if (r.ok) data = await r.json(); } catch (e) { }
+    if (!data) data = window.NEWS_FALLBACK || { items: [] };
+    DATA = data; ITEMS = (data.items || []).filter(i => C[i.country] && TN[i.topic]);
+    if (data.updated) { const d = new Date(data.updated); const k = new Date(d.getTime() + 9 * 3600e3); $('#upd').textContent = `매일 오전 7시 업데이트 · 최근 ${k.getUTCMonth() + 1}/${k.getUTCDate()} ${String(k.getUTCHours()).padStart(2, '0')}:${String(k.getUTCMinutes()).padStart(2, '0')}`; }
+    buildWorld(); buildCountrySelect(); renderTopics(); renderList(); paintCountries();
+    const v = location.hash.slice(1); setView(v === 'archive' ? 'archive' : 'map');
+    window.__gn = { S, ITEMS, select, setView };
+  }
+  load();
+})();
+</script>
+</body></html>

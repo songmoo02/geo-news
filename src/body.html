@@ -1,0 +1,66 @@
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>서부 및 남부 아시아 지리 뉴스(임송무)</h1>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="on" data-view="map" role="tab">지도</button>
+      <button data-view="archive" role="tab">지난 뉴스</button>
+    </div>
+    <span class="upd" id="upd"></span>
+    <button class="iconbtn" id="theme" title="다크/라이트 전환" aria-label="다크/라이트 전환">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </header>
+
+  <main id="vMap">
+    <div class="mapwrap" id="mapwrap">
+      <svg id="map" aria-label="지역 지도">
+        <g id="world"></g>
+        <g id="overlay"></g>
+      </svg>
+      <div class="mapctl">
+        <button id="zin" aria-label="확대">+</button>
+        <button id="zout" aria-label="축소">−</button>
+        <button id="zhome" aria-label="전체 보기" style="font-size:13px">⤢</button>
+      </div>
+      <div class="legend" id="legend">
+        <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="11" r="6.5" fill="currentColor"/></svg> 오늘</span>
+        <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="11" cy="11" r="3.5" fill="currentColor"/></svg> 1~2일 전</span>
+        <span><svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2.5 15.5 9 9 15.5 2.5 9z" fill="currentColor"/></svg> 접경 지점</span>
+        <span style="color:var(--muted)">마우스를 올리면 관련국이 표시돼요</span>
+      </div>
+      <div class="tip" id="tip"></div>
+    </div>
+    <aside class="side">
+      <div class="topics" id="topics"></div>
+      <div class="scroll" id="sideScroll">
+        <div id="list"></div>
+        <div class="detail" id="detail" hidden></div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="archive" id="vArchive" hidden>
+    <div class="arc-in">
+      <h2>지난 뉴스</h2>
+      <p class="sub">최근 1주일 동안 올라온 뉴스입니다. 3일이 지나면 지도에서는 내려가고 이곳에만 남습니다.</p>
+      <div class="filters">
+        <div class="frow"><b>날짜</b><div class="fchips" id="fDate"></div></div>
+        <div class="frow"><b>주제</b><div class="fchips" id="fTopic"></div></div>
+        <div class="frow"><b>국가</b><select id="fCountry"></select></div>
+      </div>
+      <div class="alist" id="alist"></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="ai">AI 작성</span> 뉴스의 요약·해설·비평은 생성형 AI가 원문 기사를 바탕으로 작성했습니다. 사실관계는 원문에서 확인해 주세요.
+    <span class="sep">|</span>
+    <b>삭제 요청</b> 저작권·초상권 등 게시물 삭제를 원하시면 연락 주세요:
+    <a href="mailto:a56500727@gmail.com?subject=%5B%EC%A7%80%EB%A6%AC%20%EB%89%B4%EC%8A%A4%5D%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD">a56500727@gmail.com</a> ·
+    <a href="tel:+821056500727">+82 10-5650-0727</a>
+  </footer>
+
+  <div class="sheet" id="sheet"><div class="bd"></div><div class="pn"><div class="grab"></div><div class="detail" id="sdetail"></div></div></div>
+</div>
